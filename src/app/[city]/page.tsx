@@ -48,10 +48,10 @@ export async function generateMetadata({
 }
 
 const COVERS: Record<string, string> = {
-  tailors: "/images/tailor.png",
-  boutiques: "/images/boutique.png",
-  "fabric-shops": "/images/fabric.png",
-  "rental-shops": "/images/rental.png",
+  tailors: "/images/tailor.webp",
+  boutiques: "/images/boutique.webp",
+  "fabric-shops": "/images/fabric.webp",
+  "rental-shops": "/images/rental.webp",
 };
 
 export default async function CityPage({ params }: PageProps<"/[city]">) {

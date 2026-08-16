@@ -20,10 +20,10 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 const COVERS: Record<string, string> = {
-  tailors: "/images/tailor.png",
-  boutiques: "/images/boutique.png",
-  "fabric-shops": "/images/fabric.png",
-  "rental-shops": "/images/rental.png",
+  tailors: "/images/tailor.webp",
+  boutiques: "/images/boutique.webp",
+  "fabric-shops": "/images/fabric.webp",
+  "rental-shops": "/images/rental.webp",
 };
 
 export default async function HomePage() {
