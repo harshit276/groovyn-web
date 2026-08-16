@@ -1,0 +1,238 @@
+// Groovyn directory schema.
+//
+// Postgres (Neon on Vercel). Dev and production run the same engine so there
+// are no provider-specific surprises at deploy time — use a Neon branch for
+// local work rather than a different database.
+//
+// Multi-value columns stay JSON-encoded strings (see parseList in lib/utils)
+// rather than native arrays. That's deliberate: it kept the SQLite prototype
+// portable and costs nothing here.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model City {
+  id         String      @id @default(cuid())
+  slug       String      @unique
+  name       String
+  state      String
+  lat        Float?
+  lng        Float?
+  blurb      String?
+  heroImage  String?
+  active     Boolean     @default(true)
+  sortOrder  Int         @default(0)
+  localities Locality[]
+  stores     Store[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model Locality {
+  id        String   @id @default(cuid())
+  slug      String
+  name      String
+  cityId    String
+  city      City     @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  lat       Float?
+  lng       Float?
+  blurb     String?
+  stores    Store[]
+  createdAt DateTime @default(now())
+
+  @@unique([cityId, slug])
+  @@index([cityId])
+}
+
+model Store {
+  id     String @id @default(cuid())
+  slug   String @unique
+  name   String
+  /// One of the CATEGORIES slugs in lib/site.ts: tailors | boutiques | fabric-shops | rental-shops
+  category String
+
+  cityId     String
+  city       City      @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  localityId String?
+  locality   Locality? @relation(fields: [localityId], references: [id], onDelete: SetNull)
+
+  about   String?
+  address String
+  pincode String?
+  lat     Float?
+  lng     Float?
+
+  phone     String?
+  whatsapp  String?
+  website   String?
+  instagram String?
+  mapUrl    String?
+
+  /// JSON string[] — e.g. ["Bridal", "Menswear", "Zardozi"]
+  specialities String @default("[]")
+  /// JSON string[] — fabrics/materials the shop works with
+  materials    String @default("[]")
+  /// JSON object keyed by day: {"mon":"11:00-20:00", ...}
+  openingHours String @default("{}")
+
+  /// Indicative overall price band for the shop, in rupees
+  priceMin       Int?
+  priceMax       Int?
+  turnaroundDays Int?
+
+  homeVisit       Boolean @default(false)
+  homeVisitFee    Int?
+  /// True only when the shop itself supplied the rate card. Never infer this.
+  rateCardVerified Boolean @default(false)
+  /// Listing facts checked by the Groovyn team
+  verified        Boolean @default(false)
+  /// Owner has claimed and taken over the listing
+  claimed         Boolean @default(false)
+  featured        Boolean @default(false)
+
+  /// Only ever set from real Review rows — never seeded, never estimated.
+  ratingAvg   Float?
+  ratingCount Int    @default(0)
+
+  establishedYear Int?
+  coverImage      String?
+  googlePlaceId   String?
+
+  images     StoreImage[]
+  priceItems PriceItem[]
+  reviews    Review[]
+  claims     Claim[]
+  bookings   VisitBooking[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([cityId, category])
+  @@index([localityId])
+  @@index([category])
+}
+
+model StoreImage {
+  id        String  @id @default(cuid())
+  storeId   String
+  store     Store   @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  url       String
+  alt       String
+  caption   String?
+  /// Credit line — who shot it. Matters because we only publish photos we own or licensed.
+  credit    String?
+  sortOrder Int     @default(0)
+
+  @@index([storeId])
+}
+
+model Service {
+  id          String      @id @default(cuid())
+  slug        String      @unique
+  name        String
+  /// Which vertical this service belongs to
+  category    String
+  description String?
+  /// JSON string[] of search aliases, e.g. ["coat pant", "two piece suit"]
+  aliases     String      @default("[]")
+  /// City-level benchmark range shown when a shop has no verified rate card
+  benchmarkMin Int?
+  benchmarkMax Int?
+  sortOrder   Int         @default(0)
+  priceItems  PriceItem[]
+}
+
+model PriceItem {
+  id        String   @id @default(cuid())
+  storeId   String
+  store     Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  serviceId String?
+  service   Service? @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+
+  label     String
+  priceMin  Int?
+  priceMax  Int?
+  /// "per piece" | "per metre" | "per event" | "per day"
+  unit      String  @default("per piece")
+  note      String?
+  /// Where this number came from: "shop" (they told us) | "menu" (photographed rate card) | "estimate"
+  source    String  @default("shop")
+  sortOrder Int     @default(0)
+
+  @@index([storeId])
+  @@index([serviceId])
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  storeId    String
+  store      Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  authorName String
+  rating     Int
+  body       String?
+  published  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  @@index([storeId])
+}
+
+model Claim {
+  id        String   @id @default(cuid())
+  storeId   String
+  store     Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  name      String
+  phone     String
+  email     String?
+  role      String?
+  message   String?
+  /// pending | contacted | approved | rejected
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+
+  @@index([storeId])
+  @@index([status])
+}
+
+model VisitBooking {
+  id      String @id @default(cuid())
+  storeId String
+  store   Store  @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  /// STORE = customer goes to the shop. HOME = fitter visits the customer (Phase 3).
+  type    String @default("STORE")
+
+  name          String
+  phone         String
+  preferredDate DateTime?
+  preferredSlot String?
+  serviceWanted String?
+  notes         String?
+  /// pending | confirmed | visited | no_show | cancelled
+  status        String    @default("pending")
+  /// Which page the booking came from — needed to prove footfall per surface.
+  source        String?
+  createdAt     DateTime  @default(now())
+
+  @@index([storeId])
+  @@index([status])
+}
+
+model StoreSuggestion {
+  id       String  @id @default(cuid())
+  name     String
+  category String
+  city     String
+  locality String?
+  phone    String?
+  address  String?
+  notes    String?
+  /// pending | reviewed | added | rejected
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+
+  @@index([status])
+}
