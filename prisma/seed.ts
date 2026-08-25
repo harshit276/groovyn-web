@@ -1,3 +1,6 @@
+// tsx does not load .env the way Next.js does — load it explicitly.
+import "dotenv/config";
+
 /**
  * Seed data for local development.
  *
@@ -11,8 +14,16 @@
  * The *prices* are researched market benchmarks for Delhi NCR and are broadly
  * accurate — those are worth keeping as the `Service.benchmark*` fallbacks.
  */
-import { PrismaPg } from "@prisma/adapter-pg";
+import { neonConfig } from "@neondatabase/serverless";
+import { PrismaNeon } from "@prisma/adapter-neon";
 import { PrismaClient } from "@prisma/client";
+import ws from "ws";
+
+// Scripts use Neon's WebSocket driver (port 443) rather than adapter-pg,
+// because many ISPs and office networks block outbound TCP 5432 — which is
+// exactly what happens on this machine. The deployed app keeps adapter-pg;
+// Vercel has no such restriction.
+neonConfig.webSocketConstructor = ws;
 
 const connectionString = process.env.DATABASE_URL;
 if (!connectionString) {
@@ -20,7 +31,7 @@ if (!connectionString) {
 }
 
 const db = new PrismaClient({
-  adapter: new PrismaPg({ connectionString }),
+  adapter: new PrismaNeon({ connectionString }),
 });
 
 const HOURS_STANDARD = JSON.stringify({
@@ -767,7 +778,47 @@ const COVER_BY_CATEGORY: Record<string, string> = {
   "rental-shops": "/images/rental.webp",
 };
 
+/**
+ * Services are reference data, not sample data — they power the filters and the
+ * price-index pages, and researched price items link to them. Seed them on their
+ * own so a real database can have them without the synthetic shops.
+ *   npm run db:seed -- --services-only
+ */
+async function seedServicesOnly() {
+  console.log("Seeding services only (idempotent upsert)…");
+  for (const [i, s] of SERVICES.entries()) {
+    await db.service.upsert({
+      where: { slug: s.slug },
+      update: {
+        name: s.name,
+        category: s.category,
+        description: s.description,
+        aliases: JSON.stringify(s.aliases ?? []),
+        benchmarkMin: s.benchmarkMin,
+        benchmarkMax: s.benchmarkMax,
+        sortOrder: i,
+      },
+      create: {
+        slug: s.slug,
+        name: s.name,
+        category: s.category,
+        description: s.description,
+        aliases: JSON.stringify(s.aliases ?? []),
+        benchmarkMin: s.benchmarkMin,
+        benchmarkMax: s.benchmarkMax,
+        sortOrder: i,
+      },
+    });
+  }
+  console.log(`Services: ${await db.service.count()}. Stores untouched.`);
+}
+
 async function main() {
+  if (process.argv.includes("--services-only")) {
+    await seedServicesOnly();
+    return;
+  }
+
   console.log("Clearing existing data…");
   // Order matters — children first.
   await db.priceItem.deleteMany();

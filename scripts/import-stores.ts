@@ -1,3 +1,6 @@
+// tsx does not load .env the way Next.js does — load it explicitly.
+import "dotenv/config";
+
 /**
  * Import researched stores into the database.
  *
@@ -11,9 +14,15 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 
-import { PrismaPg } from "@prisma/adapter-pg";
+import { neonConfig } from "@neondatabase/serverless";
+import { PrismaNeon } from "@prisma/adapter-neon";
 import { PrismaClient } from "@prisma/client";
+import ws from "ws";
 import { z } from "zod";
+
+// See prisma/seed.ts — WebSocket driver over 443, because outbound TCP 5432
+// is blocked on this network.
+neonConfig.webSocketConstructor = ws;
 
 // Created lazily so --dry-run can validate a file without a database at all —
 // validation is the part you want to run early and often.
@@ -27,7 +36,7 @@ function getDb(): PrismaClient {
       "DATABASE_URL is not set. Add it to .env, or pass --dry-run to validate without writing."
     );
   }
-  client = new PrismaClient({ adapter: new PrismaPg({ connectionString }) });
+  client = new PrismaClient({ adapter: new PrismaNeon({ connectionString }) });
   return client;
 }
 
