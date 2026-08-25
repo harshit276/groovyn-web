@@ -15,10 +15,21 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@prisma/client";
 import { z } from "zod";
 
-const connectionString = process.env.DATABASE_URL;
-if (!connectionString) throw new Error("DATABASE_URL is not set.");
+// Created lazily so --dry-run can validate a file without a database at all —
+// validation is the part you want to run early and often.
+let client: PrismaClient | null = null;
 
-const db = new PrismaClient({ adapter: new PrismaPg({ connectionString }) });
+function getDb(): PrismaClient {
+  if (client) return client;
+  const connectionString = process.env.DATABASE_URL;
+  if (!connectionString) {
+    throw new Error(
+      "DATABASE_URL is not set. Add it to .env, or pass --dry-run to validate without writing."
+    );
+  }
+  client = new PrismaClient({ adapter: new PrismaPg({ connectionString }) });
+  return client;
+}
 
 const CATEGORIES = ["tailors", "boutiques", "fabric-shops", "rental-shops"] as const;
 
@@ -129,10 +140,10 @@ async function main() {
         `  ${storeSlug(s).padEnd(46)} ${s.category.padEnd(14)} ${s.confidence.padEnd(6)} ${s.sources.length} source(s)`
       );
     }
-    await db.$disconnect();
     return;
   }
 
+  const db = getDb();
   let created = 0;
   let updated = 0;
 
@@ -239,8 +250,11 @@ async function main() {
   await db.$disconnect();
 }
 
-main().catch(async (e) => {
-  console.error(e);
-  await db.$disconnect();
-  process.exit(1);
-});
+main()
+  .catch(async (e) => {
+    console.error(e instanceof Error ? e.message : e);
+    process.exitCode = 1;
+  })
+  .finally(async () => {
+    await client?.$disconnect();
+  });
