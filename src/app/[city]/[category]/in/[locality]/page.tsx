@@ -10,7 +10,9 @@ import { breadcrumbSchema, itemListSchema } from "@/lib/schema";
 import { getCategory } from "@/lib/site";
 import type { StoreSort } from "@/lib/types";
 
-export const revalidate = 3600;
+// No `revalidate` — this page reads `searchParams` for sort/pagination, and
+// pairing that with an ISR window throws at runtime in production. See the note
+// in ../../page.tsx.
 
 /**
  * Locality pages are the long tail — "tailors in Lajpat Nagar" is the query

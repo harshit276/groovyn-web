@@ -18,7 +18,14 @@ import { breadcrumbSchema, itemListSchema } from "@/lib/schema";
 import { CATEGORIES, getCategory } from "@/lib/site";
 import type { StoreSort } from "@/lib/types";
 
-export const revalidate = 3600;
+// No `revalidate` here on purpose. This page reads `searchParams` for the
+// filters, which forces per-request rendering — and combining that with an ISR
+// revalidate window makes the route throw at runtime in a production build
+// (it builds fine and works under `next dev`, so it only shows up once deployed).
+//
+// SEO is unaffected: crawlers still get fully server-rendered HTML. To make this
+// statically cacheable again, filtering has to move into a client component
+// reading useSearchParams, leaving the page itself free of request-time inputs.
 
 /** Pre-render every city × category combination — these are the money pages. */
 export async function generateStaticParams() {
