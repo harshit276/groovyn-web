@@ -4,6 +4,7 @@ import {
   getAllLocalityPaths,
   getAllStorePaths,
   getCities,
+  getServicePriceIndex,
   getServices,
 } from "@/lib/queries";
 import { absoluteUrl, CATEGORIES } from "@/lib/site";
@@ -73,13 +74,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  const pricePages: MetadataRoute.Sitemap = cities.flatMap((c) =>
-    services.map((s) => ({
-      url: absoluteUrl(`/${c.slug}/prices/${s.slug}`),
-      lastModified: now,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    }))
+  // Only list price pages backed by real shop-supplied rate cards. Without them
+  // every city renders the same national benchmark, and we would be submitting
+  // dozens of near-duplicate thin pages — the fastest way to make Google
+  // discount the whole domain. These reappear automatically as cards come in.
+  const priceCandidates = await Promise.all(
+    cities.flatMap((c) =>
+      services.map(async (s) => {
+        const index = await getServicePriceIndex(c.slug, s.slug);
+        return index.sampleSize > 0
+          ? {
+              url: absoluteUrl(`/${c.slug}/prices/${s.slug}`),
+              lastModified: now,
+              changeFrequency: "weekly" as const,
+              priority: 0.8,
+            }
+          : null;
+      })
+    )
+  );
+  const pricePages: MetadataRoute.Sitemap = priceCandidates.filter(
+    (p): p is NonNullable<typeof p> => p !== null
   );
 
   return [

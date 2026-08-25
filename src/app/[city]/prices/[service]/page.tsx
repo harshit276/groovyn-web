@@ -47,11 +47,18 @@ export async function generateMetadata({
   const title = `${service.name} Price in ${city.name} (${new Date().getFullYear()})${range}`;
   const description = `What ${service.name.toLowerCase()} actually costs in ${city.name}, based on rate cards shared by local shops. Compare prices and find shops near you.`;
 
+  // With no shop-supplied rate cards, every city falls back to the same national
+  // benchmark — so /delhi/prices/x and /noida/prices/x would be identical thin
+  // pages. Keep them out of the index until they carry real observed data;
+  // they become indexable on their own once rate cards land.
+  const indexable = index.sampleSize > 0;
+
   return {
     title,
     description,
     alternates: { canonical: `/${citySlug}/prices/${serviceSlug}` },
     openGraph: { title, description, url: `/${citySlug}/prices/${serviceSlug}` },
+    robots: indexable ? undefined : { index: false, follow: true },
   };
 }
 
