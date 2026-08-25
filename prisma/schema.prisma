@@ -102,6 +102,9 @@ model Store {
   establishedYear Int?
   coverImage      String?
   googlePlaceId   String?
+  /// When Places data was last pulled. Google restricts how long its content
+  /// may be retained, so staleness has to be visible, not implicit.
+  placesSyncedAt  DateTime?
 
   images     StoreImage[]
   priceItems PriceItem[]
