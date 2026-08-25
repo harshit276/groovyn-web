@@ -819,6 +819,23 @@ async function main() {
     return;
   }
 
+  // Refuse to destroy real data. This seed wipes every store and replaces them
+  // with synthetic placeholders — harmless against an empty database, ruinous
+  // against one holding researched businesses.
+  const existingStores = await db.store.count();
+  if (existingStores > 0 && !process.argv.includes("--force")) {
+    console.error(
+      `\nRefusing to seed: the database already holds ${existingStores} store(s).\n\n` +
+        "This seed DELETES all stores and replaces them with synthetic placeholders.\n" +
+        "If those are real researched businesses, you almost certainly want one of:\n\n" +
+        "  npm run db:seed -- --services-only    seed reference data only, stores untouched\n" +
+        "  npm run import:stores -- <file.json>  add researched stores\n\n" +
+        "If you genuinely want to wipe and replace with synthetic data, re-run with --force.\n"
+    );
+    process.exitCode = 1;
+    return;
+  }
+
   console.log("Clearing existing data…");
   // Order matters — children first.
   await db.priceItem.deleteMany();
