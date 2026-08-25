@@ -1,0 +1,2093 @@
+[
+  {
+    "name": "Mahfooz Tailors",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "connaught-place",
+    "localityName": "Connaught Place",
+    "address": "Shop 21, Shankar Market, Connaught Circus, Barakhamba, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": "+919310022698",
+    "website": null,
+    "instagram": null,
+    "about": "A Shankar Market tailoring shop working mainly on womenswear, cutting both Western silhouettes and Indian suits, and known for taking on rush jobs.",
+    "specialities": [
+      "Womenswear",
+      "Western Wear",
+      "Salwar Suits",
+      "Rush Orders"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": 550,
+    "priceMax": null,
+    "turnaroundDays": 1,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Tops",
+        "priceMin": 550,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": null,
+        "source": "estimate"
+      },
+      {
+        "label": "Dresses",
+        "priceMin": 1000,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": null,
+        "source": "estimate"
+      },
+      {
+        "label": "Salwar suit stitching",
+        "priceMin": 600,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "salwar-suit-stitching",
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/5-shankar-market-tailors/",
+      "https://lbb.in/delhi/lbbpicks-tailors-for-all-your-apparel-needs/"
+    ],
+    "confidence": "medium",
+    "notes": "Name is spelled both 'Mahfooz' and 'Mehfooz' across LBB articles. Sources disagree on the shop number: LBB gives Shop 21, Shankar Market; so.city gives Stall No. 42, Shankar Market. Shop 21 used because two LBB pages agree on it. Hours not published; prices are LBB's reporting, not a shop-issued rate card."
+  },
+  {
+    "name": "R. N. Ladies Tailors",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "connaught-place",
+    "localityName": "Connaught Place",
+    "address": "Shop 28, Shankar Market, Connaught Place, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A ladies' tailoring shop in Shankar Market run by master tailor M Nafees, stitching maxis, skirts, cholis and kurtas to measure.",
+    "specialities": [
+      "Ladies Tailoring",
+      "Lehenga Choli",
+      "Kurtas",
+      "Skirts"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": 300,
+    "priceMax": null,
+    "turnaroundDays": 7,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Lehenga choli stitching",
+        "priceMin": 1000,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "lehenga-stitching",
+        "source": "estimate"
+      },
+      {
+        "label": "Palazzos",
+        "priceMin": 300,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "trouser-stitching",
+        "source": "estimate"
+      },
+      {
+        "label": "Salwar suit stitching",
+        "priceMin": 600,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "salwar-suit-stitching",
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/5-shankar-market-tailors/"
+    ],
+    "confidence": "medium",
+    "notes": "Phone and opening hours not published in the source. Prices are as reported by LBB, not confirmed by the shop."
+  },
+  {
+    "name": "Abdul Aziz Tailors",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "connaught-place",
+    "localityName": "Connaught Place",
+    "address": "Shop 33, Shankar Market, Connaught Place, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A long-running Shankar Market tailoring shop stitching for both men and women, with a line in ikat kurtis and anarkalis.",
+    "specialities": [
+      "Menswear",
+      "Womenswear",
+      "Anarkali",
+      "Kurtis"
+    ],
+    "materials": [
+      "Ikat"
+    ],
+    "openingHours": {},
+    "priceMin": 550,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": 1984,
+    "priceItems": [
+      {
+        "label": "Suit stitching",
+        "priceMin": 550,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "salwar-suit-stitching",
+        "source": "estimate"
+      },
+      {
+        "label": "Palazzos",
+        "priceMin": 700,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "trouser-stitching",
+        "source": "estimate"
+      },
+      {
+        "label": "Anarkali stitching",
+        "priceMin": 1500,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "anarkali-stitching",
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/5-shankar-market-tailors/"
+    ],
+    "confidence": "medium",
+    "notes": "Established year inferred from the source saying the tailor has been stitching here since 1984; phone and hours not published."
+  },
+  {
+    "name": "Saeed Tailors",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "connaught-place",
+    "localityName": "Connaught Place",
+    "address": "Shop 45, Shanker Market, Connaught Place, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Shankar Market tailor handling everyday menswear and womenswear — shirts, trousers and kurta pyjamas — at budget rates.",
+    "specialities": [
+      "Menswear",
+      "Shirts",
+      "Trousers",
+      "Kurta Pyjama"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": 200,
+    "priceMax": null,
+    "turnaroundDays": 7,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Shirt stitching",
+        "priceMin": 400,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "shirt-stitching",
+        "source": "estimate"
+      },
+      {
+        "label": "Trouser stitching",
+        "priceMin": 600,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "trouser-stitching",
+        "source": "estimate"
+      },
+      {
+        "label": "Kurta pyjama stitching",
+        "priceMin": 750,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "kurta-pyjama-stitching",
+        "source": "estimate"
+      },
+      {
+        "label": "Salwar suit stitching",
+        "priceMin": 650,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "salwar-suit-stitching",
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/5-shankar-market-tailors/"
+    ],
+    "confidence": "medium",
+    "notes": "Source spells the market 'Shanker Market'. Phone and hours not published."
+  },
+  {
+    "name": "Kambo Tailors",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "connaught-place",
+    "localityName": "Connaught Place",
+    "address": "Shop 41, Shankar Market, Connaught Place, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A women's tailoring shop in Shankar Market that has been stitching blouses, maxi dresses and crop tops for decades, with same-day work available.",
+    "specialities": [
+      "Blouses",
+      "Padded Blouses",
+      "Maxi Dresses",
+      "Womenswear"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": 500,
+    "priceMax": null,
+    "turnaroundDays": 1,
+    "homeVisit": false,
+    "establishedYear": 1981,
+    "priceItems": [
+      {
+        "label": "Blouse stitching",
+        "priceMin": 500,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "blouse-stitching",
+        "source": "estimate"
+      },
+      {
+        "label": "Padded blouse stitching",
+        "priceMin": 1000,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "blouse-stitching",
+        "source": "estimate"
+      },
+      {
+        "label": "Maxi dress",
+        "priceMin": 500,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": null,
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/5-shankar-market-tailors/"
+    ],
+    "confidence": "medium",
+    "notes": "Established year taken from the source describing the shop as operating since 1981. Phone and hours not published."
+  },
+  {
+    "name": "New Prominent Ladies & Gents",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "connaught-place",
+    "localityName": "Connaught Place",
+    "address": "K-25, Ground Floor, Opposite PVR Plaza, Connaught Place, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": "+911123418007",
+    "website": null,
+    "instagram": null,
+    "about": "A Connaught Place tailoring shop making custom Western, Indian and fusion pieces for men and women, including structured blazers and dresses, with measurement and delivery at home.",
+    "specialities": [
+      "Blazers",
+      "Dresses",
+      "Womenswear",
+      "Fusion Wear"
+    ],
+    "materials": [],
+    "openingHours": {
+      "mon": "11:30-19:30",
+      "tue": "11:30-19:30",
+      "wed": "11:30-19:30",
+      "thu": "11:30-19:30",
+      "fri": "11:30-19:30",
+      "sat": "11:30-19:30",
+      "sun": "11:30-19:30"
+    },
+    "priceMin": 500,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": true,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Blazer stitching",
+        "priceMin": 3500,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "blazer-stitching",
+        "source": "estimate"
+      },
+      {
+        "label": "Dresses",
+        "priceMin": 1500,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": null,
+        "source": "estimate"
+      },
+      {
+        "label": "Tops",
+        "priceMin": 500,
+        "priceMax": 600,
+        "unit": "per piece",
+        "serviceSlug": null,
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/new-prominent-tailors-cp/"
+    ],
+    "confidence": "medium",
+    "notes": "Source states store timings 11:30 AM to 7:30 PM but does not name a weekly closing day, so the same hours are recorded for all seven days — weekly off unconfirmed."
+  },
+  {
+    "name": "Vogue Jeans Tailors & Drapers",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "connaught-place",
+    "localityName": "Connaught Place",
+    "address": "Shop 57, Mohan Singh Place, Connaught Place, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": "+911123374413",
+    "website": null,
+    "instagram": null,
+    "about": "A Mohan Singh Place tailor that specialises in denim, cutting and fitting jeans in a range of silhouettes and sizes.",
+    "specialities": [
+      "Denim",
+      "Jeans",
+      "Alterations"
+    ],
+    "materials": [
+      "Denim"
+    ],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://lbb.in/delhi/lbbpicks-tailors-for-all-your-apparel-needs/"
+    ],
+    "confidence": "medium",
+    "notes": "No prices, hours or pincode published in the source."
+  },
+  {
+    "name": "H.L Tailor & Drapers",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "connaught-place",
+    "localityName": "Connaught Place",
+    "address": "Shop No. 111, Mohan Singh Place, Baba Kharak Singh Road, Connaught Place, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Mohan Singh Place tailoring shop known for getting jeans to fit properly and for general alteration work.",
+    "specialities": [
+      "Alterations",
+      "Denim",
+      "Jeans Fitting"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://so.city/delhi/article/made-to-measure-here-are-the-best-tailors-in-delhi"
+    ],
+    "confidence": "medium",
+    "notes": "Phone, hours and prices not published in the source."
+  },
+  {
+    "name": "Guys & Dolls",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "greater-kailash-1",
+    "localityName": "Greater Kailash 1",
+    "address": "M-27, Ground Floor, M Block Market, Greater Kailash 1, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": "+919810669400",
+    "website": null,
+    "instagram": null,
+    "about": "An M Block Market alteration specialist that reworks denim — letting out, taking in and reshaping jeans — alongside general garment alterations and stitching from scratch.",
+    "specialities": [
+      "Alterations",
+      "Denim",
+      "Jeans Fitting"
+    ],
+    "materials": [
+      "Denim"
+    ],
+    "openingHours": {
+      "mon": "11:00-19:30",
+      "tue": "closed",
+      "wed": "11:00-19:30",
+      "thu": "11:00-19:30",
+      "fri": "11:00-19:30",
+      "sat": "11:00-19:30",
+      "sun": "11:00-19:30"
+    },
+    "priceMin": 200,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Basic length alteration",
+        "priceMin": 200,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "alterations",
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/guys-dolls-tailor-gk/"
+    ],
+    "confidence": "medium",
+    "notes": "Hours and Tuesday closing taken from the source. Pincode not published."
+  },
+  {
+    "name": "Eve Tailors",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "greater-kailash-1",
+    "localityName": "Greater Kailash 1",
+    "address": "24-A, M Block Market, Greater Kailash 1, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": "+911141631378",
+    "website": null,
+    "instagram": null,
+    "about": "A Greater Kailash tailoring shop that concentrates on blouses and lehengas, including sequin and embroidery work for bridal and occasion outfits.",
+    "specialities": [
+      "Blouses",
+      "Lehengas",
+      "Bridal",
+      "Embroidery"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://lbb.in/delhi/lbbpicks-tailors-for-all-your-apparel-needs/",
+      "https://so.city/delhi/article/made-to-measure-here-are-the-best-tailors-in-delhi"
+    ],
+    "confidence": "low",
+    "notes": "Sources disagree on both name and address: LBB has 'Eve Tailors, 24-A, M Block Market, GK-1'; so.city has 'Eves Tailors, M-24A, Main Market, GK I'. Likely the same shop but the shop number should be confirmed by phone before publishing."
+  },
+  {
+    "name": "Amrapali Tailors",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "lajpat-nagar",
+    "localityName": "Lajpat Nagar",
+    "address": "I-26, Central Market, Lajpat Nagar 2, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": "+919811668400",
+    "website": null,
+    "instagram": null,
+    "about": "A Lajpat Nagar Central Market tailoring shop covering the full range of Indian womenswear, from everyday suits to occasion pieces.",
+    "specialities": [
+      "Indian Wear",
+      "Salwar Suits",
+      "Womenswear"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://lbb.in/delhi/lbbpicks-tailors-for-all-your-apparel-needs/"
+    ],
+    "confidence": "medium",
+    "notes": "Prices, hours and pincode not published in the source."
+  },
+  {
+    "name": "Mukesh Tailors & Drapers",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "lajpat-nagar",
+    "localityName": "Lajpat Nagar",
+    "address": "I-31, Veer Savarkar Marg, Lajpat Nagar II, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Lajpat Nagar tailoring shop working mainly on traditional Indian womenswear.",
+    "specialities": [
+      "Indian Wear",
+      "Womenswear"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://so.city/delhi/article/made-to-measure-here-are-the-best-tailors-in-delhi"
+    ],
+    "confidence": "low",
+    "notes": "Only a single editorial mention with an address; no phone, hours or prices found."
+  },
+  {
+    "name": "Dresswell Goel",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "green-park",
+    "localityName": "Green Park",
+    "address": "130-M/1, Gautam Nagar, Green Park, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": "+919212505257",
+    "website": null,
+    "instagram": null,
+    "about": "A Gautam Nagar tailoring shop near Green Park that stitches both Indian and Western clothing to measure.",
+    "specialities": [
+      "Indian Wear",
+      "Western Wear"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://lbb.in/delhi/lbbpicks-tailors-for-all-your-apparel-needs/"
+    ],
+    "confidence": "medium",
+    "notes": "Prices, hours and pincode not published in the source."
+  },
+  {
+    "name": "Feminine Flair Ladies Tailor",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "green-park",
+    "localityName": "Green Park",
+    "address": "X-45, Main Market, Green Park, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A ladies' tailor in Green Park Main Market stitching contemporary womenswear at neighbourhood rates.",
+    "specialities": [
+      "Ladies Tailoring",
+      "Womenswear"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://so.city/delhi/article/made-to-measure-here-are-the-best-tailors-in-delhi"
+    ],
+    "confidence": "low",
+    "notes": "Single editorial mention; no phone, hours or itemised prices found. Source only describes prices as affordable, which is not specific enough to record."
+  },
+  {
+    "name": "Iqbal Tailors",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "malviya-nagar",
+    "localityName": "Malviya Nagar",
+    "address": "T-220/I-3, Savitri Nagar, Malviya Nagar, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Savitri Nagar tailoring shop in Malviya Nagar that stocks fabric alongside stitching formal wear and handling fittings.",
+    "specialities": [
+      "Formal Wear",
+      "Alterations"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://so.city/delhi/article/made-to-measure-here-are-the-best-tailors-in-delhi"
+    ],
+    "confidence": "low",
+    "notes": "Single editorial mention; no phone, hours or prices found."
+  },
+  {
+    "name": "Viavero",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "malviya-nagar",
+    "localityName": "Malviya Nagar",
+    "address": "Malviya Nagar, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": "+919910086310",
+    "website": null,
+    "instagram": null,
+    "about": "A Malviya Nagar menswear tailor with a wide fabric selection, known for getting a snug fit without putting the customer through repeated trials.",
+    "specialities": [
+      "Bespoke Suits",
+      "Menswear"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": 12000,
+    "priceMax": null,
+    "turnaroundDays": 15,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Suit stitching",
+        "priceMin": 12000,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "suit-stitching",
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/suit-eight-tried-tested-tailors-delhi-men-depend/"
+    ],
+    "confidence": "low",
+    "notes": "Source gives only the locality, not a street address. Street address, hours and pincode unverified."
+  },
+  {
+    "name": "Pritika Fashion",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "saket",
+    "localityName": "Saket",
+    "address": "Saket, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": "+919990851111",
+    "website": null,
+    "instagram": null,
+    "about": "A home-studio tailor in Saket working on Indian womenswear — saris, suits and blouses — and happy to suggest designs when the customer is undecided.",
+    "specialities": [
+      "Indian Wear",
+      "Blouses",
+      "Sarees",
+      "Salwar Suits"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://lbb.in/delhi/lbbpicks-tailors-for-all-your-apparel-needs/"
+    ],
+    "confidence": "low",
+    "notes": "Home studio — the source gives no street address, only the locality. Hours and prices not published."
+  },
+  {
+    "name": "Kaiser Josh",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "south-extension-2",
+    "localityName": "South Extension 2",
+    "address": "E-24, South Extension 2, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": "+919811014024",
+    "website": null,
+    "instagram": null,
+    "about": "A South Extension menswear tailor cutting suits, shirts and trousers to measure.",
+    "specialities": [
+      "Menswear",
+      "Suits",
+      "Shirts",
+      "Trousers"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://lbb.in/delhi/lbbpicks-tailors-for-all-your-apparel-needs/"
+    ],
+    "confidence": "medium",
+    "notes": "Prices, hours and pincode not published in the source."
+  },
+  {
+    "name": "Jassi Tailors",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "jor-bagh",
+    "localityName": "Jor Bagh",
+    "address": "Jor Bagh, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": "+919891014226",
+    "website": null,
+    "instagram": null,
+    "about": "A Jor Bagh home-studio tailor best known for everyday Indian wear, palazzos and carefully finished blouses.",
+    "specialities": [
+      "Indian Wear",
+      "Blouses",
+      "Palazzos"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://lbb.in/delhi/lbbpicks-tailors-for-all-your-apparel-needs/"
+    ],
+    "confidence": "low",
+    "notes": "Home studio — no street address given by the source, only the locality."
+  },
+  {
+    "name": "Rinku Masterji",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "shahpur-jat",
+    "localityName": "Shahpur Jat",
+    "address": "Shop 417, 4th Floor, Shahpur Jat, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": "+918506065035",
+    "website": null,
+    "instagram": null,
+    "about": "A Shahpur Jat tailor taking on both Indian and Western garments in a neighbourhood better known for designer studios.",
+    "specialities": [
+      "Indian Wear",
+      "Western Wear"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://lbb.in/delhi/lbbpicks-tailors-for-all-your-apparel-needs/"
+    ],
+    "confidence": "medium",
+    "notes": "Prices, hours and pincode not published in the source."
+  },
+  {
+    "name": "Incheetape By Purvi And Sharad",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "shahpur-jat",
+    "localityName": "Shahpur Jat",
+    "address": "Shahpur Jat, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": "+919810396889",
+    "website": null,
+    "instagram": null,
+    "about": "A Shahpur Jat menswear tailoring studio run by Purvi and Sharad, working with distinctive design detailing and higher-end fabrics.",
+    "specialities": [
+      "Bespoke Suits",
+      "Menswear"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": 20000,
+    "priceMax": null,
+    "turnaroundDays": 10,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Suit stitching",
+        "priceMin": 20000,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "suit-stitching",
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/suit-eight-tried-tested-tailors-delhi-men-depend/"
+    ],
+    "confidence": "low",
+    "notes": "Source gives only the locality, not a street address. Turnaround recorded as the upper end of the stated 7-10 days."
+  },
+  {
+    "name": "Varun Kumar",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "sainik-farms",
+    "localityName": "Sainik Farms",
+    "address": "Sainik Farms, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": "+919811604824",
+    "website": null,
+    "instagram": null,
+    "about": "A Sainik Farms menswear tailor making suits and bandhgalas, including floral and patterned occasion jackets.",
+    "specialities": [
+      "Bespoke Suits",
+      "Bandhgala",
+      "Menswear"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": 18000,
+    "priceMax": null,
+    "turnaroundDays": 7,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Suit stitching",
+        "priceMin": 18000,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "suit-stitching",
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/suit-eight-tried-tested-tailors-delhi-men-depend/"
+    ],
+    "confidence": "low",
+    "notes": "Source gives only the locality, not a street address. Turnaround recorded as the upper end of the stated 4-7 days."
+  },
+  {
+    "name": "Shaheen Collection",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "tank-road",
+    "localityName": "Tank Road",
+    "address": "Tank Road, Karol Bagh, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": "+918527159391",
+    "website": null,
+    "instagram": null,
+    "about": "A Tank Road menswear tailor making suits at wholesale-market rates, including copying a garment from a customer's reference picture.",
+    "specialities": [
+      "Suits",
+      "Menswear",
+      "Alterations"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": 7,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://lbb.in/delhi/suit-eight-tried-tested-tailors-delhi-men-depend/"
+    ],
+    "confidence": "low",
+    "notes": "Source gives only 'Tank Road' — the Karol Bagh qualifier is the well-known location of that road but the exact shop number is unverified. No prices published."
+  },
+  {
+    "name": "Deepak S Chhabra",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "west-patel-nagar",
+    "localityName": "West Patel Nagar",
+    "address": "West Patel Nagar, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": "+919811837540",
+    "website": null,
+    "instagram": null,
+    "about": "A West Patel Nagar menswear tailor offering a broad choice of designs and fabrics for made-to-measure suiting.",
+    "specialities": [
+      "Bespoke Suits",
+      "Menswear"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": 10000,
+    "priceMax": null,
+    "turnaroundDays": 10,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Suit stitching",
+        "priceMin": 10000,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "suit-stitching",
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/suit-eight-tried-tested-tailors-delhi-men-depend/"
+    ],
+    "confidence": "low",
+    "notes": "Source gives only the locality, not a street address. A landline (011 4500 8375) was also listed; mobile recorded here."
+  },
+  {
+    "name": "Sunshine Tailors & Drapers",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "rk-puram",
+    "localityName": "R.K. Puram",
+    "address": "Shop No 1, Sector 2, R.K. Puram, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "An R.K. Puram tailoring shop making tuxedos and formal suits, with fabric available in store.",
+    "specialities": [
+      "Tuxedos",
+      "Formal Suits",
+      "Menswear"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://so.city/delhi/article/made-to-measure-here-are-the-best-tailors-in-delhi"
+    ],
+    "confidence": "low",
+    "notes": "Single editorial mention; no phone, hours or prices found."
+  },
+  {
+    "name": "Ashok Tailors",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "chandni-chowk",
+    "localityName": "Chandni Chowk",
+    "address": "4778, Katra Neel, Ballimaran, Chandni Chowk, Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Katra Neel menswear tailor in Chandni Chowk cutting suits, bandhgalas, tuxedos and sherwanis in the middle of the old cloth market.",
+    "specialities": [
+      "Menswear",
+      "Bandhgala",
+      "Tuxedos",
+      "Sherwani"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://so.city/delhi/article/made-to-measure-here-are-the-best-tailors-in-delhi"
+    ],
+    "confidence": "low",
+    "notes": "Source spells the lane 'Balli Maran'. No phone, hours or prices found."
+  },
+  {
+    "name": "Oriental Drapers & Tailors",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "karol-bagh",
+    "localityName": "Karol Bagh",
+    "address": "13/30, W.E.A Ajmal Khan Road, Karol Bagh, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": "+919899962505",
+    "website": null,
+    "instagram": null,
+    "about": "A tailoring shop on Karol Bagh's Ajmal Khan Road that stitches suits, blazers, trousers and shirts as separate pieces rather than only as sets, in a market otherwise dominated by ready-made sherwani retailers.",
+    "specialities": [
+      "Suits",
+      "Blazers",
+      "Trousers",
+      "Shirts",
+      "Menswear"
+    ],
+    "materials": [],
+    "openingHours": {
+      "mon": "closed"
+    },
+    "priceMin": 600,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Stitching (most garments)",
+        "priceMin": 600,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": null,
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/mens-wedding-wear-karol-bagh/"
+    ],
+    "confidence": "medium",
+    "notes": "Monday closure is stated for the Karol Bagh market as a whole, not for this shop specifically; daily opening times were not published. Pincode not published."
+  },
+  {
+    "name": "Saachi By Shuchi",
+    "category": "tailors",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "rohini",
+    "localityName": "Rohini",
+    "address": "Pocket D-12/6, Sector 7, Rohini, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Rohini Sector 7 tailoring studio that will recreate a design a customer brings in, alongside made-to-measure kurtas and everyday basics.",
+    "specialities": [
+      "Bespoke Tailoring",
+      "Design Replication",
+      "Kurtas"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": 1000,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Kurtas and basics",
+        "priceMin": 1000,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": null,
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/rohini-sector-7-shopping-guide/"
+    ],
+    "confidence": "medium",
+    "notes": "Phone, hours and pincode not published in the source."
+  },
+  {
+    "name": "Chanchal Boutique Collection & Fabric",
+    "category": "fabric-shops",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "rohini",
+    "localityName": "Rohini",
+    "address": "Pocket D-12/141, Sector 7, Rohini, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Rohini Sector 7 fabric shop stocking plain everyday cloth through to heavily worked material with sequin and gota detailing.",
+    "specialities": [
+      "Fabric Retail",
+      "Embellished Fabric",
+      "Gota Work"
+    ],
+    "materials": [
+      "Sequinned Fabric"
+    ],
+    "openingHours": {},
+    "priceMin": 100,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Fabric",
+        "priceMin": 100,
+        "priceMax": null,
+        "unit": "per metre",
+        "serviceSlug": null,
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/rohini-sector-7-shopping-guide/"
+    ],
+    "confidence": "medium",
+    "notes": "Phone, hours and pincode not published in the source. Name includes the word 'Boutique' but the source describes it as a fabric retailer, so it is filed under fabric-shops."
+  },
+  {
+    "name": "Sarika Textiles",
+    "category": "fabric-shops",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "chandni-chowk",
+    "localityName": "Chandni Chowk",
+    "address": "Krishna Gali, Katra Neel, Chandni Chowk, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Chandni Chowk fabric shop tucked inside Krishna Gali stocking cottons and linens, and arranging stitching for shirts, Nehru jackets and full sherwani sets.",
+    "specialities": [
+      "Cotton",
+      "Linen",
+      "Nehru Jackets",
+      "Sherwani Sets"
+    ],
+    "materials": [
+      "Cotton",
+      "Linen",
+      "Terry Cotton"
+    ],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Nehru jacket (fabric plus stitching)",
+        "priceMin": 1200,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": null,
+        "source": "estimate"
+      },
+      {
+        "label": "Two-piece linen suit (fabric plus stitching)",
+        "priceMin": 4000,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "suit-stitching",
+        "source": "estimate"
+      },
+      {
+        "label": "Sherwani set (fabric plus stitching)",
+        "priceMin": 40000,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": "sherwani-stitching",
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/shirts-sherwanis-5-shops-chandni-chowk-will-custom-menswear-starting-inr-400/"
+    ],
+    "confidence": "medium",
+    "notes": "Only a lane-level address is published; no shop number, phone, hours or pincode found. Krishna Gali is described in the source as being inside the Katra Neel area."
+  },
+  {
+    "name": "Navprit Textiles",
+    "category": "fabric-shops",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "chandni-chowk",
+    "localityName": "Chandni Chowk",
+    "address": "Katra Neel, Chandni Chowk, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "One of the first shops on the Katra Neel lane, stocking imported Italian suiting mills alongside more affordable terry cotton, plus ready-made Nehru jackets.",
+    "specialities": [
+      "Italian Fabrics",
+      "Suiting",
+      "Nehru Jackets"
+    ],
+    "materials": [
+      "Terry Cotton",
+      "Wool"
+    ],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Terry cotton suiting fabric",
+        "priceMin": 300,
+        "priceMax": null,
+        "unit": "per metre",
+        "serviceSlug": "suiting-fabric",
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/shirts-sherwanis-5-shops-chandni-chowk-will-custom-menswear-starting-inr-400/",
+      "https://lbb.in/delhi/shop-sarees-silver-stationery-chandni-chowk-shopping-guide/"
+    ],
+    "confidence": "medium",
+    "notes": "Only a lane-level address is published; no shop number, phone, hours or pincode found."
+  },
+  {
+    "name": "Goyal Textiles",
+    "category": "fabric-shops",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "chandni-chowk",
+    "localityName": "Chandni Chowk",
+    "address": "Katra Neel, Chandni Chowk, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Katra Neel fabric shop ranging from khadi, linen and giza cotton through to heavier jute-type printed cloth, and able to arrange stitching for safari suits, shirts and trousers.",
+    "specialities": [
+      "Khadi",
+      "Linen",
+      "Giza Cotton",
+      "Safari Suits"
+    ],
+    "materials": [
+      "Khadi",
+      "Linen",
+      "Cotton",
+      "Jute"
+    ],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Shirting fabric",
+        "priceMin": 150,
+        "priceMax": 200,
+        "unit": "per metre",
+        "serviceSlug": "shirting-fabric",
+        "source": "estimate"
+      },
+      {
+        "label": "Terrycot shirt (fabric plus stitching)",
+        "priceMin": null,
+        "priceMax": 500,
+        "unit": "per piece",
+        "serviceSlug": "shirt-stitching",
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/shirts-sherwanis-5-shops-chandni-chowk-will-custom-menswear-starting-inr-400/"
+    ],
+    "confidence": "medium",
+    "notes": "Only a lane-level address is published; no shop number, phone, hours or pincode found."
+  },
+  {
+    "name": "Shri Narain G Cotton",
+    "category": "fabric-shops",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "chandni-chowk",
+    "localityName": "Chandni Chowk",
+    "address": "Katra Neel, Chandni Chowk, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Katra Neel cotton and linen specialist carrying printed cloth in paisley, polka dot, aztec and dobby patterns, used for kurtas, shirts and trousers.",
+    "specialities": [
+      "Cotton",
+      "Linen",
+      "Printed Fabric"
+    ],
+    "materials": [
+      "Cotton",
+      "Linen"
+    ],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Cotton and linen fabric",
+        "priceMin": 100,
+        "priceMax": null,
+        "unit": "per metre",
+        "serviceSlug": "shirting-fabric",
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/shirts-sherwanis-5-shops-chandni-chowk-will-custom-menswear-starting-inr-400/"
+    ],
+    "confidence": "medium",
+    "notes": "Only a lane-level address is published; no shop number, phone, hours or pincode found."
+  },
+  {
+    "name": "Sea Green Textile",
+    "category": "fabric-shops",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "chandni-chowk",
+    "localityName": "Chandni Chowk",
+    "address": "Katra Neel, Chandni Chowk, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Katra Neel fabric shop stocking cotton and linen alongside jacquard and brocade in floral and paisley patterns.",
+    "specialities": [
+      "Jacquard",
+      "Brocade",
+      "Cotton",
+      "Linen"
+    ],
+    "materials": [
+      "Cotton",
+      "Linen",
+      "Jacquard",
+      "Brocade"
+    ],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Jacquard fabric",
+        "priceMin": 500,
+        "priceMax": null,
+        "unit": "per metre",
+        "serviceSlug": null,
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/shirts-sherwanis-5-shops-chandni-chowk-will-custom-menswear-starting-inr-400/"
+    ],
+    "confidence": "medium",
+    "notes": "Only a lane-level address is published; no shop number, phone, hours or pincode found. Source notes the jacquard price is negotiable."
+  },
+  {
+    "name": "Meerut Gota Store",
+    "category": "fabric-shops",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "kinari-bazaar",
+    "localityName": "Kinari Bazaar",
+    "address": "Kinari Bazaar, Chandni Chowk, Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Kinari Bazaar trim supplier dealing in gota, zari and other embellishment materials used on Indian wedding clothes.",
+    "specialities": [
+      "Gota",
+      "Zari",
+      "Trims",
+      "Wedding Embellishment"
+    ],
+    "materials": [
+      "Zari",
+      "Gota"
+    ],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://lbb.in/delhi/shop-sarees-silver-stationery-chandni-chowk-shopping-guide/"
+    ],
+    "confidence": "low",
+    "notes": "Only a lane-level address is published; no shop number, phone, hours or prices found."
+  },
+  {
+    "name": "Anpurna Zari House",
+    "category": "fabric-shops",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "kinari-bazaar",
+    "localityName": "Kinari Bazaar",
+    "address": "Kinari Bazaar, Chandni Chowk, Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Kinari Bazaar zari house supplying borders, laces and embellishment materials to tailors and wedding-wear makers.",
+    "specialities": [
+      "Zari",
+      "Borders",
+      "Laces",
+      "Trims"
+    ],
+    "materials": [
+      "Zari"
+    ],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://lbb.in/delhi/shop-sarees-silver-stationery-chandni-chowk-shopping-guide/"
+    ],
+    "confidence": "low",
+    "notes": "Only a lane-level address is published; no shop number, phone, hours or prices found. Spelling of the name may be 'Annapurna' — recorded as printed in the source."
+  },
+  {
+    "name": "Genuine Textures",
+    "category": "fabric-shops",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "kamla-nagar",
+    "localityName": "Kamla Nagar",
+    "address": "8G, Opp. Spark Mall, Block UB, Jawahar Nagar, Kamla Nagar, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": "+919311274998",
+    "website": null,
+    "instagram": null,
+    "about": "A Kamla Nagar fabric shop near Spark Mall carrying brocade and pure silks, chikankari, block-print and ikat cottons, woollens, handwoven cloth and dupattas.",
+    "specialities": [
+      "Silk",
+      "Chikankari",
+      "Block Prints",
+      "Ikat",
+      "Dupattas"
+    ],
+    "materials": [
+      "Silk",
+      "Brocade",
+      "Cotton",
+      "Wool",
+      "Handwoven"
+    ],
+    "openingHours": {},
+    "priceMin": 100,
+    "priceMax": 850,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Plain cotton fabric",
+        "priceMin": 100,
+        "priceMax": null,
+        "unit": "per metre",
+        "serviceSlug": null,
+        "source": "estimate"
+      },
+      {
+        "label": "Premium silk and chikankari fabric",
+        "priceMin": null,
+        "priceMax": 850,
+        "unit": "per metre",
+        "serviceSlug": "silk-fabric",
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/this-store-in-kamla-nagar-b66371/"
+    ],
+    "confidence": "medium",
+    "notes": "Opening hours and pincode not published in the source."
+  },
+  {
+    "name": "Print Centre",
+    "category": "fabric-shops",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "greater-kailash-1",
+    "localityName": "Greater Kailash 1",
+    "address": "M-8A, M Block Market, Greater Kailash I, New Delhi",
+    "pincode": "110048",
+    "lat": null,
+    "lng": null,
+    "phone": "+911140516201",
+    "website": null,
+    "instagram": null,
+    "about": "A small M Block Market fabric shop focused on salwar suit material — cottons, chanderi, georgette and crepe silk in plain, printed and embroidered finishes, deliberately avoiding heavy gold and lace cloth.",
+    "specialities": [
+      "Salwar Suit Fabric",
+      "Chanderi",
+      "Georgette",
+      "Crepe Silk"
+    ],
+    "materials": [
+      "Cotton",
+      "Chiffon",
+      "Chanderi",
+      "Georgette",
+      "Crepe Silk"
+    ],
+    "openingHours": {
+      "mon": "11:00-21:00",
+      "tue": "closed",
+      "wed": "11:00-21:00",
+      "thu": "11:00-21:00",
+      "fri": "11:00-21:00",
+      "sat": "11:00-21:00",
+      "sun": "11:00-21:00"
+    },
+    "priceMin": 150,
+    "priceMax": 1000,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Salwar suit fabric",
+        "priceMin": 150,
+        "priceMax": 1000,
+        "unit": "per metre",
+        "serviceSlug": null,
+        "source": "estimate"
+      },
+      {
+        "label": "Embroidered unstitched salwar suit piece",
+        "priceMin": 3500,
+        "priceMax": null,
+        "unit": "per piece",
+        "serviceSlug": null,
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://www.shopkhoj.com/shops-in-delhi/print-centre/"
+    ],
+    "confidence": "medium",
+    "notes": "Hours, Tuesday closing, pincode and landline all taken from Shopkhoj. A second number (9198100009077) was listed but looks malformed, so only the landline is recorded."
+  },
+  {
+    "name": "Textures",
+    "category": "fabric-shops",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "nehru-place",
+    "localityName": "Nehru Place",
+    "address": "81, Ground Floor, Howe India House, Textures Square, Nehru Place, New Delhi",
+    "pincode": "110019",
+    "lat": null,
+    "lng": null,
+    "phone": "+919899060025",
+    "website": null,
+    "instagram": null,
+    "about": "A Nehru Place designer-fabric store carrying printed chiffons and georgettes along with satin, velvet, lycra and sequinned cloth, plus matching scarves.",
+    "specialities": [
+      "Designer Fabrics",
+      "Chiffon",
+      "Georgette",
+      "Sequinned Fabric"
+    ],
+    "materials": [
+      "Chiffon",
+      "Georgette",
+      "Satin",
+      "Velvet",
+      "Lycra"
+    ],
+    "openingHours": {
+      "mon": "11:00-19:30",
+      "tue": "11:00-19:30",
+      "wed": "11:00-19:30",
+      "thu": "11:00-19:30",
+      "fri": "11:00-19:30",
+      "sat": "11:00-19:30",
+      "sun": "closed"
+    },
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://www.shopkhoj.com/shops-in-delhi/textures/"
+    ],
+    "confidence": "medium",
+    "notes": "Hours, Sunday closing, pincode and phone taken from Shopkhoj. No prices published."
+  },
+  {
+    "name": "Monolisa",
+    "category": "fabric-shops",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "lajpat-nagar",
+    "localityName": "Lajpat Nagar",
+    "address": "A-94, Central Market, Part-II, Lajpat Nagar, New Delhi",
+    "pincode": "110024",
+    "lat": null,
+    "lng": null,
+    "phone": "+911146112577",
+    "website": null,
+    "instagram": null,
+    "about": "A large basement fabric shop on the Lajpat Nagar canal lane, stocking Banarasi and brocade nets, chanderi, georgette, silk, satin and leather, plus crochet and Lucknowi chikan borders.",
+    "specialities": [
+      "Banarasi",
+      "Brocade",
+      "Chanderi",
+      "Borders"
+    ],
+    "materials": [
+      "Banarasi",
+      "Brocade",
+      "Chanderi",
+      "Cotton",
+      "Georgette",
+      "Lycra",
+      "Silk",
+      "Satin"
+    ],
+    "openingHours": {
+      "mon": "closed",
+      "tue": "11:00-20:00",
+      "wed": "11:00-20:00",
+      "thu": "11:00-20:00",
+      "fri": "11:00-20:00",
+      "sat": "11:00-20:00",
+      "sun": "11:00-20:00"
+    },
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://www.shopkhoj.com/shops-in-delhi/monalisa-fabricstore-lajpat-nagar/"
+    ],
+    "confidence": "medium",
+    "notes": "Source describes the shop as roughly 20 years old but gives no founding year, so establishedYear is left null. Name also appears spelt 'Monalisa' in the source URL. No prices published."
+  },
+  {
+    "name": "The Prakash Collection",
+    "category": "fabric-shops",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "lajpat-nagar",
+    "localityName": "Lajpat Nagar",
+    "address": "E-24, Central Market, Behind Kashmir Paints & Hardware, Lajpat Nagar 2, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Lajpat Nagar trims shop dealing in borders and edgings — phulkari, kundan, zari, Rajasthani, Parsi and cutwork styles — alongside studs, stones, beads, pearls, buttons and zips.",
+    "specialities": [
+      "Borders",
+      "Trims",
+      "Kundan Work",
+      "Buttons",
+      "Zips"
+    ],
+    "materials": [
+      "Zari",
+      "Phulkari"
+    ],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://lbb.in/delhi/shopping-stores-lajpat-nagar/"
+    ],
+    "confidence": "medium",
+    "notes": "No phone, hours, pincode or itemised prices published in the source."
+  },
+  {
+    "name": "Istri Vastra",
+    "category": "fabric-shops",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "lajpat-nagar",
+    "localityName": "Lajpat Nagar",
+    "address": "Shop 1, Pushpa Central Market, Lajpat Nagar 2, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Lajpat Nagar fabric shop known for plain whites and bright neons, chikan work, laces and georgettes.",
+    "specialities": [
+      "Chikankari",
+      "Laces",
+      "Georgette",
+      "White Fabric"
+    ],
+    "materials": [
+      "Georgette",
+      "Lace",
+      "Chikan"
+    ],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://lbb.in/delhi/shopping-stores-lajpat-nagar/"
+    ],
+    "confidence": "medium",
+    "notes": "No phone, hours, pincode or itemised prices published in the source."
+  },
+  {
+    "name": "Tek Chand Fabrics",
+    "category": "fabric-shops",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "lajpat-nagar",
+    "localityName": "Lajpat Nagar",
+    "address": "A-53, Lower Ground Floor, Lajpat Nagar 2, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Lajpat Nagar fabric store selling saris, lehengas and Western pieces with in-house tailoring attached.",
+    "specialities": [
+      "Sarees",
+      "Lehengas",
+      "In-house Tailoring"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://so.city/delhi/article/made-to-measure-here-are-the-best-tailors-in-delhi"
+    ],
+    "confidence": "low",
+    "notes": "Single editorial mention. Source writes the address as 'A 53 Lower Ground Floor'. No phone, hours or prices found."
+  },
+  {
+    "name": "Wedding Bells - Rent An Attire",
+    "category": "rental-shops",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "rajouri-garden",
+    "localityName": "Rajouri Garden",
+    "address": "H-13, Main Market Marg, Block H, Rajouri Garden, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Rajouri Garden rental store carrying saris, lehengas and gowns along with matching jewellery for weddings and functions.",
+    "specialities": [
+      "Lehenga Rental",
+      "Gown Rental",
+      "Saree Rental",
+      "Jewellery Rental"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": 2500,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Outfit rental",
+        "priceMin": 2500,
+        "priceMax": null,
+        "unit": "per rental",
+        "serviceSlug": "lehenga-rental",
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/wedding-clothes-on-rent/"
+    ],
+    "confidence": "low",
+    "notes": "Listed by LBB as a Rent An Attire franchise outlet; relationship to the Rent An Attire brand not independently confirmed. No phone or hours published."
+  },
+  {
+    "name": "Laljees Rent A Party Dress",
+    "category": "rental-shops",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "lajpat-nagar",
+    "localityName": "Lajpat Nagar",
+    "address": "J-31, Block J, Lajpat Nagar 1, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Lajpat Nagar rental store stocking wedding and festive outfits together with jewellery to complete the look.",
+    "specialities": [
+      "Wedding Wear Rental",
+      "Festive Wear Rental",
+      "Jewellery Rental"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": null,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [],
+    "sources": [
+      "https://lbb.in/delhi/wedding-clothes-on-rent/"
+    ],
+    "confidence": "medium",
+    "notes": "Source states prices are quoted on request, so no price recorded. Phone and hours not published."
+  },
+  {
+    "name": "Dress Masters",
+    "category": "rental-shops",
+    "city": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi",
+    "locality": "lajpat-nagar",
+    "localityName": "Lajpat Nagar",
+    "address": "E-26-B, Block E, Lajpat Nagar 2, New Delhi",
+    "pincode": null,
+    "lat": null,
+    "lng": null,
+    "phone": null,
+    "website": null,
+    "instagram": null,
+    "about": "A Lajpat Nagar rental store for wedding, party and occasion outfits, which will also customise a rented piece to fit.",
+    "specialities": [
+      "Wedding Wear Rental",
+      "Party Wear Rental",
+      "Customisation"
+    ],
+    "materials": [],
+    "openingHours": {},
+    "priceMin": 2000,
+    "priceMax": null,
+    "turnaroundDays": null,
+    "homeVisit": false,
+    "establishedYear": null,
+    "priceItems": [
+      {
+        "label": "Outfit rental",
+        "priceMin": 2000,
+        "priceMax": null,
+        "unit": "per rental",
+        "serviceSlug": null,
+        "source": "estimate"
+      }
+    ],
+    "sources": [
+      "https://lbb.in/delhi/wedding-clothes-on-rent/"
+    ],
+    "confidence": "medium",
+    "notes": "Phone and hours not published in the source."
+  }
+]

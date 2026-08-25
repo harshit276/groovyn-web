@@ -11,7 +11,8 @@
     "db:seed": "tsx prisma/seed.ts",
     "db:reset": "prisma db push --force-reset && npm run db:seed",
     "db:studio": "prisma studio",
-    "import:stores": "tsx scripts/import-stores.ts"
+    "import:stores": "tsx scripts/import-stores.ts",
+    "worklist": "tsx scripts/verify-worklist.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
