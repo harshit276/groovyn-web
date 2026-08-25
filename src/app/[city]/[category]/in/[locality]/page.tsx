@@ -5,23 +5,19 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { JsonLd } from "@/components/json-ld";
 import { StoreGrid } from "@/components/store-grid";
 import { Container } from "@/components/ui/container";
-import { getAllLocalityPaths, getLocality, listStores } from "@/lib/queries";
+import { getLocality, listStores } from "@/lib/queries";
 import { breadcrumbSchema, itemListSchema } from "@/lib/schema";
 import { getCategory } from "@/lib/site";
 import type { StoreSort } from "@/lib/types";
 
-// No `revalidate` — this page reads `searchParams` for sort/pagination, and
-// pairing that with an ISR window throws at runtime in production. See the note
-// in ../../page.tsx.
-
-/**
- * Locality pages are the long tail — "tailors in Lajpat Nagar" is the query
- * that actually converts, and it's where a directory beats a horizontal like
- * Justdial. Pre-render every combination that has at least one store.
- */
-export async function generateStaticParams() {
-  return getAllLocalityPaths();
-}
+// Reads `searchParams` for sort and pagination, so it can't be prerendered.
+// See the note in ../../page.tsx.
+//
+// Locality pages are the long tail — "tailors in Lajpat Nagar" is the query
+// that actually converts, and it's where a directory beats a horizontal like
+// Justdial. They're dynamic for now; making them cacheable means moving the
+// sort/page controls into a client component.
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,

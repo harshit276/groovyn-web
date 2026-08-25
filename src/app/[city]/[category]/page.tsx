@@ -15,26 +15,19 @@ import {
   listStores,
 } from "@/lib/queries";
 import { breadcrumbSchema, itemListSchema } from "@/lib/schema";
-import { CATEGORIES, getCategory } from "@/lib/site";
+import { getCategory } from "@/lib/site";
 import type { StoreSort } from "@/lib/types";
 
-// No `revalidate` here on purpose. This page reads `searchParams` for the
-// filters, which forces per-request rendering — and combining that with an ISR
-// revalidate window makes the route throw at runtime in a production build
-// (it builds fine and works under `next dev`, so it only shows up once deployed).
+// This page reads `searchParams` for the filters, so it cannot be prerendered.
+// Say so explicitly: without this Next treats it as a static/ISR route and
+// throws at request time. It builds cleanly and works under `next dev` either
+// way, so the failure only appears once deployed — verify with `next start`.
 //
-// SEO is unaffected: crawlers still get fully server-rendered HTML. To make this
-// statically cacheable again, filtering has to move into a client component
-// reading useSearchParams, leaving the page itself free of request-time inputs.
-
-/** Pre-render every city × category combination — these are the money pages. */
-export async function generateStaticParams() {
-  const { getCities } = await import("@/lib/queries");
-  const cities = await getCities();
-  return cities.flatMap((c) =>
-    CATEGORIES.map((cat) => ({ city: c.slug, category: cat.slug }))
-  );
-}
+// SEO is unaffected: crawlers still receive fully server-rendered HTML. To make
+// these statically cacheable, filtering would have to move into a client
+// component reading useSearchParams, leaving the page free of request-time
+// input — worth doing once traffic justifies it.
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
