@@ -128,6 +128,11 @@ export function StoreCover({
   const patternId = `weave-${slug.replace(/[^a-z0-9]/gi, "")}`;
   // Small rotation so neighbouring tiles in a grid never look aligned.
   const rotation = ((h >> 8) % 4) * 15 - 22;
+  // Every shop in a category shares one accent, so pattern alone leaves a grid
+  // looking monotone. A small hue and saturation shift per shop gives each tile
+  // its own tone while staying recognisably within the category's colour.
+  const hueShift = (((h >> 16) % 29) - 14).toFixed(0);
+  const saturation = (0.85 + ((h >> 20) % 40) / 100).toFixed(2);
 
   return (
     <div
@@ -138,18 +143,19 @@ export function StoreCover({
         className="absolute inset-0 size-full"
         preserveAspectRatio="xMidYMid slice"
         viewBox="0 0 400 300"
+        style={{ filter: `hue-rotate(${hueShift}deg) saturate(${saturation})` }}
       >
         <defs>
           <WeaveDef weave={weave} id={patternId} color={accent} />
           <linearGradient id={`${patternId}-fade`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor={accent} stopOpacity="0.09" />
-            <stop offset="100%" stopColor={accent} stopOpacity="0.02" />
+            <stop offset="0%" stopColor={accent} stopOpacity="0.17" />
+            <stop offset="100%" stopColor={accent} stopOpacity="0.05" />
           </linearGradient>
         </defs>
 
         <rect width="400" height="300" fill={`url(#${patternId}-fade)`} />
         <g
-          opacity="0.42"
+          opacity="0.52"
           transform={`rotate(${rotation} 200 150) scale(1.6)`}
           style={{ transformOrigin: "center" }}
         >
