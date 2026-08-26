@@ -1,10 +1,29 @@
+/**
+ * Absolute base for canonicals, og:image and sitemap URLs.
+ *
+ * Order matters. Hardcoding groovyn.com made every canonical and share image on
+ * the preview deployment point at a domain still serving the old site, so
+ * previews were broken and untestable. Falling back to Vercel's own production
+ * URL keeps them working before DNS is switched, and setting
+ * NEXT_PUBLIC_SITE_URL overrides everything once the domain is live.
+ */
+function resolveSiteUrl(): string {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL;
+  if (explicit) return explicit.replace(/\/$/, "");
+
+  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  if (vercel) return `https://${vercel.replace(/\/$/, "")}`;
+
+  return "http://localhost:3000";
+}
+
 /** Single source of truth for anything that ends up in metadata or structured data. */
 export const site = {
   name: "Groovyn",
   tagline: "Custom clothing, decoded",
   description:
     "Find verified tailors, boutiques, fabric shops and rental stores across Delhi NCR — with real rate cards, real work photos, and no spam calls.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://groovyn.com",
+  url: resolveSiteUrl(),
   ogImage: "/og/default.png",
   email: "info@groovyn.com",
   phone: "+917891467209",
