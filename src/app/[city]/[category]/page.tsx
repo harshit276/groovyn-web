@@ -184,7 +184,13 @@ export default async function CategoryPage({
         result={result}
         basePath={basePath}
         searchParams={flatParams}
-        view={str(sp.view) === "index" ? "index" : "gallery"}
+        view={
+          str(sp.view) === "index"
+            ? "index"
+            : str(sp.view) === "gallery"
+              ? "gallery"
+              : "list"
+        }
       />
 
       <JsonLd

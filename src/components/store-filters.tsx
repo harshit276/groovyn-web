@@ -1,6 +1,6 @@
 "use client";
 
-import { LayoutGrid, List, SlidersHorizontal, X } from "lucide-react";
+import { LayoutGrid, List, Rows3, SlidersHorizontal, X } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
 
@@ -58,7 +58,10 @@ export function StoreFilters({
     homeVisit: searchParams.get("homeVisit") === "1",
     rateCard: searchParams.get("rateCard") === "1",
     sort: searchParams.get("sort") ?? "relevance",
-    view: searchParams.get("view") === "index" ? "index" : "gallery",
+    view: (() => {
+      const v = searchParams.get("view");
+      return v === "index" || v === "gallery" ? v : "list";
+    })(),
   };
 
   const activeCount =
@@ -179,8 +182,15 @@ export function StoreFilters({
               className="flex overflow-hidden rounded-full border border-ink-200"
             >
               <ViewButton
-                active={active.view === "gallery"}
+                active={active.view === "list"}
                 onClick={() => setParam("view", null)}
+                label="List view"
+              >
+                <Rows3 aria-hidden className="size-4" />
+              </ViewButton>
+              <ViewButton
+                active={active.view === "gallery"}
+                onClick={() => setParam("view", "gallery")}
                 label="Gallery view"
               >
                 <LayoutGrid aria-hidden className="size-4" />

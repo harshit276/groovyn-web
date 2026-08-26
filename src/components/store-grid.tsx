@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Reveal } from "@/components/reveal";
 import { StoreCard } from "@/components/store-card";
 import { StoreIndex } from "@/components/store-index";
+import { StoreRow } from "@/components/store-row";
 import { Button } from "@/components/ui/button";
 import type { Paginated, StoreSummaryDTO } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -11,15 +12,18 @@ export function StoreGrid({
   result,
   basePath,
   searchParams,
-  view = "gallery",
+  view = "list",
 }: {
   result: Paginated<StoreSummaryDTO>;
   /** Path to build pagination links from, e.g. "/delhi/tailors". */
   basePath: string;
   /** Current query string values to preserve across pages. */
   searchParams: Record<string, string | undefined>;
-  /** "index" swaps the cards for a typographic contents list. */
-  view?: "gallery" | "index";
+  /**
+   * "list" is the app's row card (photo left, details and actions right) and is
+   * the default. "gallery" is the photo-card grid, "index" the typographic one.
+   */
+  view?: "list" | "gallery" | "index";
 }) {
   if (!result.items.length) {
     return (
@@ -83,6 +87,21 @@ export function StoreGrid({
     return (
       <>
         <StoreIndex stores={result.items} />
+        {pagination}
+      </>
+    );
+  }
+
+  if (view === "list") {
+    return (
+      <>
+        <div className="grid gap-4 lg:grid-cols-2">
+          {result.items.map((store, i) => (
+            <Reveal key={store.id} delay={Math.min(i, 5) * 50} className="flex">
+              <StoreRow store={store} priority={i < 4} className="w-full" />
+            </Reveal>
+          ))}
+        </div>
         {pagination}
       </>
     );

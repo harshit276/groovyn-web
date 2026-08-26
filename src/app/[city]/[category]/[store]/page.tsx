@@ -334,13 +334,16 @@ export default async function StorePage({
               </div>
             </div>
 
-            <VisitBooking
-              storeId={store.id}
-              storeName={store.name}
-              offersHomeVisit={store.homeVisit}
-              homeVisitFee={store.homeVisitFee}
-              source={`store:${store.slug}`}
-            />
+            {/* Anchor target for the listing card's "Book Visit" button. */}
+            <div id="book" className="scroll-mt-24">
+              <VisitBooking
+                storeId={store.id}
+                storeName={store.name}
+                offersHomeVisit={store.homeVisit}
+                homeVisitFee={store.homeVisitFee}
+                source={`store:${store.slug}`}
+              />
+            </div>
 
             {!store.claimed ? (
               <div className="rounded-card border border-dashed border-brand-100 bg-brand-50 p-5">
