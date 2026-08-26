@@ -67,9 +67,7 @@ export async function generateMetadata({
       description,
       url: store.href,
       type: "website",
-      images: store.coverImage
-        ? [{ url: store.coverImage, width: 1200, height: 630, alt: store.name }]
-        : undefined,
+      // og:image comes from opengraph-image.tsx in this folder.
     },
   };
 }
