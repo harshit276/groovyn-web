@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Reveal } from "@/components/reveal";
 import { StoreCard } from "@/components/store-card";
+import { StoreIndex } from "@/components/store-index";
 import { Button } from "@/components/ui/button";
 import type { Paginated, StoreSummaryDTO } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -10,12 +11,15 @@ export function StoreGrid({
   result,
   basePath,
   searchParams,
+  view = "gallery",
 }: {
   result: Paginated<StoreSummaryDTO>;
   /** Path to build pagination links from, e.g. "/delhi/tailors". */
   basePath: string;
   /** Current query string values to preserve across pages. */
   searchParams: Record<string, string | undefined>;
+  /** "index" swaps the cards for a typographic contents list. */
+  view?: "gallery" | "index";
 }) {
   if (!result.items.length) {
     return (
@@ -47,6 +51,43 @@ export function StoreGrid({
   // is enough to make the page feel edited rather than generated.
   const lead = result.page === 1 && result.items.length >= 3;
 
+  const pagination =
+    result.totalPages > 1 ? (
+      <nav
+        aria-label="Pagination"
+        className="mt-10 flex items-center justify-center gap-2"
+      >
+        {result.page > 1 ? (
+          <Button asChild variant="outline" size="sm">
+            <Link href={pageHref(result.page - 1)} rel="prev">
+              Previous
+            </Link>
+          </Button>
+        ) : null}
+
+        <span className="px-3 text-sm text-ink-500">
+          Page {result.page} of {result.totalPages}
+        </span>
+
+        {result.page < result.totalPages ? (
+          <Button asChild variant="outline" size="sm">
+            <Link href={pageHref(result.page + 1)} rel="next">
+              Next
+            </Link>
+          </Button>
+        ) : null}
+      </nav>
+    ) : null;
+
+  if (view === "index") {
+    return (
+      <>
+        <StoreIndex stores={result.items} />
+        {pagination}
+      </>
+    );
+  }
+
   return (
     <>
       <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
@@ -69,32 +110,7 @@ export function StoreGrid({
         ))}
       </div>
 
-      {result.totalPages > 1 ? (
-        <nav
-          aria-label="Pagination"
-          className="mt-10 flex items-center justify-center gap-2"
-        >
-          {result.page > 1 ? (
-            <Button asChild variant="outline" size="sm">
-              <Link href={pageHref(result.page - 1)} rel="prev">
-                Previous
-              </Link>
-            </Button>
-          ) : null}
-
-          <span className="px-3 text-sm text-ink-500">
-            Page {result.page} of {result.totalPages}
-          </span>
-
-          {result.page < result.totalPages ? (
-            <Button asChild variant="outline" size="sm">
-              <Link href={pageHref(result.page + 1)} rel="next">
-                Next
-              </Link>
-            </Button>
-          ) : null}
-        </nav>
-      ) : null}
+      {pagination}
     </>
   );
 }

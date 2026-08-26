@@ -1,6 +1,6 @@
 "use client";
 
-import { SlidersHorizontal, X } from "lucide-react";
+import { LayoutGrid, List, SlidersHorizontal, X } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
 
@@ -15,6 +15,14 @@ const SORTS = [
   { value: "name", label: "Name (A–Z)" },
 ] as const;
 
+/**
+ * Horizontal, sticky filter bar.
+ *
+ * Deliberately not a left sidebar: a filter rail beside a card grid is the
+ * universal directory layout, and it is the main reason this page read as
+ * generic. Filters belong in a slim band that gets out of the way of the
+ * listings.
+ */
 export function StoreFilters({
   localities,
   services,
@@ -37,7 +45,7 @@ export function StoreFilters({
       if (value) params.set(key, value);
       else params.delete(key);
       // Any filter change resets pagination, otherwise you land on an empty page 3.
-      params.delete("page");
+      if (key !== "view") params.delete("page");
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
     },
     [pathname, router, searchParams]
@@ -50,6 +58,7 @@ export function StoreFilters({
     homeVisit: searchParams.get("homeVisit") === "1",
     rateCard: searchParams.get("rateCard") === "1",
     sort: searchParams.get("sort") ?? "relevance",
+    view: searchParams.get("view") === "index" ? "index" : "gallery",
   };
 
   const activeCount =
@@ -67,137 +76,143 @@ export function StoreFilters({
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
-  const panel = (
-    <div className="space-y-5">
-      <Field label="Locality">
-        <select
-          value={active.locality ?? ""}
-          onChange={(e) => setParam("locality", e.target.value || null)}
-          className={selectClass}
-        >
-          <option value="">All localities</option>
-          {localities.map((l) => (
-            <option key={l.slug} value={l.slug}>
-              {l.name} ({l.storeCount})
-            </option>
-          ))}
-        </select>
-      </Field>
-
+  const selects = (
+    <>
+      <Select
+        label="Locality"
+        value={active.locality ?? ""}
+        onChange={(v) => setParam("locality", v || null)}
+        options={[
+          { value: "", label: "All localities" },
+          ...localities.map((l) => ({
+            value: l.slug,
+            label: `${l.name} (${l.storeCount})`,
+          })),
+        ]}
+      />
       {services.length ? (
-        <Field label="Service">
-          <select
-            value={active.service ?? ""}
-            onChange={(e) => setParam("service", e.target.value || null)}
-            className={selectClass}
-          >
-            <option value="">Any service</option>
-            {services.map((s) => (
-              <option key={s.slug} value={s.slug}>
-                {s.name}
-              </option>
-            ))}
-          </select>
-        </Field>
+        <Select
+          label="Service"
+          value={active.service ?? ""}
+          onChange={(v) => setParam("service", v || null)}
+          options={[
+            { value: "", label: "Any service" },
+            ...services.map((s) => ({ value: s.slug, label: s.name })),
+          ]}
+        />
       ) : null}
-
       {specialities.length ? (
-        <Field label="Speciality">
-          <div className="flex flex-wrap gap-1.5">
-            {specialities.slice(0, 12).map((s) => {
-              const isActive = active.speciality === s;
-              return (
-                <button
-                  key={s}
-                  type="button"
-                  aria-pressed={isActive}
-                  onClick={() => setParam("speciality", isActive ? null : s)}
-                  className={cn(
-                    "rounded-full border px-3 py-1 text-xs transition-colors",
-                    isActive
-                      ? "border-ink-900 bg-ink-900 text-paper-50"
-                      : "border-paper-400 bg-paper-50 text-ink-700 hover:border-ink-400"
-                  )}
-                >
-                  {s}
-                </button>
-              );
-            })}
-          </div>
-        </Field>
+        <Select
+          label="Speciality"
+          value={active.speciality ?? ""}
+          onChange={(v) => setParam("speciality", v || null)}
+          options={[
+            { value: "", label: "Any speciality" },
+            ...specialities.map((s) => ({ value: s, label: s })),
+          ]}
+        />
       ) : null}
+    </>
+  );
 
-      <Field label="Options">
-        <div className="space-y-2">
-          <Toggle
-            checked={active.homeVisit}
-            onChange={(v) => setParam("homeVisit", v ? "1" : null)}
-            label="Offers home visit"
-          />
-          <Toggle
-            checked={active.rateCard}
-            onChange={(v) => setParam("rateCard", v ? "1" : null)}
-            label="Has a verified rate card"
-          />
-        </div>
-      </Field>
-
-      {activeCount > 0 ? (
-        <Button variant="ghost" size="sm" onClick={clearAll} className="w-full">
-          <X aria-hidden /> Clear filters
-        </Button>
-      ) : null}
-    </div>
+  const toggles = (
+    <>
+      <Toggle
+        active={active.homeVisit}
+        onClick={() => setParam("homeVisit", active.homeVisit ? null : "1")}
+        label="Home visit"
+      />
+      <Toggle
+        active={active.rateCard}
+        onClick={() => setParam("rateCard", active.rateCard ? null : "1")}
+        label="Has rate card"
+      />
+    </>
   );
 
   return (
     <>
-      {/* Sort + mobile trigger bar */}
-      <div className="mb-5 flex items-center justify-between gap-3">
-        <p className="text-sm text-ink-500" aria-live="polite">
-          <span className="font-medium text-ink-900">{total}</span>{" "}
-          {total === 1 ? "store" : "stores"}
-        </p>
+      <div className="sticky top-16 z-30 -mx-4 mb-8 border-y border-ink-900/12 bg-paper-100/92 px-4 backdrop-blur-md sm:-mx-6 sm:px-6">
+        <div className="flex items-center gap-3 py-3">
+          <p className="shrink-0 text-sm text-ink-500" aria-live="polite">
+            <span className="font-display text-lg text-ink-900">{total}</span>{" "}
+            {total === 1 ? "shop" : "shops"}
+          </p>
 
-        <div className="flex items-center gap-2">
-          <label className="sr-only" htmlFor="sort">
-            Sort by
-          </label>
-          <select
-            id="sort"
-            value={active.sort}
-            onChange={(e) => setParam("sort", e.target.value)}
-            className="h-9 rounded-full border border-paper-400 bg-paper-50 px-3 text-sm text-ink-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-500"
-          >
-            {SORTS.map((s) => (
-              <option key={s.value} value={s.value}>
-                {s.label}
-              </option>
-            ))}
-          </select>
-
-          <Button
-            variant="outline"
-            size="sm"
-            className="lg:hidden"
-            onClick={() => setMobileOpen(true)}
-            aria-expanded={mobileOpen}
-          >
-            <SlidersHorizontal aria-hidden />
-            Filters
-            {activeCount ? (
-              <span className="ml-1 grid size-5 place-items-center rounded-full bg-ink-900 text-[11px] text-paper-50">
-                {activeCount}
-              </span>
+          <div className="hidden flex-1 items-center gap-2 lg:flex">
+            {selects}
+            {toggles}
+            {activeCount > 0 ? (
+              <button
+                type="button"
+                onClick={clearAll}
+                className="ml-1 inline-flex items-center gap-1 text-xs text-ink-500 underline underline-offset-2 hover:text-terra-600"
+              >
+                <X aria-hidden className="size-3" />
+                Clear
+              </button>
             ) : null}
-          </Button>
+          </div>
+
+          <div className="ml-auto flex items-center gap-2">
+            <label className="sr-only" htmlFor="sort">
+              Sort by
+            </label>
+            <select
+              id="sort"
+              value={active.sort}
+              onChange={(e) => setParam("sort", e.target.value)}
+              className="h-9 rounded-full border border-paper-400 bg-paper-50 px-3 text-sm text-ink-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-500"
+            >
+              {SORTS.map((s) => (
+                <option key={s.value} value={s.value}>
+                  {s.label}
+                </option>
+              ))}
+            </select>
+
+            {/* Gallery vs index. The index is the view that makes this feel
+                like a guide rather than a search results page. */}
+            <div
+              role="group"
+              aria-label="View"
+              className="flex overflow-hidden rounded-full border border-paper-400"
+            >
+              <ViewButton
+                active={active.view === "gallery"}
+                onClick={() => setParam("view", null)}
+                label="Gallery view"
+              >
+                <LayoutGrid aria-hidden className="size-4" />
+              </ViewButton>
+              <ViewButton
+                active={active.view === "index"}
+                onClick={() => setParam("view", "index")}
+                label="Index view"
+              >
+                <List aria-hidden className="size-4" />
+              </ViewButton>
+            </div>
+
+            <Button
+              variant="outline"
+              size="sm"
+              className="lg:hidden"
+              onClick={() => setMobileOpen(true)}
+              aria-expanded={mobileOpen}
+            >
+              <SlidersHorizontal aria-hidden />
+              Filters
+              {activeCount ? (
+                <span className="ml-1 grid size-5 place-items-center rounded-full bg-ink-900 text-[11px] text-paper-50">
+                  {activeCount}
+                </span>
+              ) : null}
+            </Button>
+          </div>
         </div>
       </div>
 
-      {/* Desktop sidebar */}
-      <div className="hidden lg:block">{panel}</div>
-
-      {/* Mobile sheet */}
       {mobileOpen ? (
         <div className="fixed inset-0 z-50 lg:hidden">
           <button
@@ -206,8 +221,8 @@ export function StoreFilters({
             className="absolute inset-0 bg-ink-950/50"
           />
           <div className="absolute inset-x-0 bottom-0 max-h-[85vh] overflow-y-auto rounded-t-2xl bg-paper-100 p-5">
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-lg">Filters</h2>
+            <div className="mb-5 flex items-center justify-between">
+              <h2 className="font-display text-xl">Filters</h2>
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}
@@ -217,13 +232,22 @@ export function StoreFilters({
                 <X aria-hidden className="size-4" />
               </button>
             </div>
-            {panel}
+
+            <div className="grid gap-3">{selects}</div>
+            <div className="mt-4 flex flex-wrap gap-2">{toggles}</div>
+
+            {activeCount > 0 ? (
+              <Button variant="ghost" size="sm" onClick={clearAll} className="mt-4 w-full">
+                <X aria-hidden /> Clear filters
+              </Button>
+            ) : null}
+
             <Button
               variant="primary"
               className="mt-5 w-full"
               onClick={() => setMobileOpen(false)}
             >
-              Show {total} {total === 1 ? "store" : "stores"}
+              Show {total} {total === 1 ? "shop" : "shops"}
             </Button>
           </div>
         </div>
@@ -232,44 +256,92 @@ export function StoreFilters({
   );
 }
 
-const selectClass =
-  "w-full rounded-lg border border-paper-400 bg-paper-50 px-3 py-2 text-sm text-ink-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-500";
-
-function Field({
+function Select({
   label,
-  children,
+  value,
+  onChange,
+  options,
 }: {
   label: string;
-  children: React.ReactNode;
+  value: string;
+  onChange: (v: string) => void;
+  options: { value: string; label: string }[];
 }) {
   return (
-    <div>
-      <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink-500">
+    <>
+      <label className="sr-only" htmlFor={`f-${label}`}>
         {label}
-      </p>
-      {children}
-    </div>
+      </label>
+      <select
+        id={`f-${label}`}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className={cn(
+          "h-9 max-w-[12rem] rounded-full border px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-500",
+          value
+            ? "border-ink-900 bg-ink-900 text-paper-50"
+            : "border-paper-400 bg-paper-50 text-ink-800"
+        )}
+      >
+        {options.map((o) => (
+          <option key={o.value} value={o.value} className="bg-paper-50 text-ink-900">
+            {o.label}
+          </option>
+        ))}
+      </select>
+    </>
   );
 }
 
 function Toggle({
-  checked,
-  onChange,
+  active,
+  onClick,
   label,
 }: {
-  checked: boolean;
-  onChange: (v: boolean) => void;
+  active: boolean;
+  onClick: () => void;
   label: string;
 }) {
   return (
-    <label className="flex cursor-pointer items-center gap-2.5 text-sm text-ink-700">
-      <input
-        type="checkbox"
-        checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
-        className="size-4 rounded border-paper-400 accent-brass-500"
-      />
+    <button
+      type="button"
+      aria-pressed={active}
+      onClick={onClick}
+      className={cn(
+        "h-9 shrink-0 rounded-full border px-3.5 text-sm transition-colors",
+        active
+          ? "border-ink-900 bg-ink-900 text-paper-50"
+          : "border-paper-400 bg-paper-50 text-ink-700 hover:border-ink-400"
+      )}
+    >
       {label}
-    </label>
+    </button>
+  );
+}
+
+function ViewButton({
+  active,
+  onClick,
+  label,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={label}
+      aria-pressed={active}
+      className={cn(
+        "grid size-9 place-items-center transition-colors",
+        active ? "bg-ink-900 text-paper-50" : "bg-paper-50 text-ink-500 hover:text-ink-900"
+      )}
+    >
+      {children}
+    </button>
   );
 }
