@@ -1,8 +1,16 @@
-import { PrismaPg } from "@prisma/adapter-pg";
+import { neonConfig } from "@neondatabase/serverless";
+import { PrismaNeon } from "@prisma/adapter-neon";
 import { PrismaClient } from "@prisma/client";
+import ws from "ws";
+
+// Neon's driver tunnels over 443 instead of holding a TCP connection on 5432.
+// Two reasons that matters: serverless functions don't keep pools alive between
+// invocations, and plenty of ISPs and office networks block 5432 outright —
+// including this project's dev network, where adapter-pg times out entirely.
+neonConfig.webSocketConstructor = ws;
 
 // Reuse the client across HMR reloads in dev and across warm serverless
-// invocations in production — otherwise every request opens a new pool.
+// invocations in production, so every request doesn't open a new connection.
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
@@ -15,12 +23,8 @@ function createClient() {
     );
   }
 
-  // Prisma 7 requires a driver adapter. PrismaPg speaks plain Postgres, so this
-  // works with Neon, Supabase or any managed Postgres without code changes.
-  const adapter = new PrismaPg({ connectionString });
-
   return new PrismaClient({
-    adapter,
+    adapter: new PrismaNeon({ connectionString }),
     log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
   });
 }

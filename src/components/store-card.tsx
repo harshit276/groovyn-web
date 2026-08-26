@@ -2,6 +2,7 @@ import { BadgeCheck, Clock, Home, MapPin, ReceiptText } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { StoreCover } from "@/components/store-cover";
 import { Badge } from "@/components/ui/badge";
 import { getCategory } from "@/lib/site";
 import type { StoreSummaryDTO } from "@/lib/types";
@@ -11,21 +12,32 @@ export function StoreCard({
   store,
   className,
   priority = false,
+  /** Feature tiles run wider and taller in the editorial grid. */
+  feature = false,
 }: {
   store: StoreSummaryDTO;
   className?: string;
   priority?: boolean;
+  feature?: boolean;
 }) {
   const category = getCategory(store.category);
 
   return (
     <article
       className={cn(
-        "group relative flex flex-col overflow-hidden rounded-card border border-paper-300 bg-paper-50 transition-shadow hover:shadow-[0_12px_40px_-16px_rgb(20_27_45_/_0.35)]",
+        "group relative flex flex-col overflow-hidden rounded-card border border-paper-300 bg-paper-50",
+        "transition-[transform,box-shadow] duration-300 ease-out",
+        "hover:-translate-y-0.5 hover:shadow-[0_18px_50px_-24px_rgb(20_27_45_/_0.45)]",
+        "focus-within:-translate-y-0.5 focus-within:shadow-[0_18px_50px_-24px_rgb(20_27_45_/_0.45)]",
         className
       )}
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-paper-200">
+      <div
+        className={cn(
+          "relative overflow-hidden",
+          feature ? "aspect-[16/10]" : "aspect-4/5"
+        )}
+      >
         {store.coverImage ? (
           <Image
             src={store.coverImage}
@@ -33,11 +45,22 @@ export function StoreCard({
               store.locality?.name ?? store.city.name
             }`}
             fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            sizes={
+              feature
+                ? "(max-width: 640px) 100vw, 66vw"
+                : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            }
             priority={priority}
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
           />
-        ) : null}
+        ) : (
+          <StoreCover
+            name={store.name}
+            slug={store.slug}
+            category={store.category}
+            className="size-full transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+          />
+        )}
 
         <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
           {store.rateCardVerified ? (
@@ -57,29 +80,48 @@ export function StoreCard({
         {category ? (
           <span
             aria-hidden
-            className="absolute bottom-0 left-0 h-1 w-full"
+            className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"
             style={{ backgroundColor: category.accent }}
           />
         ) : null}
       </div>
 
-      <div className="flex flex-1 flex-col p-4">
-        <h3 className="text-lg leading-snug text-ink-900">
-          {/* Stretched link keeps the whole card clickable without nesting anchors. */}
-          <Link href={store.href} className="after:absolute after:inset-0">
+      <div className="flex flex-1 flex-col p-5">
+        <p
+          className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em]"
+          style={{ color: category?.accent }}
+        >
+          {category?.singular}
+        </p>
+
+        <h3
+          className={cn(
+            "leading-[1.15] text-ink-900",
+            feature ? "text-2xl sm:text-3xl" : "text-xl"
+          )}
+        >
+          <Link
+            href={store.href}
+            className="after:absolute after:inset-0 focus-visible:outline-none"
+          >
             {store.name}
           </Link>
         </h3>
 
-        <p className="mt-1 flex items-center gap-1 text-sm text-ink-500">
+        <p className="mt-2 flex items-center gap-1.5 text-sm text-ink-500">
           <MapPin aria-hidden className="size-3.5 shrink-0" />
           {store.locality?.name ?? store.city.name}
-          {store.locality ? `, ${store.city.name}` : null}
         </p>
 
+        {feature && store.about ? (
+          <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-ink-600">
+            {store.about}
+          </p>
+        ) : null}
+
         {store.specialities.length ? (
-          <ul className="mt-3 flex flex-wrap gap-1.5">
-            {store.specialities.slice(0, 3).map((s) => (
+          <ul className="mt-4 flex flex-wrap gap-1.5">
+            {store.specialities.slice(0, feature ? 4 : 2).map((s) => (
               <li key={s}>
                 <Badge variant="outline">{s}</Badge>
               </li>
@@ -87,13 +129,13 @@ export function StoreCard({
           </ul>
         ) : null}
 
-        <div className="mt-auto pt-4">
-          <div className="flex items-center justify-between gap-3 border-t border-paper-300 pt-3">
+        <div className="mt-auto pt-5">
+          <div className="flex items-end justify-between gap-3 border-t border-paper-300 pt-3.5">
             <div>
-              <p className="text-[11px] uppercase tracking-wider text-ink-400">
+              <p className="text-[10px] uppercase tracking-[0.14em] text-ink-400">
                 Typical range
               </p>
-              <p className="font-medium text-ink-900">
+              <p className="font-display text-lg leading-tight text-ink-900">
                 {formatPriceRange(store.priceMin, store.priceMax)}
               </p>
             </div>

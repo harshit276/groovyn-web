@@ -1,8 +1,10 @@
 import Link from "next/link";
 
+import { Reveal } from "@/components/reveal";
 import { StoreCard } from "@/components/store-card";
 import { Button } from "@/components/ui/button";
 import type { Paginated, StoreSummaryDTO } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 export function StoreGrid({
   result,
@@ -40,11 +42,30 @@ export function StoreGrid({
     return qs ? `${basePath}?${qs}` : basePath;
   }
 
+  // Lead the first page with one wide tile. A grid of identically sized cards
+  // reads as a spreadsheet however nice the cards are; one break in the rhythm
+  // is enough to make the page feel edited rather than generated.
+  const lead = result.page === 1 && result.items.length >= 3;
+
   return (
     <>
       <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
         {result.items.map((store, i) => (
-          <StoreCard key={store.id} store={store} priority={i < 3} />
+          <Reveal
+            key={store.id}
+            delay={Math.min(i, 5) * 60}
+            className={cn(
+              "flex",
+              lead && i === 0 && "sm:col-span-2"
+            )}
+          >
+            <StoreCard
+              store={store}
+              priority={i < 3}
+              feature={lead && i === 0}
+              className="w-full"
+            />
+          </Reveal>
         ))}
       </div>
 

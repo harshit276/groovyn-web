@@ -7,8 +7,9 @@ import { formatPriceRange } from "@/lib/utils";
 
 /**
  * The rate card is the whole product. Nobody else publishes what a tailor
- * charges, so this table has to be unambiguous about where each number came
- * from — a shop-supplied price and our own estimate must never look alike.
+ * charges, so this is styled as a menu rather than a data table — and it has to
+ * be unambiguous about where each number came from. A shop-supplied price and
+ * our own estimate must never look alike.
  */
 export function RateCard({
   items,
@@ -21,16 +22,18 @@ export function RateCard({
 }) {
   if (!items.length) {
     return (
-      <div className="rounded-card border border-dashed border-paper-400 bg-paper-50 p-6 text-center">
-        <p className="text-ink-600">
-          No rate card yet for {storeName}.
+      <div className="rounded-card border border-dashed border-paper-400 bg-paper-50 px-6 py-10 text-center">
+        <ReceiptText aria-hidden className="mx-auto mb-3 size-5 text-paper-500" />
+        <p className="font-display text-xl text-ink-800">
+          No price list yet for {storeName}
         </p>
-        <p className="mt-1 text-sm text-ink-500">
-          We&apos;re collecting it. Know their prices?{" "}
-          <Link href="/suggest" className="text-brass-700 underline">
-            Tell us
-          </Link>
-          .
+        <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-ink-500">
+          We&apos;re collecting rate cards shop by shop. If you know what they
+          charge,{" "}
+          <Link href="/suggest" className="text-brass-700 underline underline-offset-2">
+            tell us
+          </Link>{" "}
+          and we&apos;ll add it.
         </p>
       </div>
     );
@@ -40,11 +43,13 @@ export function RateCard({
 
   return (
     <div className="overflow-hidden rounded-card border border-paper-300 bg-paper-50">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-paper-300 bg-paper-100 px-4 py-3">
-        <h3 className="flex items-center gap-2 text-base text-ink-900">
-          <ReceiptText aria-hidden className="size-4 text-brass-600" />
-          Price list
-        </h3>
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-paper-300 px-6 py-5">
+        <div>
+          <h2 className="font-display text-2xl text-ink-900">Price list</h2>
+          <p className="mt-0.5 text-xs uppercase tracking-[0.14em] text-ink-400">
+            {items.length} {items.length === 1 ? "service" : "services"}
+          </p>
+        </div>
         {verified ? (
           <Badge variant="rateCard">Shared by the shop</Badge>
         ) : (
@@ -52,61 +57,49 @@ export function RateCard({
         )}
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[30rem] border-collapse text-sm">
-          <caption className="sr-only">
-            Price list for {storeName}
-          </caption>
-          <thead>
-            <tr className="text-left text-xs uppercase tracking-wider text-ink-400">
-              <th scope="col" className="px-4 py-2 font-medium">
-                Service
-              </th>
-              <th scope="col" className="px-4 py-2 text-right font-medium">
-                Price
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item) => (
-              <tr
-                key={item.id}
-                className="border-t border-paper-200 align-top"
-              >
-                <th
-                  scope="row"
-                  className="px-4 py-3 text-left font-normal text-ink-800"
-                >
-                  <span className="font-medium text-ink-900">{item.label}</span>
-                  {item.note ? (
-                    <span className="mt-0.5 block text-xs text-ink-500">
-                      {item.note}
-                    </span>
-                  ) : null}
-                  {item.source === "estimate" ? (
-                    <span className="mt-1 inline-flex items-center gap-1 text-xs text-ink-400">
-                      <Info aria-hidden className="size-3" />
-                      Estimated, not confirmed by the shop
-                    </span>
-                  ) : null}
-                </th>
-                <td className="whitespace-nowrap px-4 py-3 text-right">
-                  <span className="font-medium text-ink-900">
-                    {formatPriceRange(item.priceMin, item.priceMax)}
-                  </span>
-                  <span className="block text-xs text-ink-400">
-                    {item.unit}
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <ul className="divide-y divide-paper-200">
+        {items.map((item) => (
+          <li
+            key={item.id}
+            className="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-6 py-4 transition-colors hover:bg-paper-100"
+          >
+            <span className="font-display text-lg leading-snug text-ink-900">
+              {item.label}
+            </span>
 
-      <p className="border-t border-paper-200 bg-paper-100 px-4 py-2.5 text-xs text-ink-500">
+            {/* Leader rule, the way a menu joins a dish to its price. */}
+            <span
+              aria-hidden
+              className="mx-1 hidden min-w-8 flex-1 translate-y-[-0.25rem] border-b border-dotted border-paper-400 sm:block"
+            />
+
+            <span className="ml-auto text-right sm:ml-0">
+              <span className="font-display text-lg font-semibold text-ink-900 tabular-nums">
+                {formatPriceRange(item.priceMin, item.priceMax)}
+              </span>
+              <span className="ml-1.5 text-xs text-ink-400">{item.unit}</span>
+            </span>
+
+            {item.note || item.source === "estimate" ? (
+              <span className="w-full">
+                {item.note ? (
+                  <span className="block text-sm text-ink-500">{item.note}</span>
+                ) : null}
+                {item.source === "estimate" ? (
+                  <span className="mt-0.5 inline-flex items-center gap-1 text-xs text-ink-400">
+                    <Info aria-hidden className="size-3" />
+                    Estimated — not confirmed by the shop
+                  </span>
+                ) : null}
+              </span>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+
+      <p className="border-t border-paper-200 bg-paper-100 px-6 py-3 text-xs leading-relaxed text-ink-500">
         {hasEstimates
-          ? "Estimated prices are our own research and may differ from what the shop quotes. Always confirm before ordering."
+          ? "Estimated prices come from our own research and may differ from what the shop quotes. Always confirm before ordering."
           : "Prices shared by the shop. Fabric is usually charged separately unless stated."}
       </p>
     </div>

@@ -1,24 +1,22 @@
 import {
   AtSign,
-  BadgeCheck,
-  CalendarClock,
   Clock,
   ExternalLink,
   Globe,
   MapPin,
   MessageCircle,
   Phone,
-  Store as StoreIcon,
 } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Gallery } from "@/components/gallery";
 import { JsonLd } from "@/components/json-ld";
 import { RateCard } from "@/components/rate-card";
+import { Reveal } from "@/components/reveal";
 import { StoreCard } from "@/components/store-card";
+import { StoreHero } from "@/components/store-hero";
 import { VisitBooking } from "@/components/visit-booking";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -123,60 +121,28 @@ export default async function StorePage({
   const waNumber = store.whatsapp?.replace(/[^0-9]/g, "");
 
   return (
-    <Container className="py-10">
-      <Breadcrumbs crumbs={crumbs} />
+    <>
+      <StoreHero store={store} crumbs={crumbs} />
 
-      <div className="grid gap-10 lg:grid-cols-[1fr_22rem]">
+      <Container className="py-12">
+        <div className="grid gap-10 lg:grid-cols-[1fr_22rem]">
         {/* ── Main column ─────────────────────────────────────── */}
         {/* min-w-0: grid items default to min-width:auto, which lets the
             rate-card table's min-width push the whole page sideways. */}
         <div className="min-w-0">
-          <header className="mb-6">
-            <div className="mb-3 flex flex-wrap items-center gap-2">
-              {store.rateCardVerified ? (
-                <Badge variant="rateCard">Rate card shared by shop</Badge>
-              ) : null}
-              {store.verified ? (
-                <Badge variant="verified">
-                  <BadgeCheck aria-hidden className="size-3" />
-                  Details verified
-                </Badge>
-              ) : null}
-              {store.claimed ? <Badge variant="dark">Owner managed</Badge> : null}
-            </div>
-
-            <h1 className="text-3xl text-ink-900 sm:text-4xl">{store.name}</h1>
-
-            <p className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-ink-600">
-              <span className="flex items-center gap-1.5">
-                <MapPin aria-hidden className="size-4 text-ink-400" />
-                {store.locality ? `${store.locality.name}, ` : ""}
-                {store.city.name}
-              </span>
-              {store.establishedYear ? (
-                <span className="flex items-center gap-1.5">
-                  <StoreIcon aria-hidden className="size-4 text-ink-400" />
-                  Since {store.establishedYear}
-                </span>
-              ) : null}
-              {store.turnaroundDays ? (
-                <span className="flex items-center gap-1.5">
-                  <CalendarClock aria-hidden className="size-4 text-ink-400" />
-                  {store.turnaroundDays === 0
-                    ? "Same day"
-                    : `~${store.turnaroundDays} day turnaround`}
-                </span>
-              ) : null}
-            </p>
-          </header>
-
           <Gallery images={store.images} storeName={store.name} />
 
           {store.about ? (
-            <section className="mt-8">
-              <h2 className="mb-3 text-xl text-ink-900">About</h2>
-              <p className="leading-relaxed text-ink-700">{store.about}</p>
-            </section>
+            <Reveal>
+              <section className={store.images.length ? "mt-10" : ""}>
+                <h2 className="mb-4 text-2xl text-ink-900">About</h2>
+                {/* Lead paragraph, because this is the one piece of prose on
+                    the page and it should read like an editor wrote it. */}
+                <p className="max-w-2xl text-lg leading-relaxed text-ink-700">
+                  {store.about}
+                </p>
+              </section>
+            </Reveal>
           ) : null}
 
           {store.specialities.length || store.materials.length ? (
@@ -377,7 +343,8 @@ export default async function StorePage({
         </section>
       ) : null}
 
-      <JsonLd data={[storeSchema(store), breadcrumbSchema(crumbs)]} />
-    </Container>
+        <JsonLd data={[storeSchema(store), breadcrumbSchema(crumbs)]} />
+      </Container>
+    </>
   );
 }

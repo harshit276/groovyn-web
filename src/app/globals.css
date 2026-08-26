@@ -112,6 +112,25 @@
     border-top: 1px solid var(--color-brass-300);
   }
 
+  /* Scroll reveal. Driven by a data attribute rather than React state — see
+     components/reveal.tsx. Content is visible by default so it still reads
+     with JavaScript disabled. */
+  .reveal {
+    transition:
+      opacity 0.7s ease-out,
+      transform 0.7s ease-out;
+  }
+
+  .reveal[data-reveal="pending"] {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  .reveal[data-reveal="shown"] {
+    opacity: 1;
+    transform: none;
+  }
+
   /* Clamp helpers for card copy */
   .line-clamp-2 {
     display: -webkit-box;
