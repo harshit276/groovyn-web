@@ -193,27 +193,30 @@ export default async function StorePage({
                 <Clock aria-hidden className="size-4 text-brass-600" />
                 Opening hours
               </h2>
-              <dl className="space-y-1.5 text-sm">
-                {DAY_LABELS.map(([key, label]) => {
-                  const value = store.openingHours[key];
-                  return (
-                    <div key={key} className="flex justify-between gap-4">
-                      <dt className="text-ink-600">{label}</dt>
-                      <dd
-                        className={
-                          !value || value === "closed"
-                            ? "text-ink-400"
-                            : "text-ink-900"
-                        }
-                      >
-                        {!value || value === "closed"
-                          ? "Closed"
-                          : value.replace("-", " – ")}
-                      </dd>
-                    </div>
-                  );
-                })}
-              </dl>
+              {/* An empty hours object means we never collected them — which is
+                  not the same as the shop being shut. Rendering seven "Closed"
+                  rows tells the visitor a trading business never opens. */}
+              {Object.keys(store.openingHours).length ? (
+                <dl className="space-y-1.5 text-sm">
+                  {DAY_LABELS.map(([key, label]) => {
+                    const value = store.openingHours[key];
+                    const closed = !value || value === "closed";
+                    return (
+                      <div key={key} className="flex justify-between gap-4">
+                        <dt className="text-ink-600">{label}</dt>
+                        <dd className={closed ? "text-ink-400" : "text-ink-900"}>
+                          {closed ? "Closed" : value.replace("-", " – ")}
+                        </dd>
+                      </div>
+                    );
+                  })}
+                </dl>
+              ) : (
+                <p className="text-sm leading-relaxed text-ink-500">
+                  Not published yet — please call the shop to confirm before
+                  visiting.
+                </p>
+              )}
             </div>
 
             <div className="rounded-card border border-paper-300 bg-paper-50 p-5">
@@ -223,7 +226,14 @@ export default async function StorePage({
               </h2>
               <address className="not-italic leading-relaxed text-ink-700">
                 {store.address}
-                {store.pincode ? <><br />{store.pincode}</> : null}
+                {/* Researched addresses often already end in the pincode, so
+                    only append it when it isn't there already. */}
+                {store.pincode && !store.address.includes(store.pincode) ? (
+                  <>
+                    <br />
+                    {store.pincode}
+                  </>
+                ) : null}
               </address>
               {store.mapUrl ? (
                 <Button asChild variant="outline" size="sm" className="mt-4">
