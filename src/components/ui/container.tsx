@@ -33,7 +33,7 @@ export function SectionHeading({
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="max-w-2xl">
           {eyebrow ? (
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-brass-600">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand-500">
               {eyebrow}
             </p>
           ) : null}
@@ -44,7 +44,7 @@ export function SectionHeading({
         </div>
         {action}
       </div>
-      <div className="mt-5 h-px w-full bg-linear-to-r from-brass-400/70 to-transparent" />
+      <div className="mt-5 h-px w-full bg-ink-100" />
     </div>
   );
 }

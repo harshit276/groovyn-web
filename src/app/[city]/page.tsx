@@ -48,10 +48,10 @@ export async function generateMetadata({
 }
 
 const COVERS: Record<string, string> = {
-  tailors: "/images/tailor.webp",
-  boutiques: "/images/boutique.webp",
-  "fabric-shops": "/images/fabric.webp",
-  "rental-shops": "/images/rental.webp",
+  tailors: "/images/cat-tailors.webp",
+  boutiques: "/images/cat-boutiques.webp",
+  "fabric-shops": "/images/cat-fabric-shops.webp",
+  "rental-shops": "/images/cat-rental-shops.webp",
 };
 
 export default async function CityPage({ params }: PageProps<"/[city]">) {
@@ -96,7 +96,7 @@ export default async function CityPage({ params }: PageProps<"/[city]">) {
             <Link
               key={c.slug}
               href={`/${citySlug}/${c.slug}`}
-              className="group relative overflow-hidden rounded-card border border-paper-300"
+              className="group relative overflow-hidden rounded-card border border-ink-100"
             >
               <div className="relative aspect-3/2">
                 <Image
@@ -113,8 +113,8 @@ export default async function CityPage({ params }: PageProps<"/[city]">) {
                     className="mb-2 block h-0.5 w-8"
                     style={{ backgroundColor: c.accent }}
                   />
-                  <h2 className="font-display text-xl text-paper-50">{c.name}</h2>
-                  <p className="text-sm text-brass-300">
+                  <h2 className="font-display text-xl text-white">{c.name}</h2>
+                  <p className="text-sm text-brand-300">
                     {counts[c.slug] ?? 0} listed
                   </p>
                 </div>
@@ -135,7 +135,7 @@ export default async function CityPage({ params }: PageProps<"/[city]">) {
               <li key={l.slug}>
                 <Link
                   href={`/${citySlug}/tailors/in/${l.slug}`}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-paper-400 bg-paper-50 px-3.5 py-1.5 text-sm text-ink-700 transition-colors hover:border-brass-400 hover:text-ink-900"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-ink-200 bg-white px-3.5 py-1.5 text-sm text-ink-700 transition-colors hover:border-brand-300 hover:text-ink-900"
                 >
                   {l.name}
                   <span className="text-xs text-ink-400">{l.storeCount}</span>
@@ -168,12 +168,12 @@ export default async function CityPage({ params }: PageProps<"/[city]">) {
             <Link
               key={s.slug}
               href={`/${citySlug}/prices/${s.slug}`}
-              className="group flex items-center justify-between gap-4 rounded-card border border-paper-300 bg-paper-50 px-4 py-3.5 transition-colors hover:border-brass-400"
+              className="group flex items-center justify-between gap-4 rounded-card border border-ink-100 bg-white px-4 py-3.5 transition-colors hover:border-brand-300"
             >
               <span className="text-ink-800">{s.name}</span>
               <ArrowRight
                 aria-hidden
-                className="size-4 text-brass-600 transition-transform group-hover:translate-x-0.5"
+                className="size-4 text-brand-500 transition-transform group-hover:translate-x-0.5"
               />
             </Link>
           ))}

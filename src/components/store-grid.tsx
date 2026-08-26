@@ -23,7 +23,7 @@ export function StoreGrid({
 }) {
   if (!result.items.length) {
     return (
-      <div className="rounded-card border border-dashed border-paper-400 bg-paper-50 p-10 text-center">
+      <div className="rounded-card border border-dashed border-ink-200 bg-white p-10 text-center">
         <h2 className="text-xl text-ink-900">Nothing matches yet</h2>
         <p className="mx-auto mt-2 max-w-md text-ink-600">
           We&apos;re still adding shops in this area. Try widening your filters,

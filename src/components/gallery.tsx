@@ -56,7 +56,7 @@ export function Gallery({
         <button
           type="button"
           onClick={() => setOpenIndex(0)}
-          className="group relative col-span-2 aspect-4/3 overflow-hidden rounded-card bg-paper-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-500"
+          className="group relative col-span-2 aspect-4/3 overflow-hidden rounded-card bg-ink-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
         >
           <Image
             src={hero.url}
@@ -76,7 +76,7 @@ export function Gallery({
               type="button"
               onClick={() => setOpenIndex(i + 1)}
               className={cn(
-                "group relative aspect-4/3 overflow-hidden rounded-card bg-paper-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-500 sm:aspect-auto"
+                "group relative aspect-4/3 overflow-hidden rounded-card bg-ink-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 sm:aspect-auto"
               )}
             >
               <Image
@@ -87,7 +87,7 @@ export function Gallery({
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               />
               {i === 1 && images.length > 3 ? (
-                <span className="absolute inset-0 grid place-items-center bg-ink-950/55 text-sm font-medium text-paper-50">
+                <span className="absolute inset-0 grid place-items-center bg-ink-950/55 text-sm font-medium text-white">
                   +{images.length - 3} more
                 </span>
               ) : null}
@@ -117,10 +117,10 @@ export function Gallery({
               />
             </div>
 
-            <div className="flex items-center justify-between gap-4 px-4 py-3 text-paper-100">
+            <div className="flex items-center justify-between gap-4 px-4 py-3 text-white">
               <p className="text-sm">
                 {images[openIndex].caption ?? images[openIndex].alt}
-                <span className="ml-2 text-paper-400">
+                <span className="ml-2 text-white/55">
                   {openIndex + 1} / {images.length}
                 </span>
               </p>
@@ -128,14 +128,14 @@ export function Gallery({
                 <button
                   type="button"
                   onClick={() => step(-1)}
-                  className="rounded-full px-3 py-1 text-sm hover:bg-paper-100/10"
+                  className="rounded-full px-3 py-1 text-sm hover:bg-ground/10"
                 >
                   Prev
                 </button>
                 <button
                   type="button"
                   onClick={() => step(1)}
-                  className="rounded-full px-3 py-1 text-sm hover:bg-paper-100/10"
+                  className="rounded-full px-3 py-1 text-sm hover:bg-ground/10"
                 >
                   Next
                 </button>
@@ -146,7 +146,7 @@ export function Gallery({
               type="button"
               onClick={close}
               aria-label="Close gallery"
-              className="absolute right-3 top-3 grid size-9 place-items-center rounded-full bg-ink-950/70 text-paper-100 hover:bg-ink-950"
+              className="absolute right-3 top-3 grid size-9 place-items-center rounded-full bg-ink-950/70 text-white hover:bg-ink-950"
             >
               <X aria-hidden className="size-4" />
             </button>

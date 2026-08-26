@@ -160,7 +160,7 @@ export default async function CategoryPage({
                   href={`/${citySlug}/${categorySlug}/in/${l.slug}`}
                   className="group inline-flex items-baseline gap-1.5 text-sm text-ink-600 transition-colors hover:text-ink-900"
                 >
-                  <span className="underline decoration-transparent decoration-1 underline-offset-4 transition-colors group-hover:decoration-brass-500">
+                  <span className="underline decoration-transparent decoration-1 underline-offset-4 transition-colors group-hover:decoration-brand-500">
                     {l.name}
                   </span>
                   <span className="font-display text-xs tabular-nums text-ink-300">

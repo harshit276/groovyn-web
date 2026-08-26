@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Montserrat, Poppins } from "next/font/google";
 
 import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
@@ -10,19 +10,19 @@ import { site } from "@/lib/site";
 
 import "./globals.css";
 
-// Fraunces carries the whole brand — it's the one thing that stops this
-// reading like every other directory.
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+// Same pairing as the Android app: Montserrat for headings, Poppins for body.
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
   display: "swap",
-  axes: ["SOFT", "WONK"],
+  weight: ["500", "600", "700", "800"],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#faf7f2",
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
 };
@@ -69,12 +69,12 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en-IN"
-      className={`${fraunces.variable} ${inter.variable} h-full antialiased`}
+      className={`${montserrat.variable} ${poppins.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-paper-100">
+      <body className="flex min-h-full flex-col bg-ground">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink-900 focus:px-4 focus:py-2 focus:text-paper-50"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink-900 focus:px-4 focus:py-2 focus:text-white"
         >
           Skip to content
         </a>

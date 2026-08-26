@@ -100,7 +100,7 @@ export default async function AdminOverviewPage() {
           Latest bookings
         </h2>
         {recent.length ? (
-          <ul className="divide-y divide-paper-300 overflow-hidden rounded-card border border-paper-300 bg-paper-50">
+          <ul className="divide-y divide-ink-100 overflow-hidden rounded-card border border-ink-100 bg-white">
             {recent.map((b) => (
               <li
                 key={b.id}
@@ -114,13 +114,13 @@ export default async function AdminOverviewPage() {
                     </span>
                   </p>
                   <p className="text-sm text-ink-500">
-                    <a href={`tel:${b.phone}`} className="hover:text-brass-700">
+                    <a href={`tel:${b.phone}`} className="hover:text-brand-600">
                       {b.phone}
                     </a>{" "}
                     ·{" "}
                     <Link
                       href={storeHref(b.store.city.slug, b.store.category, b.store.slug)}
-                      className="hover:text-brass-700"
+                      className="hover:text-brand-600"
                     >
                       {b.store.name}
                     </Link>
@@ -136,7 +136,7 @@ export default async function AdminOverviewPage() {
             ))}
           </ul>
         ) : (
-          <p className="rounded-card border border-dashed border-paper-400 p-6 text-center text-ink-500">
+          <p className="rounded-card border border-dashed border-ink-200 p-6 text-center text-ink-500">
             No bookings yet.
           </p>
         )}
@@ -161,11 +161,11 @@ function Stat({
   const body = (
     <div
       className={cn(
-        "rounded-card border bg-paper-50 p-5 transition-colors",
+        "rounded-card border bg-white p-5 transition-colors",
         urgent
-          ? "border-brass-400 bg-brass-200/25"
-          : "border-paper-300",
-        href && "hover:border-brass-400"
+          ? "border-brand-300 bg-brand-50"
+          : "border-ink-100",
+        href && "hover:border-brand-300"
       )}
     >
       <p className="text-xs uppercase tracking-wider text-ink-400">{label}</p>

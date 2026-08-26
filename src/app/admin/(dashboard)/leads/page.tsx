@@ -51,8 +51,8 @@ export default async function LeadsPage({
               href={s.value === "all" ? "/admin/leads" : `/admin/leads?status=${s.value}`}
               className={`rounded-full border px-3 py-1 text-xs transition-colors ${
                 isActive
-                  ? "border-ink-900 bg-ink-900 text-paper-50"
-                  : "border-paper-400 bg-paper-50 text-ink-700 hover:border-ink-400"
+                  ? "border-ink-900 bg-ink-900 text-white"
+                  : "border-ink-200 bg-white text-ink-700 hover:border-ink-400"
               }`}
             >
               {s.label}
@@ -62,14 +62,14 @@ export default async function LeadsPage({
       </nav>
 
       {bookings.length === 0 ? (
-        <p className="rounded-card border border-dashed border-paper-400 p-8 text-center text-ink-500">
+        <p className="rounded-card border border-dashed border-ink-200 p-8 text-center text-ink-500">
           No leads{filter && filter !== "all" ? ` with status "${filter}"` : ""} yet.
         </p>
       ) : (
-        <div className="overflow-x-auto rounded-card border border-paper-300 bg-paper-50">
+        <div className="overflow-x-auto rounded-card border border-ink-100 bg-white">
           <table className="w-full min-w-[52rem] border-collapse text-sm">
             <thead>
-              <tr className="border-b border-paper-300 text-left text-xs uppercase tracking-wider text-ink-400">
+              <tr className="border-b border-ink-100 text-left text-xs uppercase tracking-wider text-ink-400">
                 <th scope="col" className="px-4 py-3 font-medium">Customer</th>
                 <th scope="col" className="px-4 py-3 font-medium">Shop</th>
                 <th scope="col" className="px-4 py-3 font-medium">Wants</th>
@@ -79,13 +79,13 @@ export default async function LeadsPage({
             </thead>
             <tbody>
               {bookings.map((b) => (
-                <tr key={b.id} className="border-b border-paper-200 align-top last:border-0">
+                <tr key={b.id} className="border-b border-ink-100 align-top last:border-0">
                   <td className="px-4 py-3">
                     <p className="font-medium text-ink-900">{b.name}</p>
                     <div className="mt-1 flex items-center gap-2">
                       <a
                         href={`tel:${b.phone.replace(/\s/g, "")}`}
-                        className="inline-flex items-center gap-1 text-xs text-ink-600 hover:text-brass-700"
+                        className="inline-flex items-center gap-1 text-xs text-ink-600 hover:text-brand-600"
                       >
                         <Phone aria-hidden className="size-3" />
                         {b.phone}
@@ -108,7 +108,7 @@ export default async function LeadsPage({
                   <td className="px-4 py-3">
                     <Link
                       href={storeHref(b.store.city.slug, b.store.category, b.store.slug)}
-                      className="text-ink-900 hover:text-brass-700"
+                      className="text-ink-900 hover:text-brand-600"
                     >
                       {b.store.name}
                     </Link>

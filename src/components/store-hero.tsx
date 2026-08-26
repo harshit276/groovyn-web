@@ -49,7 +49,7 @@ export function StoreHero({
       </div>
 
       <Container className="flex min-h-[22rem] flex-col justify-end py-8 sm:min-h-[26rem]">
-        <div className="[&_a]:text-paper-300/80 [&_a:hover]:text-brass-300 [&_li]:text-paper-300/70 [&_span]:text-paper-100">
+        <div className="[&_a]:text-white/70 [&_a:hover]:text-brand-300 [&_li]:text-white/65 [&_span]:text-white">
           <Breadcrumbs crumbs={crumbs} />
         </div>
 
@@ -61,19 +61,19 @@ export function StoreHero({
           {store.establishedYear ? ` · since ${store.establishedYear}` : null}
         </p>
 
-        <h1 className="max-w-3xl text-4xl leading-[1.05] text-paper-50 sm:text-6xl">
+        <h1 className="max-w-3xl text-4xl leading-[1.05] text-white sm:text-6xl">
           {store.name}
         </h1>
 
-        <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 text-paper-200/90">
+        <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 text-white/85">
           <span className="flex items-center gap-1.5 text-sm">
-            <MapPin aria-hidden className="size-4 text-brass-400" />
+            <MapPin aria-hidden className="size-4 text-brand-300" />
             {store.locality ? `${store.locality.name}, ` : ""}
             {store.city.name}
           </span>
           {store.turnaroundDays ? (
             <span className="flex items-center gap-1.5 text-sm">
-              <CalendarClock aria-hidden className="size-4 text-brass-400" />
+              <CalendarClock aria-hidden className="size-4 text-brand-300" />
               {store.turnaroundDays === 0
                 ? "Same day"
                 : `~${store.turnaroundDays} day turnaround`}
@@ -81,7 +81,7 @@ export function StoreHero({
           ) : null}
           {store.materials.length ? (
             <span className="flex items-center gap-1.5 text-sm">
-              <StoreIcon aria-hidden className="size-4 text-brass-400" />
+              <StoreIcon aria-hidden className="size-4 text-brand-300" />
               {store.materials.slice(0, 3).join(" · ")}
             </span>
           ) : null}

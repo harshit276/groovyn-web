@@ -15,7 +15,7 @@ export default function SuggestPage() {
   return (
     <Container className="py-12">
       <div className="mx-auto max-w-xl">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-brass-600">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-500">
           Help us build this
         </p>
         <h1 className="text-3xl text-ink-900 sm:text-4xl">

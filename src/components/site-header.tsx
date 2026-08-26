@@ -26,17 +26,17 @@ export function SiteHeader({ cities }: { cities: CityDTO[] }) {
   const closeMenu = React.useCallback(() => setOpen(false), []);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-paper-300 bg-paper-100/85 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-ink-100 bg-white/90 backdrop-blur-md">
       <Container>
         <div className="flex h-16 items-center justify-between gap-4">
           <Link
             href="/"
-            className="flex items-baseline gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-500"
+            className="flex items-baseline gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
           >
             <span className="font-display text-2xl font-semibold tracking-tight text-ink-900">
               Groovyn
             </span>
-            <span className="hidden text-[11px] uppercase tracking-[0.2em] text-brass-600 sm:inline">
+            <span className="hidden text-[11px] uppercase tracking-[0.2em] text-brand-500 sm:inline">
               Atelier Index
             </span>
           </Link>
@@ -53,7 +53,7 @@ export function SiteHeader({ cities }: { cities: CityDTO[] }) {
                       className={cn(
                         "rounded-full px-3.5 py-2 text-sm transition-colors",
                         isActive
-                          ? "bg-ink-900 text-paper-50"
+                          ? "bg-ink-900 text-white"
                           : "text-ink-700 hover:bg-ink-900/5"
                       )}
                     >
@@ -72,7 +72,7 @@ export function SiteHeader({ cities }: { cities: CityDTO[] }) {
                 Search
               </Link>
             </Button>
-            <Button asChild variant="brass" size="sm" className="hidden sm:inline-flex">
+            <Button asChild variant="brand" size="sm" className="hidden sm:inline-flex">
               <Link href="/claim">List your shop</Link>
             </Button>
 
@@ -95,7 +95,7 @@ export function SiteHeader({ cities }: { cities: CityDTO[] }) {
       </Container>
 
       {open ? (
-        <div id="mobile-nav" className="border-t border-paper-300 bg-paper-100 lg:hidden">
+        <div id="mobile-nav" className="border-t border-ink-100 bg-ground lg:hidden">
           <Container className="py-4">
             <ul className="grid gap-1">
               {CATEGORIES.map((c) => (
@@ -103,7 +103,7 @@ export function SiteHeader({ cities }: { cities: CityDTO[] }) {
                   <Link
                     href={`/${citySlug}/${c.slug}`}
                     onClick={closeMenu}
-                    className="flex items-center justify-between rounded-lg px-3 py-3 text-ink-800 hover:bg-paper-200"
+                    className="flex items-center justify-between rounded-lg px-3 py-3 text-ink-800 hover:bg-ink-50"
                   >
                     <span>{c.name}</span>
                     <span
@@ -121,7 +121,7 @@ export function SiteHeader({ cities }: { cities: CityDTO[] }) {
                   Search all stores
                 </Link>
               </Button>
-              <Button asChild variant="brass">
+              <Button asChild variant="brand">
                 <Link href="/claim" onClick={closeMenu}>
                   List your shop
                 </Link>

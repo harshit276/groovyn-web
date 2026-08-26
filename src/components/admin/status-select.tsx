@@ -38,9 +38,9 @@ export function StatusSelect({
         disabled={pending}
         onChange={() => formRef.current?.requestSubmit()}
         className={cn(
-          "rounded-full border px-2.5 py-1 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-500",
+          "rounded-full border px-2.5 py-1 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500",
           pending && "opacity-50",
-          STATUS_STYLES[value] ?? "border-paper-400 bg-paper-50 text-ink-700"
+          STATUS_STYLES[value] ?? "border-ink-200 bg-white text-ink-700"
         )}
       >
         {options.map((o) => (
@@ -54,14 +54,14 @@ export function StatusSelect({
 }
 
 const STATUS_STYLES: Record<string, string> = {
-  pending: "border-brass-400/50 bg-brass-200/40 text-brass-800",
+  pending: "border-brand-100 bg-brand-50 text-brand-700",
   confirmed: "border-emerald-700/25 bg-emerald-700/10 text-emerald-900",
   visited: "border-emerald-700/40 bg-emerald-700/20 text-emerald-900",
   approved: "border-emerald-700/40 bg-emerald-700/20 text-emerald-900",
   added: "border-emerald-700/40 bg-emerald-700/20 text-emerald-900",
-  contacted: "border-ink-300 bg-paper-200 text-ink-700",
-  reviewed: "border-ink-300 bg-paper-200 text-ink-700",
-  no_show: "border-terra-400/50 bg-terra-300/25 text-terra-600",
-  cancelled: "border-ink-300 bg-paper-200 text-ink-400",
-  rejected: "border-ink-300 bg-paper-200 text-ink-400",
+  contacted: "border-ink-300 bg-ink-50 text-ink-700",
+  reviewed: "border-ink-300 bg-ink-50 text-ink-700",
+  no_show: "border-coral-300 bg-coral-200 text-coral-500",
+  cancelled: "border-ink-300 bg-ink-50 text-ink-400",
+  rejected: "border-ink-300 bg-ink-50 text-ink-400",
 };

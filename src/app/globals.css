@@ -1,73 +1,71 @@
 @import "tailwindcss";
 
 /*
-  Groovyn "Atelier" design system.
-  Warm, editorial, photo-forward. Deliberately warm neutrals (paper) rather than
-  cool greys, so garment photography sits on the page instead of fighting it.
+  Groovyn web theme, matched to the Android app.
+
+  White surfaces on a near-white ground, black type and buttons, blue for the
+  active/selected state, coral for promotional banners. Montserrat for headings,
+  Poppins for body — the same pairing the app uses.
 */
 @theme {
-  /* Ink — primary dark, used for text and dark surfaces */
-  --color-ink-50: #f4f5f8;
-  --color-ink-100: #e4e7ee;
-  --color-ink-200: #c6ccda;
-  --color-ink-300: #9aa4bd;
-  --color-ink-400: #6b789a;
-  --color-ink-500: #4a5878;
-  --color-ink-600: #3a4661;
-  --color-ink-700: #2c3956;
-  --color-ink-800: #1e2740;
-  --color-ink-900: #141b2d;
-  --color-ink-950: #0a0e18;
+  /* Ground and surfaces */
+  --color-ground: #fafafa;
+  --color-surface: #ffffff;
 
-  /* Paper — warm ivory backgrounds */
-  --color-paper-50: #fdfbf7;
-  --color-paper-100: #faf7f2;
-  --color-paper-200: #f2ede4;
-  --color-paper-300: #e7dfd2;
-  --color-paper-400: #d5c9b6;
-  --color-paper-500: #b9a98f;
+  /* Ink — black-based text, matching the app's Colors.black87 hierarchy */
+  --color-ink-50: #f5f5f5;
+  --color-ink-100: #ebebeb;
+  --color-ink-200: #d6d6d6;
+  --color-ink-300: #b0b0b0;
+  --color-ink-400: #8a8a8a;
+  --color-ink-500: #6b6b6b;
+  --color-ink-600: #525252;
+  --color-ink-700: #3d3d3d;
+  --color-ink-800: #232323;
+  --color-ink-900: #111111;
+  --color-ink-950: #000000;
 
-  /* Brass — primary accent */
-  --color-brass-200: #ecd9b4;
-  --color-brass-300: #dcb878;
-  --color-brass-400: #cfa25a;
-  --color-brass-500: #c08a3e;
-  --color-brass-600: #a2712f;
-  --color-brass-700: #7f5722;
-  --color-brass-800: #5d3f18;
+  /* Blue — the app's accent, used for the active nav item and links */
+  --color-brand-50: #e8f2fd;
+  --color-brand-100: #c5ddf9;
+  --color-brand-300: #64a8ee;
+  --color-brand-500: #1976d2;
+  --color-brand-600: #1565b8;
+  --color-brand-700: #0f4e8f;
 
-  /* Terracotta — secondary accent */
-  --color-terra-300: #dfa08c;
-  --color-terra-400: #c87259;
-  --color-terra-500: #b5563f;
-  --color-terra-600: #96432f;
+  /* Coral — promotional banners */
+  --color-coral-200: #ffd4d0;
+  --color-coral-300: #ffb3ac;
+  --color-coral-400: #fa8d84;
+  --color-coral-500: #f57268;
 
-  /* Category accents — distinct but all muted earth tones so they stay a family */
-  --color-cat-tailor: #c08a3e;
-  --color-cat-boutique: #7d4a6b;
-  --color-cat-fabric: #2f6b6a;
-  --color-cat-rental: #b5563f;
+  /* Pink — store links, as in the app's product page */
+  --color-accentpink-500: #e91e63;
 
-  /* Support */
-  --color-success: #2f6b4f;
-  --color-warning: #b5843f;
+  /* Category accents. Kept distinct for filters and badges, but the blue
+     brand colour leads everywhere else. */
+  --color-cat-tailor: #1976d2;
+  --color-cat-boutique: #e91e63;
+  --color-cat-fabric: #0f9b8e;
+  --color-cat-rental: #f57268;
 
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --color-success: #2e7d32;
+  --color-warning: #ed6c02;
 
-  --radius-card: 0.75rem;
+  --font-display: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+
+  /* The app leans on generous corner radii — 10 on cards, 20 on pills. */
+  --radius-card: 0.875rem;
+  --radius-pill: 1.5rem;
 }
 
 :root {
-  --background: var(--color-paper-100);
+  --background: var(--color-ground);
   --foreground: var(--color-ink-900);
 }
 
 @layer base {
-  * {
-    border-color: var(--color-paper-300);
-  }
-
   body {
     background-color: var(--background);
     color: var(--foreground);
@@ -80,11 +78,10 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    font-weight: 600;
-    letter-spacing: -0.015em;
+    font-weight: 700;
+    letter-spacing: -0.01em;
   }
 
-  /* Respect users who ask for less motion. */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -98,40 +95,20 @@
 }
 
 @layer utilities {
-  /* Subtle paper grain — gives photography something to sit on. */
-  .bg-grain {
-    background-image: radial-gradient(
-      circle at 1px 1px,
-      rgb(20 27 45 / 0.045) 1px,
-      transparent 0
-    );
-    background-size: 18px 18px;
+  /* The app's card shadow: soft, close, slightly downward. */
+  .shadow-card {
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.08);
   }
 
-  .hairline {
-    border-top: 1px solid var(--color-brass-300);
+  .shadow-card-lg {
+    box-shadow: 0 4px 16px rgb(0 0 0 / 0.12);
   }
 
-  /* Scroll reveal. Driven by a data attribute rather than React state — see
-     components/reveal.tsx. Content is visible by default so it still reads
-     with JavaScript disabled. */
-  .reveal {
-    transition:
-      opacity 0.7s ease-out,
-      transform 0.7s ease-out;
+  /* The floating search bar at the top of every app screen. */
+  .shadow-pill {
+    box-shadow: 2px 2px 6px rgb(0 0 0 / 0.16);
   }
 
-  .reveal[data-reveal="pending"] {
-    opacity: 0;
-    transform: translateY(1rem);
-  }
-
-  .reveal[data-reveal="shown"] {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* Clamp helpers for card copy */
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -144,5 +121,23 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  /* Scroll reveal — driven by a data attribute rather than React state.
+     Visible by default so it still reads without JavaScript. */
+  .reveal {
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
+  }
+
+  .reveal[data-reveal="pending"] {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  .reveal[data-reveal="shown"] {
+    opacity: 1;
+    transform: none;
   }
 }

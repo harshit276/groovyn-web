@@ -20,10 +20,10 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 const COVERS: Record<string, string> = {
-  tailors: "/images/tailor.webp",
-  boutiques: "/images/boutique.webp",
-  "fabric-shops": "/images/fabric.webp",
-  "rental-shops": "/images/rental.webp",
+  tailors: "/images/cat-tailors.webp",
+  boutiques: "/images/cat-boutiques.webp",
+  "fabric-shops": "/images/cat-fabric-shops.webp",
+  "rental-shops": "/images/cat-rental-shops.webp",
 };
 
 export default async function HomePage() {
@@ -39,16 +39,16 @@ export default async function HomePage() {
   return (
     <>
       {/* ── Hero ───────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden border-b border-paper-300 bg-grain">
+      <section className="relative overflow-hidden border-b border-ink-100 bg-grain">
         <Container className="py-16 sm:py-24">
           <div className="max-w-3xl">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-brass-600">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-brand-500">
               Delhi · Gurugram · Noida
             </p>
             <h1 className="text-4xl leading-[1.08] text-ink-900 sm:text-6xl">
               Know the price
               <br />
-              <span className="italic text-brass-600">before</span> you walk in.
+              <span className="italic text-brand-500">before</span> you walk in.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-600">
               Real rate cards and real work photos from tailors, boutiques,
@@ -62,15 +62,15 @@ export default async function HomePage() {
 
             <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-500">
               <li className="flex items-center gap-1.5">
-                <ReceiptText aria-hidden className="size-4 text-brass-600" />
+                <ReceiptText aria-hidden className="size-4 text-brand-500" />
                 Published price lists
               </li>
               <li className="flex items-center gap-1.5">
-                <PhoneOff aria-hidden className="size-4 text-brass-600" />
+                <PhoneOff aria-hidden className="size-4 text-brand-500" />
                 We never sell your number
               </li>
               <li className="flex items-center gap-1.5">
-                <BadgeCheck aria-hidden className="size-4 text-brass-600" />
+                <BadgeCheck aria-hidden className="size-4 text-brand-500" />
                 No paid rankings
               </li>
             </ul>
@@ -91,7 +91,7 @@ export default async function HomePage() {
             <Link
               key={c.slug}
               href={`/${primaryCity}/${c.slug}`}
-              className="group relative overflow-hidden rounded-card border border-paper-300 bg-paper-50 transition-shadow hover:shadow-[0_16px_44px_-20px_rgb(20_27_45_/_0.4)]"
+              className="group relative overflow-hidden rounded-card border border-ink-100 bg-white transition-shadow hover:shadow-[0_16px_44px_-20px_rgb(20_27_45_/_0.4)]"
             >
               <div className="relative aspect-4/5 overflow-hidden">
                 <Image
@@ -109,11 +109,11 @@ export default async function HomePage() {
                     className="mb-3 block h-0.5 w-10"
                     style={{ backgroundColor: c.accent }}
                   />
-                  <h3 className="font-display text-2xl text-paper-50">
+                  <h3 className="font-display text-2xl text-white">
                     {c.name}
                   </h3>
-                  <p className="mt-1 text-sm text-paper-200/85">{c.blurb}</p>
-                  <p className="mt-3 flex items-center gap-1.5 text-sm font-medium text-brass-300">
+                  <p className="mt-1 text-sm text-white/80">{c.blurb}</p>
+                  <p className="mt-3 flex items-center gap-1.5 text-sm font-medium text-brand-300">
                     {counts[c.slug] ?? 0} in Delhi
                     <ArrowRight
                       aria-hidden
@@ -150,7 +150,7 @@ export default async function HomePage() {
       </Container>
 
       {/* ── Price index ────────────────────────────────────────── */}
-      <section className="border-y border-paper-300 bg-paper-200/60">
+      <section className="border-y border-ink-100 bg-ink-50">
         <Container className="py-16">
           <SectionHeading
             eyebrow="Price transparency"
@@ -163,10 +163,10 @@ export default async function HomePage() {
               <Link
                 key={s.slug}
                 href={`/${primaryCity}/prices/${s.slug}`}
-                className="group flex items-center justify-between gap-4 rounded-card border border-paper-300 bg-paper-50 px-4 py-3.5 transition-colors hover:border-brass-400"
+                className="group flex items-center justify-between gap-4 rounded-card border border-ink-100 bg-white px-4 py-3.5 transition-colors hover:border-brand-300"
               >
                 <span className="text-ink-800">{s.name}</span>
-                <span className="flex items-center gap-2 text-sm font-medium text-brass-700">
+                <span className="flex items-center gap-2 text-sm font-medium text-brand-600">
                   {s.benchmarkMin ? `₹${s.benchmarkMin.toLocaleString("en-IN")}+` : "See rates"}
                   <ArrowRight
                     aria-hidden
@@ -182,23 +182,23 @@ export default async function HomePage() {
       {/* ── Owner CTA ──────────────────────────────────────────── */}
       <Container className="py-16">
         <div className="overflow-hidden rounded-card bg-ink-900 px-6 py-12 text-center sm:px-12">
-          <h2 className="mx-auto max-w-2xl text-3xl text-paper-50">
+          <h2 className="mx-auto max-w-2xl text-3xl text-white">
             Run a tailoring shop, boutique or fabric store?
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-paper-300/85">
+          <p className="mx-auto mt-4 max-w-xl text-white/70">
             Your listing is free, and always will be. Claim it to update your
             photos, price list and timings — and get found by people who already
             know what they want.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button asChild variant="brass" size="lg">
+            <Button asChild variant="brand" size="lg">
               <Link href="/claim">Claim your listing</Link>
             </Button>
             <Button
               asChild
               variant="outline"
               size="lg"
-              className="border-paper-100/25 text-paper-100 hover:bg-paper-100/10"
+              className="border-white/25 text-white hover:bg-ground/10"
             >
               <Link href="/suggest">Suggest a shop</Link>
             </Button>

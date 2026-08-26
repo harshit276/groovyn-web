@@ -14,9 +14,9 @@ import { notFound } from "next/navigation";
 import { Gallery } from "@/components/gallery";
 import { JsonLd } from "@/components/json-ld";
 import { RateCard } from "@/components/rate-card";
-import { Reveal } from "@/components/reveal";
 import { StoreCard } from "@/components/store-card";
 import { StoreHero } from "@/components/store-hero";
+import { StoreTabs } from "@/components/store-tabs";
 import { VisitBooking } from "@/components/visit-booking";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -128,67 +128,92 @@ export default async function StorePage({
         {/* min-w-0: grid items default to min-width:auto, which lets the
             rate-card table's min-width push the whole page sideways. */}
         <div className="min-w-0">
-          <Gallery images={store.images} storeName={store.name} />
+          {/* Services / Gallery / Reviews, as the app lays it out. */}
+          <StoreTabs
+            tabs={[
+              {
+                id: "services",
+                label: "Services",
+                count: store.priceItems.length || undefined,
+                panel: (
+                  <div className="space-y-8">
+                    {store.about ? (
+                      <p className="max-w-2xl leading-relaxed text-ink-700">
+                        {store.about}
+                      </p>
+                    ) : null}
 
-          {store.about ? (
-            <Reveal>
-              <section className={store.images.length ? "mt-10" : ""}>
-                <h2 className="mb-4 text-2xl text-ink-900">About</h2>
-                {/* Lead paragraph, because this is the one piece of prose on
-                    the page and it should read like an editor wrote it. */}
-                <p className="max-w-2xl text-lg leading-relaxed text-ink-700">
-                  {store.about}
-                </p>
-              </section>
-            </Reveal>
-          ) : null}
+                    {store.specialities.length || store.materials.length ? (
+                      <div className="grid gap-6 sm:grid-cols-2">
+                        {store.specialities.length ? (
+                          <div>
+                            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-ink-500">
+                              Speciality
+                            </h3>
+                            <ul className="flex flex-wrap gap-1.5">
+                              {store.specialities.map((s) => (
+                                <li key={s}>
+                                  <Badge>{s}</Badge>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ) : null}
 
-          {store.specialities.length || store.materials.length ? (
-            <section className="mt-8 grid gap-6 sm:grid-cols-2">
-              {store.specialities.length ? (
-                <div>
-                  <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-ink-500">
-                    Speciality
-                  </h2>
-                  <ul className="flex flex-wrap gap-1.5">
-                    {store.specialities.map((s) => (
-                      <li key={s}>
-                        <Badge>{s}</Badge>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
+                        {store.materials.length ? (
+                          <div>
+                            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-ink-500">
+                              Works with
+                            </h3>
+                            <ul className="flex flex-wrap gap-1.5">
+                              {store.materials.map((m) => (
+                                <li key={m}>
+                                  <Badge variant="outline">{m}</Badge>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ) : null}
+                      </div>
+                    ) : null}
 
-              {store.materials.length ? (
-                <div>
-                  <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-ink-500">
-                    Works with
-                  </h2>
-                  <ul className="flex flex-wrap gap-1.5">
-                    {store.materials.map((m) => (
-                      <li key={m}>
-                        <Badge variant="outline">{m}</Badge>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-            </section>
-          ) : null}
-
-          <section className="mt-10">
-            <RateCard
-              items={store.priceItems}
-              storeName={store.name}
-              verified={store.rateCardVerified}
-            />
-          </section>
+                    <RateCard
+                      items={store.priceItems}
+                      storeName={store.name}
+                      verified={store.rateCardVerified}
+                    />
+                  </div>
+                ),
+              },
+              {
+                id: "gallery",
+                label: "Gallery",
+                count: store.images.length || undefined,
+                panel: store.images.length ? (
+                  <Gallery images={store.images} storeName={store.name} />
+                ) : (
+                  <p className="rounded-card border border-dashed border-ink-200 bg-white px-6 py-10 text-center text-ink-500">
+                    No photos yet. We only publish pictures we&apos;ve taken
+                    ourselves or been given permission to use.
+                  </p>
+                ),
+              },
+              {
+                id: "reviews",
+                label: "Reviews",
+                panel: (
+                  <p className="rounded-card border border-dashed border-ink-200 bg-white px-6 py-10 text-center text-ink-500">
+                    No reviews yet.
+                  </p>
+                ),
+              },
+            ]}
+          />
 
           <section className="mt-10 grid gap-6 sm:grid-cols-2">
-            <div className="rounded-card border border-paper-300 bg-paper-50 p-5">
+            <div className="rounded-card border border-ink-100 bg-white p-5">
               <h2 className="mb-3 flex items-center gap-2 text-base text-ink-900">
-                <Clock aria-hidden className="size-4 text-brass-600" />
+                <Clock aria-hidden className="size-4 text-brand-500" />
                 Opening hours
               </h2>
               {/* An empty hours object means we never collected them — which is
@@ -217,9 +242,9 @@ export default async function StorePage({
               )}
             </div>
 
-            <div className="rounded-card border border-paper-300 bg-paper-50 p-5">
+            <div className="rounded-card border border-ink-100 bg-white p-5">
               <h2 className="mb-3 flex items-center gap-2 text-base text-ink-900">
-                <MapPin aria-hidden className="size-4 text-brass-600" />
+                <MapPin aria-hidden className="size-4 text-brand-500" />
                 Address
               </h2>
               <address className="not-italic leading-relaxed text-ink-700">
@@ -248,7 +273,7 @@ export default async function StorePage({
         {/* ── Sticky sidebar ──────────────────────────────────── */}
         <aside className="min-w-0 lg:sticky lg:top-24 lg:self-start">
           <div className="space-y-4">
-            <div className="rounded-card border border-paper-300 bg-paper-50 p-5">
+            <div className="rounded-card border border-ink-100 bg-white p-5">
               <p className="text-xs uppercase tracking-wider text-ink-400">
                 Typical range
               </p>
@@ -318,13 +343,13 @@ export default async function StorePage({
             />
 
             {!store.claimed ? (
-              <div className="rounded-card border border-dashed border-brass-400/60 bg-brass-200/20 p-5">
+              <div className="rounded-card border border-dashed border-brand-100 bg-brand-50 p-5">
                 <h2 className="text-base text-ink-900">Is this your shop?</h2>
                 <p className="mt-1.5 text-sm text-ink-600">
                   Claim the listing to update photos, prices and timings. Free,
                   and always will be.
                 </p>
-                <Button asChild variant="brass" size="sm" className="mt-4 w-full">
+                <Button asChild variant="brand" size="sm" className="mt-4 w-full">
                   <Link href={`/claim?store=${store.slug}`}>
                     Claim this listing
                   </Link>

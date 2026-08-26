@@ -22,7 +22,7 @@ export function StoreIndex({ stores }: { stores: StoreSummaryDTO[] }) {
         return (
           <li
             key={store.id}
-            className="group relative border-b border-ink-900/12 transition-colors hover:bg-paper-200/45"
+            className="group relative border-b border-ink-900/12 transition-colors hover:bg-ink-50"
           >
             <div className="grid grid-cols-[2.5rem_1fr] items-baseline gap-x-4 py-5 sm:grid-cols-[3rem_minmax(0,1.6fr)_minmax(0,1fr)_minmax(0,1.1fr)_auto] sm:gap-x-6">
               {/* A numbered index reads as curation, not search results. */}
@@ -66,7 +66,7 @@ export function StoreIndex({ stores }: { stores: StoreSummaryDTO[] }) {
                   </span>
                   <span className="flex items-center justify-end gap-2 text-[11px] text-ink-400">
                     {store.rateCardVerified ? (
-                      <span className="flex items-center gap-0.5 text-brass-700">
+                      <span className="flex items-center gap-0.5 text-brand-600">
                         <ReceiptText aria-hidden className="size-3" />
                         rate card
                       </span>
@@ -81,7 +81,7 @@ export function StoreIndex({ stores }: { stores: StoreSummaryDTO[] }) {
                 </span>
                 <ArrowUpRight
                   aria-hidden
-                  className="size-4 shrink-0 text-ink-300 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brass-600"
+                  className="size-4 shrink-0 text-ink-300 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brand-500"
                 />
               </div>
             </div>

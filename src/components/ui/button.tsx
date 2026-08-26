@@ -4,18 +4,20 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
+// Buttons follow the app: black primary, blue for anything that reads as a
+// link-ish action, generous pill radius.
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-500 focus-visible:ring-offset-2 focus-visible:ring-offset-paper-100 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ground disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        primary: "bg-ink-900 text-paper-50 hover:bg-ink-800",
-        brass: "bg-brass-500 text-ink-950 hover:bg-brass-400 font-semibold",
+        primary: "bg-ink-900 text-white hover:bg-ink-800",
+        brand: "bg-brand-500 text-white hover:bg-brand-600 font-semibold",
         outline:
-          "border border-ink-900/20 bg-transparent text-ink-900 hover:bg-ink-900/5",
-        ghost: "text-ink-700 hover:bg-ink-900/5",
-        whatsapp: "bg-[#128C7E] text-white hover:bg-[#0f7568]",
-        subtle: "bg-paper-200 text-ink-800 hover:bg-paper-300",
+          "border border-ink-200 bg-white text-ink-900 hover:border-ink-400",
+        ghost: "text-ink-600 hover:bg-ink-900/5",
+        whatsapp: "bg-[#25D366] text-ink-950 hover:bg-[#1eb955] font-semibold",
+        subtle: "bg-ink-50 text-ink-800 hover:bg-ink-100",
       },
       size: {
         sm: "h-9 px-4",

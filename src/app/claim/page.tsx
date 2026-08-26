@@ -50,13 +50,13 @@ export default async function ClaimPage({ searchParams }: PageProps<"/claim">) {
     <Container className="py-12">
       <div className="grid gap-12 lg:grid-cols-[1fr_28rem]">
         <div>
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-brass-600">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-500">
             For shop owners
           </p>
           <h1 className="text-3xl text-ink-900 sm:text-5xl">
             {store ? (
               <>
-                Claim <span className="italic text-brass-600">{store.name}</span>
+                Claim <span className="italic text-brand-500">{store.name}</span>
               </>
             ) : (
               <>
@@ -75,7 +75,7 @@ export default async function ClaimPage({ searchParams }: PageProps<"/claim">) {
           <ul className="mt-10 grid gap-6 sm:grid-cols-2">
             {BENEFITS.map((b) => (
               <li key={b.title}>
-                <b.icon aria-hidden className="size-5 text-brass-600" />
+                <b.icon aria-hidden className="size-5 text-brand-500" />
                 <h2 className="mt-3 text-base text-ink-900">{b.title}</h2>
                 <p className="mt-1.5 text-sm leading-relaxed text-ink-600">
                   {b.body}

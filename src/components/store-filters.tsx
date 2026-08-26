@@ -132,7 +132,7 @@ export function StoreFilters({
 
   return (
     <>
-      <div className="sticky top-16 z-30 -mx-4 mb-8 border-y border-ink-900/12 bg-paper-100/92 px-4 backdrop-blur-md sm:-mx-6 sm:px-6">
+      <div className="sticky top-16 z-30 -mx-4 mb-8 border-y border-ink-900/12 bg-white/92 px-4 backdrop-blur-md sm:-mx-6 sm:px-6">
         <div className="flex items-center gap-3 py-3">
           <p className="shrink-0 text-sm text-ink-500" aria-live="polite">
             <span className="font-display text-lg text-ink-900">{total}</span>{" "}
@@ -146,7 +146,7 @@ export function StoreFilters({
               <button
                 type="button"
                 onClick={clearAll}
-                className="ml-1 inline-flex items-center gap-1 text-xs text-ink-500 underline underline-offset-2 hover:text-terra-600"
+                className="ml-1 inline-flex items-center gap-1 text-xs text-ink-500 underline underline-offset-2 hover:text-coral-500"
               >
                 <X aria-hidden className="size-3" />
                 Clear
@@ -162,7 +162,7 @@ export function StoreFilters({
               id="sort"
               value={active.sort}
               onChange={(e) => setParam("sort", e.target.value)}
-              className="h-9 rounded-full border border-paper-400 bg-paper-50 px-3 text-sm text-ink-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-500"
+              className="h-9 rounded-full border border-ink-200 bg-white px-3 text-sm text-ink-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
             >
               {SORTS.map((s) => (
                 <option key={s.value} value={s.value}>
@@ -176,7 +176,7 @@ export function StoreFilters({
             <div
               role="group"
               aria-label="View"
-              className="flex overflow-hidden rounded-full border border-paper-400"
+              className="flex overflow-hidden rounded-full border border-ink-200"
             >
               <ViewButton
                 active={active.view === "gallery"}
@@ -204,7 +204,7 @@ export function StoreFilters({
               <SlidersHorizontal aria-hidden />
               Filters
               {activeCount ? (
-                <span className="ml-1 grid size-5 place-items-center rounded-full bg-ink-900 text-[11px] text-paper-50">
+                <span className="ml-1 grid size-5 place-items-center rounded-full bg-ink-900 text-[11px] text-white">
                   {activeCount}
                 </span>
               ) : null}
@@ -220,14 +220,14 @@ export function StoreFilters({
             onClick={() => setMobileOpen(false)}
             className="absolute inset-0 bg-ink-950/50"
           />
-          <div className="absolute inset-x-0 bottom-0 max-h-[85vh] overflow-y-auto rounded-t-2xl bg-paper-100 p-5">
+          <div className="absolute inset-x-0 bottom-0 max-h-[85vh] overflow-y-auto rounded-t-2xl bg-ground p-5">
             <div className="mb-5 flex items-center justify-between">
               <h2 className="font-display text-xl">Filters</h2>
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}
                 aria-label="Close filters"
-                className="grid size-9 place-items-center rounded-full hover:bg-paper-200"
+                className="grid size-9 place-items-center rounded-full hover:bg-ink-50"
               >
                 <X aria-hidden className="size-4" />
               </button>
@@ -277,14 +277,14 @@ function Select({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className={cn(
-          "h-9 max-w-[12rem] rounded-full border px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-500",
+          "h-9 max-w-[12rem] rounded-full border px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500",
           value
-            ? "border-ink-900 bg-ink-900 text-paper-50"
-            : "border-paper-400 bg-paper-50 text-ink-800"
+            ? "border-ink-900 bg-ink-900 text-white"
+            : "border-ink-200 bg-white text-ink-800"
         )}
       >
         {options.map((o) => (
-          <option key={o.value} value={o.value} className="bg-paper-50 text-ink-900">
+          <option key={o.value} value={o.value} className="bg-white text-ink-900">
             {o.label}
           </option>
         ))}
@@ -310,8 +310,8 @@ function Toggle({
       className={cn(
         "h-9 shrink-0 rounded-full border px-3.5 text-sm transition-colors",
         active
-          ? "border-ink-900 bg-ink-900 text-paper-50"
-          : "border-paper-400 bg-paper-50 text-ink-700 hover:border-ink-400"
+          ? "border-ink-900 bg-ink-900 text-white"
+          : "border-ink-200 bg-white text-ink-700 hover:border-ink-400"
       )}
     >
       {label}
@@ -338,7 +338,7 @@ function ViewButton({
       aria-pressed={active}
       className={cn(
         "grid size-9 place-items-center transition-colors",
-        active ? "bg-ink-900 text-paper-50" : "bg-paper-50 text-ink-500 hover:text-ink-900"
+        active ? "bg-ink-900 text-white" : "bg-white text-ink-500 hover:text-ink-900"
       )}
     >
       {children}

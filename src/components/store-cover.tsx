@@ -124,7 +124,7 @@ export function StoreCover({
 }) {
   const h = hash(slug);
   const weave = WEAVES[h % WEAVES.length];
-  const accent = getCategory(category)?.accent ?? "var(--color-brass-500)";
+  const accent = getCategory(category)?.accent ?? "var(--color-brand-500)";
   const patternId = `weave-${slug.replace(/[^a-z0-9]/gi, "")}`;
   // Small rotation so neighbouring tiles in a grid never look aligned.
   const rotation = ((h >> 8) % 4) * 15 - 22;
@@ -136,7 +136,7 @@ export function StoreCover({
 
   return (
     <div
-      className={cn("relative overflow-hidden bg-paper-200", className)}
+      className={cn("relative overflow-hidden bg-ink-50", className)}
       aria-hidden
     >
       <svg

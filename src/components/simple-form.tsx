@@ -76,7 +76,7 @@ export function SimpleForm({
   return (
     <form
       onSubmit={onSubmit}
-      className="space-y-4 rounded-card border border-paper-300 bg-paper-50 p-6"
+      className="space-y-4 rounded-card border border-ink-100 bg-white p-6"
     >
       {fields.map((f) => (
         <div key={f.name}>
@@ -86,7 +86,7 @@ export function SimpleForm({
           >
             {f.label}
             {f.required ? (
-              <span aria-hidden className="ml-0.5 text-terra-500">
+              <span aria-hidden className="ml-0.5 text-coral-500">
                 *
               </span>
             ) : null}
@@ -133,14 +133,14 @@ export function SimpleForm({
       ))}
 
       {error ? (
-        <p role="alert" className="text-sm text-terra-600">
+        <p role="alert" className="text-sm text-coral-500">
           {error}
         </p>
       ) : null}
 
       <Button
         type="submit"
-        variant="brass"
+        variant="brand"
         className="w-full"
         disabled={state === "sending"}
       >
@@ -151,4 +151,4 @@ export function SimpleForm({
 }
 
 const inputClass =
-  "w-full rounded-lg border border-paper-400 bg-paper-50 px-3 py-2.5 text-sm text-ink-900 placeholder:text-ink-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-500";
+  "w-full rounded-lg border border-ink-200 bg-white px-3 py-2.5 text-sm text-ink-900 placeholder:text-ink-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500";

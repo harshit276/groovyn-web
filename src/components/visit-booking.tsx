@@ -84,10 +84,10 @@ export function VisitBooking({
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-card border border-paper-300 bg-paper-50 p-5"
+      className="rounded-card border border-ink-100 bg-white p-5"
     >
       <h3 className="flex items-center gap-2 text-lg text-ink-900">
-        <CalendarCheck aria-hidden className="size-4 text-brass-600" />
+        <CalendarCheck aria-hidden className="size-4 text-brand-500" />
         Book a visit
       </h3>
       <p className="mt-1 text-sm text-ink-500">
@@ -115,8 +115,8 @@ export function VisitBooking({
               className={cn(
                 "flex items-center justify-center gap-2 rounded-lg border px-3 py-2.5 text-sm transition-colors",
                 type === opt.value
-                  ? "border-ink-900 bg-ink-900 text-paper-50"
-                  : "border-paper-400 bg-paper-50 text-ink-700 hover:border-ink-400"
+                  ? "border-ink-900 bg-ink-900 text-white"
+                  : "border-ink-200 bg-white text-ink-700 hover:border-ink-400"
               )}
             >
               <opt.icon aria-hidden className="size-4" />
@@ -127,7 +127,7 @@ export function VisitBooking({
       ) : null}
 
       {type === "HOME" && homeVisitFee ? (
-        <p className="mt-3 rounded-lg bg-paper-200 px-3 py-2 text-xs text-ink-600">
+        <p className="mt-3 rounded-lg bg-ink-50 px-3 py-2 text-xs text-ink-600">
           This shop charges ₹{homeVisitFee.toLocaleString("en-IN")} for a home
           measurement visit, usually adjusted against your final bill.
         </p>
@@ -188,14 +188,14 @@ export function VisitBooking({
       </div>
 
       {error ? (
-        <p role="alert" className="mt-3 text-sm text-terra-600">
+        <p role="alert" className="mt-3 text-sm text-coral-500">
           {error}
         </p>
       ) : null}
 
       <Button
         type="submit"
-        variant="brass"
+        variant="brand"
         className="mt-4 w-full"
         disabled={state === "sending"}
       >
@@ -210,7 +210,7 @@ export function VisitBooking({
 }
 
 const inputClass =
-  "w-full rounded-lg border border-paper-400 bg-paper-50 px-3 py-2 text-sm text-ink-900 placeholder:text-ink-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-500";
+  "w-full rounded-lg border border-ink-200 bg-white px-3 py-2 text-sm text-ink-900 placeholder:text-ink-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500";
 
 function Field({
   label,

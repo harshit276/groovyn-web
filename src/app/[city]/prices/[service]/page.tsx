@@ -103,7 +103,7 @@ export default async function PriceIndexPage({
       <Breadcrumbs crumbs={crumbs} />
 
       <header className="mb-10 max-w-3xl">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-brass-600">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-500">
           Price index · {city.name}
         </p>
         <h1 className="text-3xl text-ink-900 sm:text-4xl">
@@ -116,8 +116,8 @@ export default async function PriceIndexPage({
         ) : null}
       </header>
 
-      <section className="mb-12 overflow-hidden rounded-card border border-paper-300 bg-paper-50">
-        <div className="grid divide-y divide-paper-300 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+      <section className="mb-12 overflow-hidden rounded-card border border-ink-100 bg-white">
+        <div className="grid divide-y divide-ink-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           <Stat label="Typical low" value={low ? formatINR(low) : "—"} />
           <Stat
             label="Typical high"
@@ -133,7 +133,7 @@ export default async function PriceIndexPage({
           />
         </div>
 
-        <p className="flex items-start gap-2 border-t border-paper-300 bg-paper-100 px-4 py-3 text-xs leading-relaxed text-ink-500">
+        <p className="flex items-start gap-2 border-t border-ink-100 bg-ground px-4 py-3 text-xs leading-relaxed text-ink-500">
           <Info aria-hidden className="mt-0.5 size-3.5 shrink-0" />
           {usingBenchmark
             ? `We haven't collected verified rate cards for ${service.name.toLowerCase()} in ${city.name} yet. The range above is our own market research and should be treated as indicative only.`

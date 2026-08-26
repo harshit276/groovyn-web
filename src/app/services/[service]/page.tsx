@@ -76,7 +76,7 @@ export default async function ServicePage({
           </p>
         ) : null}
         {service.benchmarkMin && service.benchmarkMax ? (
-          <p className="mt-4 inline-flex items-baseline gap-2 rounded-full bg-paper-200 px-4 py-2">
+          <p className="mt-4 inline-flex items-baseline gap-2 rounded-full bg-ink-50 px-4 py-2">
             <span className="text-sm text-ink-500">Typical range</span>
             <span className="font-display text-lg text-ink-900">
               {formatINR(service.benchmarkMin)} – {formatINR(service.benchmarkMax)}
@@ -96,7 +96,7 @@ export default async function ServicePage({
             <Link
               key={c.slug}
               href={`/${c.slug}/prices/${serviceSlug}`}
-              className="group flex items-center justify-between gap-4 rounded-card border border-paper-300 bg-paper-50 px-4 py-4 transition-colors hover:border-brass-400"
+              className="group flex items-center justify-between gap-4 rounded-card border border-ink-100 bg-white px-4 py-4 transition-colors hover:border-brand-300"
             >
               <span>
                 <span className="block text-ink-900">{c.name}</span>
@@ -104,7 +104,7 @@ export default async function ServicePage({
               </span>
               <ArrowRight
                 aria-hidden
-                className="size-4 text-brass-600 transition-transform group-hover:translate-x-0.5"
+                className="size-4 text-brand-500 transition-transform group-hover:translate-x-0.5"
               />
             </Link>
           ))}

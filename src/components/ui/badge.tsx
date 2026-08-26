@@ -8,12 +8,12 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: "border-paper-400 bg-paper-200 text-ink-700",
-        outline: "border-ink-900/15 bg-transparent text-ink-600",
-        verified: "border-brass-400/40 bg-brass-200/50 text-brass-800",
-        rateCard: "border-emerald-700/25 bg-emerald-700/10 text-emerald-900",
-        estimate: "border-ink-300 bg-paper-200 text-ink-500",
-        dark: "border-transparent bg-ink-900 text-paper-100",
+        default: "border-ink-100 bg-ink-50 text-ink-700",
+        outline: "border-ink-200 bg-white text-ink-600",
+        verified: "border-brand-100 bg-brand-50 text-brand-700",
+        rateCard: "border-emerald-200 bg-emerald-50 text-emerald-800",
+        estimate: "border-ink-200 bg-ink-50 text-ink-500",
+        dark: "border-transparent bg-ink-900 text-white",
       },
     },
     defaultVariants: { variant: "default" },

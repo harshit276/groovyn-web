@@ -85,7 +85,7 @@ export function SearchBox({
         onSubmit={submit}
         role="search"
         className={cn(
-          "flex flex-col gap-2 rounded-card border border-paper-300 bg-paper-50 p-2 shadow-[0_8px_30px_-18px_rgb(20_27_45_/_0.4)] sm:flex-row sm:items-center sm:rounded-full",
+          "flex flex-col gap-2 rounded-card border border-ink-100 bg-white p-2 shadow-[0_8px_30px_-18px_rgb(20_27_45_/_0.4)] sm:flex-row sm:items-center sm:rounded-full",
           size === "lg" ? "sm:p-2" : "sm:p-1.5"
         )}
       >
@@ -108,7 +108,7 @@ export function SearchBox({
           />
         </div>
 
-        <div className="flex items-center gap-2 sm:border-l sm:border-paper-300 sm:pl-3">
+        <div className="flex items-center gap-2 sm:border-l sm:border-ink-100 sm:pl-3">
           <label className="sr-only" htmlFor="search-city">
             City
           </label>
@@ -117,7 +117,7 @@ export function SearchBox({
             value={city}
             onChange={(e) => setCity(e.target.value)}
             className={cn(
-              "w-full cursor-pointer rounded-full bg-transparent px-2 text-ink-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-brass-500 sm:w-auto",
+              "w-full cursor-pointer rounded-full bg-transparent px-2 text-ink-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 sm:w-auto",
               size === "lg" ? "h-11" : "h-9 text-sm"
             )}
           >
@@ -130,7 +130,7 @@ export function SearchBox({
 
           <Button
             type="submit"
-            variant="brass"
+            variant="brand"
             size={size === "lg" ? "md" : "sm"}
             className="shrink-0"
           >
@@ -140,12 +140,12 @@ export function SearchBox({
       </form>
 
       {open && suggestions.length ? (
-        <ul className="absolute left-0 right-0 top-full z-30 mt-2 overflow-hidden rounded-card border border-paper-300 bg-paper-50 shadow-lg">
+        <ul className="absolute left-0 right-0 top-full z-30 mt-2 overflow-hidden rounded-card border border-ink-100 bg-white shadow-lg">
           {suggestions.map((s) => (
             <li key={`${s.href}-${s.label}`}>
               <a
                 href={s.href}
-                className="flex items-center justify-between gap-3 px-4 py-2.5 text-sm hover:bg-paper-200"
+                className="flex items-center justify-between gap-3 px-4 py-2.5 text-sm hover:bg-ink-50"
               >
                 <span className="text-ink-900">{s.label}</span>
                 <span className="text-xs text-ink-400">{s.sublabel}</span>

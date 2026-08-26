@@ -36,7 +36,7 @@ export default async function AdminLayout({
       </div>
 
       {!isTelegramConfigured() ? (
-        <p className="mb-6 rounded-card border border-brass-400/50 bg-brass-200/30 px-4 py-3 text-sm text-brass-800">
+        <p className="mb-6 rounded-card border border-brand-100 bg-brand-50 px-4 py-3 text-sm text-brand-700">
           Telegram notifications are off — set <code>TELEGRAM_BOT_TOKEN</code>{" "}
           and <code>TELEGRAM_CHAT_ID</code>. Until then leads only appear here,
           so check this page daily.{" "}
