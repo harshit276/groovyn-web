@@ -142,7 +142,7 @@ export function StoreFilters({
             {total === 1 ? "shop" : "shops"}
           </p>
 
-          <div className="hidden flex-1 items-center gap-2 lg:flex">
+          <div className="hidden min-w-0 flex-1 items-center gap-2 overflow-x-auto lg:flex [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {selects}
             {toggles}
             {activeCount > 0 ? (
@@ -157,7 +157,7 @@ export function StoreFilters({
             ) : null}
           </div>
 
-          <div className="ml-auto flex items-center gap-2">
+          <div className="ml-auto flex shrink-0 items-center gap-2">
             <label className="sr-only" htmlFor="sort">
               Sort by
             </label>
@@ -165,7 +165,7 @@ export function StoreFilters({
               id="sort"
               value={active.sort}
               onChange={(e) => setParam("sort", e.target.value)}
-              className="h-9 rounded-full border border-ink-200 bg-white px-3 text-sm text-ink-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+              className="h-9 shrink-0 rounded-full border border-ink-200 bg-white px-3 text-sm text-ink-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
             >
               {SORTS.map((s) => (
                 <option key={s.value} value={s.value}>
@@ -287,7 +287,7 @@ function Select({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className={cn(
-          "h-9 max-w-[12rem] rounded-full border px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500",
+          "h-9 max-w-[12rem] shrink-0 rounded-full border px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500",
           value
             ? "border-ink-900 bg-ink-900 text-white"
             : "border-ink-200 bg-white text-ink-800"
