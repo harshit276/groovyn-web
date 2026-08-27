@@ -151,28 +151,6 @@ export default async function CategoryPage({
         </dl>
       </header>
 
-      {localities.length ? (
-        <nav aria-label="Popular localities" className="mb-8">
-          <ul className="flex flex-wrap gap-x-5 gap-y-2 border-t border-ink-900/12 pt-5">
-            {localities.map((l) => (
-              <li key={l.slug}>
-                <Link
-                  href={`/${citySlug}/${categorySlug}/in/${l.slug}`}
-                  className="group inline-flex items-baseline gap-1.5 text-sm text-ink-600 transition-colors hover:text-ink-900"
-                >
-                  <span className="underline decoration-transparent decoration-1 underline-offset-4 transition-colors group-hover:decoration-brand-500">
-                    {l.name}
-                  </span>
-                  <span className="font-display text-xs tabular-nums text-ink-300">
-                    {l.storeCount}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      ) : null}
-
       <StoreFilters
         localities={localities}
         services={services}
@@ -192,6 +170,37 @@ export default async function CategoryPage({
               : "list"
         }
       />
+
+      {/* Locality links live at the foot of the page. Filtering by locality is
+          the dropdown's job; these exist so each locality page is crawlable and
+          reachable, which is what the long-tail SEO depends on. */}
+      {localities.length ? (
+        <nav
+          aria-label="Browse by locality"
+          className="mt-14 border-t border-ink-100 pt-6"
+        >
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-ink-500">
+            {category.name} by locality
+          </h2>
+          <ul className="flex flex-wrap gap-x-5 gap-y-2">
+            {localities.map((l) => (
+              <li key={l.slug}>
+                <Link
+                  href={`/${citySlug}/${categorySlug}/in/${l.slug}`}
+                  className="group inline-flex items-baseline gap-1.5 text-sm text-ink-600 transition-colors hover:text-ink-900"
+                >
+                  <span className="underline decoration-transparent decoration-1 underline-offset-4 transition-colors group-hover:decoration-brand-500">
+                    {l.name}
+                  </span>
+                  <span className="font-display text-xs tabular-nums text-ink-300">
+                    {l.storeCount}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ) : null}
 
       <JsonLd
         data={[
