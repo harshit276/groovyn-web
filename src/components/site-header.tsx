@@ -1,6 +1,7 @@
 "use client";
 
 import { Menu, Search, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
@@ -31,13 +32,19 @@ export function SiteHeader({ cities }: { cities: CityDTO[] }) {
         <div className="flex h-16 items-center justify-between gap-4">
           <Link
             href="/"
-            className="flex items-baseline gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+            aria-label="Groovyn — home"
+            className="flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
           >
-            <span className="font-display text-2xl font-semibold tracking-tight text-ink-900">
+            <Image
+              src="/images/logo-mark.png"
+              alt=""
+              width={32}
+              height={32}
+              priority
+              className="size-8 shrink-0"
+            />
+            <span className="font-display text-2xl font-bold tracking-tight text-ink-900">
               Groovyn
-            </span>
-            <span className="hidden text-[11px] uppercase tracking-[0.2em] text-brand-500 sm:inline">
-              Atelier Index
             </span>
           </Link>
 

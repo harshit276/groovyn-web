@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
@@ -12,9 +13,22 @@ export function SiteFooter({ cities }: { cities: CityDTO[] }) {
       <Container className="py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="font-display text-2xl font-semibold text-white">
-              Groovyn
-            </p>
+            <div className="flex items-center gap-2.5">
+              {/* The mark is black, so it needs a light chip to read on the
+                  dark footer rather than disappearing into it. */}
+              <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-white">
+                <Image
+                  src="/images/logo-mark.png"
+                  alt=""
+                  width={28}
+                  height={28}
+                  className="size-7"
+                />
+              </span>
+              <p className="font-display text-2xl font-bold text-white">
+                Groovyn
+              </p>
+            </div>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/70">
               {site.description}
             </p>
