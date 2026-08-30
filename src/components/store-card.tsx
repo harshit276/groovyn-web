@@ -2,6 +2,7 @@ import { Clock, Home, MapPin, ReceiptText } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { GoogleRating } from "@/components/google-rating";
 import { SaveButton } from "@/components/save-button";
 import { StoreCover } from "@/components/store-cover";
 import { getCategory } from "@/lib/site";
@@ -64,10 +65,16 @@ export function StoreCard({
           />
         )}
 
-        {/* The app puts its rating pill bottom-right over the photo. We have no
-            ratings, so the same slot carries the thing we do have that nobody
-            else does: whether the shop's prices are published. */}
-        <div className="absolute bottom-2.5 right-2.5 flex gap-1.5">
+        {/* The app puts its rating pill bottom-right over the photo. Same slot:
+            Google's rating (attributed), then the signal nobody else has —
+            whether the shop's prices are published. */}
+        <div className="absolute bottom-2.5 right-2.5 flex flex-wrap justify-end gap-1.5">
+          <GoogleRating
+            rating={store.googleRating}
+            count={store.googleRatingCount}
+            mapsUri={store.googleMapsUri}
+            variant="pill"
+          />
           {store.rateCardVerified ? (
             <span className="inline-flex items-center gap-1 rounded-full bg-black/70 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-sm">
               <ReceiptText aria-hidden className="size-3" />

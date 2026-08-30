@@ -106,6 +106,14 @@ model Store {
   /// may be retained, so staleness has to be visible, not implicit.
   placesSyncedAt  DateTime?
 
+  /// Google's rating, kept separate from ratingAvg on purpose. ratingAvg is
+  /// ours and may appear in structured data; these never can — Google requires
+  /// attribution, and passing a third party's rating off as your own
+  /// aggregateRating is a manual-action risk.
+  googleRating      Float?
+  googleRatingCount Int?
+  googleMapsUri     String?
+
   images     StoreImage[]
   priceItems PriceItem[]
   reviews    Review[]

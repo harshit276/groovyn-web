@@ -2,6 +2,7 @@ import { BadgeCheck, CalendarClock, MapPin, Store as StoreIcon } from "lucide-re
 import Image from "next/image";
 
 import { Breadcrumbs, type Crumb } from "@/components/breadcrumbs";
+import { GoogleRating } from "@/components/google-rating";
 import { StoreCover } from "@/components/store-cover";
 import { Badge } from "@/components/ui/badge";
 import { Container } from "@/components/ui/container";
@@ -71,6 +72,14 @@ export function StoreHero({
             {store.locality ? `${store.locality.name}, ` : ""}
             {store.city.name}
           </span>
+          {store.googleRating != null ? (
+            <GoogleRating
+              rating={store.googleRating}
+              count={store.googleRatingCount}
+              mapsUri={store.googleMapsUri}
+              variant="pill"
+            />
+          ) : null}
           {store.turnaroundDays ? (
             <span className="flex items-center gap-1.5 text-sm">
               <CalendarClock aria-hidden className="size-4 text-brand-300" />

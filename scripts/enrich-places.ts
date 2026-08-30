@@ -21,8 +21,10 @@ import "dotenv/config";
  *   - openingHours        stored with placesSyncedAt so staleness is visible;
  *                         re-run with --refresh on a schedule
  *
- * It never overwrites anything a human verified, and never touches ratings or
- * reviews — those carry the tightest restrictions and we don't publish them.
+ * It never overwrites anything a human verified. Google's rating is stored in
+ * googleRating (never ratingAvg) because it must always be shown as Google's,
+ * with attribution, and must never enter our own aggregateRating markup.
+ * Review *text* is not fetched at all — that carries the tightest restrictions.
  */
 import { neonConfig } from "@neondatabase/serverless";
 import { PrismaNeon } from "@prisma/adapter-neon";
@@ -52,6 +54,9 @@ const FIELD_MASK = [
   "places.nationalPhoneNumber",
   "places.regularOpeningHours",
   "places.websiteUri",
+  "places.rating",
+  "places.userRatingCount",
+  "places.googleMapsUri",
 ].join(",");
 
 type PlaceResult = {
@@ -61,6 +66,9 @@ type PlaceResult = {
   location?: { latitude: number; longitude: number };
   nationalPhoneNumber?: string;
   websiteUri?: string;
+  rating?: number;
+  userRatingCount?: number;
+  googleMapsUri?: string;
   regularOpeningHours?: {
     periods?: {
       open?: { day: number; hour: number; minute: number };
@@ -200,6 +208,7 @@ async function main() {
       if (Object.keys(hours).length) gained.push("hours");
       if (!s.phone && place.nationalPhoneNumber) gained.push("phone");
       if (!s.website && place.websiteUri) gained.push("website");
+      if (place.rating) gained.push(`rating ${place.rating}`);
 
       matched++;
       console.log(
@@ -222,6 +231,9 @@ async function main() {
             openingHours: Object.keys(hours).length
               ? JSON.stringify(hours)
               : s.openingHours,
+            googleRating: place.rating ?? null,
+            googleRatingCount: place.userRatingCount ?? null,
+            googleMapsUri: place.googleMapsUri ?? null,
             placesSyncedAt: new Date(),
           },
         });

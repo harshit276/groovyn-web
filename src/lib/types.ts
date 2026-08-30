@@ -46,8 +46,13 @@ export type StoreSummaryDTO = {
   claimed: boolean;
   rateCardVerified: boolean;
   featured: boolean;
+  /** Our own reviews. Safe for structured data. */
   ratingAvg: number | null;
   ratingCount: number;
+  /** Google's. Display-only, always attributed, never in structured data. */
+  googleRating: number | null;
+  googleRatingCount: number | null;
+  googleMapsUri: string | null;
   /** Canonical web path for this store. */
   href: string;
 };

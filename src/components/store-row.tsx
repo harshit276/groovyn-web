@@ -2,6 +2,7 @@ import { CalendarClock, Clock, Home, MapPin, ReceiptText } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { GoogleRating } from "@/components/google-rating";
 import { SaveButton } from "@/components/save-button";
 import { StoreCover } from "@/components/store-cover";
 import { getCategory } from "@/lib/site";
@@ -12,9 +13,8 @@ import { cn, formatPriceRange } from "@/lib/utils";
  * The app's listing row: photo on the left, details on the right, and two
  * actions at the bottom — Book Now filled black, Visit Store outlined.
  *
- * The app's photo carries a hardcoded "4.5" rating pill. We don't have ratings
- * and won't invent them, so that slot shows whether the shop's prices are
- * published — which is the more useful signal anyway.
+ * The app's photo carries a hardcoded "4.5". Ours shows Google's real rating,
+ * always attributed, plus whether the shop's prices are published.
  */
 export function StoreRow({
   store,
@@ -57,12 +57,20 @@ export function StoreRow({
           />
         )}
 
-        {store.rateCardVerified ? (
-          <span className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full bg-black/70 px-2 py-0.5 text-[10px] font-semibold text-white backdrop-blur-sm">
-            <ReceiptText aria-hidden className="size-3" />
-            Prices
-          </span>
-        ) : null}
+        <div className="absolute bottom-2 right-2 flex flex-col items-end gap-1">
+          <GoogleRating
+            rating={store.googleRating}
+            count={store.googleRatingCount}
+            mapsUri={store.googleMapsUri}
+            variant="pill"
+          />
+          {store.rateCardVerified ? (
+            <span className="inline-flex items-center gap-1 rounded-full bg-black/70 px-2 py-0.5 text-[10px] font-semibold text-white backdrop-blur-sm">
+              <ReceiptText aria-hidden className="size-3" />
+              Prices
+            </span>
+          ) : null}
+        </div>
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col justify-between gap-3 p-4">

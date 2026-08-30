@@ -53,6 +53,9 @@ type StoreRow = {
   featured: boolean;
   ratingAvg: number | null;
   ratingCount: number;
+  googleRating: number | null;
+  googleRatingCount: number | null;
+  googleMapsUri: string | null;
   city: { slug: string; name: string };
   locality: { slug: string; name: string } | null;
 };
@@ -81,6 +84,9 @@ function toSummary(row: StoreRow): StoreSummaryDTO {
     featured: row.featured,
     ratingAvg: row.ratingAvg,
     ratingCount: row.ratingCount,
+    googleRating: row.googleRating,
+    googleRatingCount: row.googleRatingCount,
+    googleMapsUri: row.googleMapsUri,
     href: storeHref(row.city.slug, row.category, row.slug),
   };
 }
@@ -104,6 +110,9 @@ const summarySelect = {
   featured: true,
   ratingAvg: true,
   ratingCount: true,
+  googleRating: true,
+  googleRatingCount: true,
+  googleMapsUri: true,
   city: { select: { slug: true, name: true } },
   locality: { select: { slug: true, name: true } },
 } as const;
