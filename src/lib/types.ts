@@ -25,6 +25,11 @@ export type StoreImageDTO = {
   url: string;
   alt: string;
   caption: string | null;
+  /**
+   * Who shot it. Not decoration: a Google-sourced photo may only be shown with
+   * the photographer's attribution, so the UI must always have this to hand.
+   */
+  credit: string | null;
 };
 
 export type StoreSummaryDTO = {
@@ -42,6 +47,12 @@ export type StoreSummaryDTO = {
   priceMax: number | null;
   turnaroundDays: number | null;
   homeVisit: boolean;
+  /**
+   * What this shop gives someone who books a visit through us, in the shop's
+   * own words. Owner-supplied only — never generated, because the visitor
+   * quotes it at the counter and the shop has to honour it.
+   */
+  visitOffer: string | null;
   verified: boolean;
   claimed: boolean;
   rateCardVerified: boolean;
@@ -58,6 +69,8 @@ export type StoreSummaryDTO = {
 };
 
 export type StoreDetailDTO = StoreSummaryDTO & {
+  /** Conditions the shop attached to its visit offer. */
+  visitOfferTerms: string | null;
   pincode: string | null;
   lat: number | null;
   lng: number | null;

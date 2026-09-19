@@ -94,7 +94,7 @@ export default async function PriceIndexPage({
   const crumbs = [
     { name: "Home", href: "/" },
     { name: city.name, href: `/${citySlug}` },
-    { name: "Prices", href: `/${citySlug}/prices/${serviceSlug}` },
+    { name: "Prices", href: `/${citySlug}/prices` },
     { name: service.name, href: `/${citySlug}/prices/${serviceSlug}` },
   ];
 

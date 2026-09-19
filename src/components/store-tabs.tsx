@@ -5,8 +5,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * The app's store page splits into Services / Gallery / Reviews with a black
- * underline on the active tab. Same structure here.
+ * Services / Gallery / Reviews, as pills on a rail.
  *
  * Every panel stays in the DOM and is hidden with `hidden` rather than being
  * unmounted, so the price list and gallery are still in the server-rendered
@@ -27,7 +26,7 @@ export function StoreTabs({
       <div
         role="tablist"
         aria-label="Store sections"
-        className="flex gap-7 border-b border-ink-100"
+        className="inline-flex gap-1 rounded-full bg-ink-50 p-1.5 ring-1 ring-ink-100"
       >
         {available.map((tab) => {
           const isActive = tab.id === active;
@@ -40,23 +39,23 @@ export function StoreTabs({
               aria-controls={`panel-${tab.id}`}
               onClick={() => setActive(tab.id)}
               className={cn(
-                "relative -mb-px pb-3 pt-1 font-display text-base font-semibold transition-colors",
-                isActive ? "text-ink-900" : "text-ink-400 hover:text-ink-700"
+                "rounded-full px-4 py-2 font-display text-sm font-bold transition-all duration-300",
+                isActive
+                  ? "bg-ink-950 text-white shadow-md"
+                  : "text-ink-500 hover:bg-white hover:text-ink-900"
               )}
             >
               {tab.label}
               {tab.count !== undefined ? (
-                <span className="ml-1.5 text-sm font-normal text-ink-400">
+                <span
+                  className={cn(
+                    "ml-1.5 text-xs font-semibold",
+                    isActive ? "text-white/50" : "text-ink-400"
+                  )}
+                >
                   {tab.count}
                 </span>
               ) : null}
-              <span
-                aria-hidden
-                className={cn(
-                  "absolute inset-x-0 bottom-0 h-0.5 rounded-full transition-colors",
-                  isActive ? "bg-ink-900" : "bg-transparent"
-                )}
-              />
             </button>
           );
         })}
@@ -69,7 +68,7 @@ export function StoreTabs({
           id={`panel-${tab.id}`}
           aria-labelledby={`tab-${tab.id}`}
           hidden={tab.id !== active}
-          className="pt-6"
+          className="pt-7"
         >
           {tab.panel}
         </div>

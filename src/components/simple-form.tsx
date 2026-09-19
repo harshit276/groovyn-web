@@ -11,6 +11,8 @@ export type FormField = {
   type?: "text" | "tel" | "email" | "textarea" | "select";
   required?: boolean;
   placeholder?: string;
+  /** Small print under the field — context the label is too short to carry. */
+  help?: string;
   options?: { value: string; label: string }[];
   defaultValue?: string;
   autoComplete?: string;
@@ -129,6 +131,12 @@ export function SimpleForm({
               className={inputClass}
             />
           )}
+
+          {f.help ? (
+            <p className="mt-1.5 text-xs leading-relaxed text-ink-400">
+              {f.help}
+            </p>
+          ) : null}
         </div>
       ))}
 

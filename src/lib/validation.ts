@@ -10,6 +10,49 @@ const phone = z
 
 const name = z.string().trim().min(2, "Please enter your name").max(80);
 
+/**
+ * A measurement snapshot attached to a booking.
+ *
+ * Validated key by key rather than waved through as JSON: this is
+ * customer-supplied data that ends up in front of a shop owner, so the keys are
+ * restricted to ones we define and every value has to be a plausible human
+ * measurement in centimetres.
+ */
+const measurementKey = z.enum([
+  "height",
+  "neck",
+  "shoulder",
+  "chest",
+  "waist",
+  "hip",
+  "sleeveLength",
+  "bicep",
+  "wrist",
+  "shirtLength",
+  "inseam",
+  "outseam",
+  "thigh",
+  "underbust",
+  "armhole",
+]);
+
+export const measurementSnapshotSchema = z.object({
+  unit: z.enum(["cm", "in"]),
+  // partialRecord, not record: with an enum key `z.record` demands every key,
+  // which would reject the normal case of someone who has filled in four of
+  // the thirteen. Unknown keys are still refused.
+  values: z
+    .partialRecord(
+      measurementKey,
+      z.object({
+        cm: z.number().positive().max(300),
+        source: z.enum(["scan", "manual", "tailor"]),
+      })
+    )
+    // One entry per defined key, so a crafted payload cannot balloon the row.
+    .refine((v) => Object.keys(v).length <= 15, "Too many measurements."),
+});
+
 export const bookingSchema = z.object({
   storeId: z.string().min(1),
   type: z.enum(["STORE", "HOME"]).default("STORE"),
@@ -20,6 +63,7 @@ export const bookingSchema = z.object({
   serviceWanted: z.string().max(200).nullish(),
   notes: z.string().max(1000).nullish(),
   source: z.string().max(100).nullish(),
+  measurements: measurementSnapshotSchema.nullish(),
 });
 
 export const claimSchema = z.object({
@@ -29,6 +73,12 @@ export const claimSchema = z.object({
   email: z.email("Enter a valid email").nullish().or(z.literal("")),
   role: z.string().max(40).nullish(),
   message: z.string().max(1000).nullish(),
+  /**
+   * An offer the owner wants shown to people who book a visit. Reviewed by a
+   * human before it goes live — the shop has to honour it at the counter, so
+   * it never publishes straight from a form.
+   */
+  visitOffer: z.string().max(160).nullish(),
 });
 
 export const suggestionSchema = z.object({

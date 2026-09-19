@@ -83,6 +83,8 @@ type BookingPayload = {
   serviceWanted: string | null;
   notes: string | null;
   source: string | null;
+  /** Key measurements in cm, when the customer chose to attach a profile. */
+  measurements?: { chest?: number; waist?: number; hip?: number } | null;
 };
 
 export function bookingMessage(b: BookingPayload, siteUrl: string): string {
@@ -104,6 +106,17 @@ export function bookingMessage(b: BookingPayload, siteUrl: string): string {
     `<b>When:</b> ${esc(when)}${b.preferredSlot ? ` (${esc(b.preferredSlot)})` : ""}`,
     b.serviceWanted ? `<b>Wants:</b> ${esc(b.serviceWanted)}` : null,
     b.notes ? `<b>Notes:</b> ${esc(b.notes)}` : null,
+    b.measurements
+      ? `<b>Measurements:</b> ${esc(
+          [
+            b.measurements.chest ? `chest ${b.measurements.chest}` : null,
+            b.measurements.waist ? `waist ${b.measurements.waist}` : null,
+            b.measurements.hip ? `hip ${b.measurements.hip}` : null,
+          ]
+            .filter(Boolean)
+            .join(" · ") || "attached"
+        )} cm <i>(customer estimate — confirm with a tape)</i>`
+      : null,
     ``,
     `<a href="${esc(siteUrl)}${esc(b.storeHref)}">View listing</a> · <a href="${esc(siteUrl)}/admin/leads">Admin</a>`,
   ]

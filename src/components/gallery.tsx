@@ -4,6 +4,7 @@ import { X } from "lucide-react";
 import Image from "next/image";
 import * as React from "react";
 
+import { isPlacesRef, resolveStoreImage } from "@/lib/images";
 import type { StoreImageDTO } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -59,11 +60,12 @@ export function Gallery({
           className="group relative col-span-2 aspect-4/3 overflow-hidden rounded-card bg-ink-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
         >
           <Image
-            src={hero.url}
+            src={resolveStoreImage(hero.url, 800)!}
             alt={hero.alt}
             fill
             priority
             sizes="(max-width: 640px) 100vw, 66vw"
+            unoptimized={isPlacesRef(hero.url)}
             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
           <span className="sr-only">Open gallery for {storeName}</span>
@@ -80,10 +82,11 @@ export function Gallery({
               )}
             >
               <Image
-                src={img.url}
+                src={resolveStoreImage(img.url, 400)!}
                 alt={img.alt}
                 fill
                 sizes="33vw"
+                unoptimized={isPlacesRef(img.url)}
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               />
               {i === 1 && images.length > 3 ? (
@@ -109,10 +112,11 @@ export function Gallery({
           <div className="relative">
             <div className="relative aspect-4/3 w-full">
               <Image
-                src={images[openIndex].url}
+                src={resolveStoreImage(images[openIndex].url, 1600)!}
                 alt={images[openIndex].alt}
                 fill
                 sizes="90vw"
+                unoptimized={isPlacesRef(images[openIndex].url)}
                 className="object-contain"
               />
             </div>
@@ -123,6 +127,13 @@ export function Gallery({
                 <span className="ml-2 text-white/55">
                   {openIndex + 1} / {images.length}
                 </span>
+                {/* Attribution is a licensing obligation for Google-sourced
+                    photos, not a nicety — always render it when present. */}
+                {images[openIndex].credit ? (
+                  <span className="mt-0.5 block text-xs text-white/45">
+                    Photo: {images[openIndex].credit}
+                  </span>
+                ) : null}
               </p>
               <div className="flex gap-2">
                 <button

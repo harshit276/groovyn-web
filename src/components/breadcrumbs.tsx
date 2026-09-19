@@ -10,7 +10,9 @@ export function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
         {crumbs.map((c, i) => {
           const isLast = i === crumbs.length - 1;
           return (
-            <li key={c.href} className="flex items-center gap-1">
+            // Keyed by position, not href: a trail can legitimately repeat a
+            // destination, and a duplicate key silently drops a crumb.
+            <li key={`${i}-${c.href}`} className="flex items-center gap-1">
               {i > 0 ? (
                 <ChevronRight aria-hidden className="size-3.5 text-ink-300" />
               ) : null}

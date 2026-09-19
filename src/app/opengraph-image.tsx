@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 // Generated at build time so social shares always have a real, absolute image.
 // The old site pointed og:image at a relative path, which meant every WhatsApp
 // share rendered without a preview — and WhatsApp is the distribution channel.
-export const alt = "Groovyn — Custom clothing, decoded";
+export const alt = "Groovyn — Find the best tailors and custom clothing shops near you";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -55,9 +55,9 @@ export default function OpengraphImage() {
               flexDirection: "column",
             }}
           >
-            <span>Know the price</span>
+            <span>Find the best tailors</span>
             <span style={{ color: "#cfa25a", fontStyle: "italic" }}>
-              before you walk in.
+              and shops near you.
             </span>
           </div>
 

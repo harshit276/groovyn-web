@@ -135,6 +135,12 @@ export default async function ClaimPage({ searchParams }: PageProps<"/claim">) {
                 ],
               },
               {
+                name: "visitOffer",
+                label: "Offer for customers who book a visit (optional)",
+                placeholder: "e.g. Free fitting consultation on the first visit",
+                help: "We show this on your listing once we have confirmed it with you. Customers quote it at your counter, so only add something you will honour.",
+              },
+              {
                 name: "message",
                 label: "Anything we should fix on your listing?",
                 type: "textarea",

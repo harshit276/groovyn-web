@@ -20,9 +20,9 @@ function resolveSiteUrl(): string {
 /** Single source of truth for anything that ends up in metadata or structured data. */
 export const site = {
   name: "Groovyn",
-  tagline: "Custom clothing, decoded",
+  tagline: "Find the best tailors near you",
   description:
-    "Find verified tailors, boutiques, fabric shops and rental stores across Delhi NCR — with real rate cards, real work photos, and no spam calls.",
+    "Find the best tailors, boutiques, fabric shops and rental stores near you in Delhi NCR. Compare real rates, see work photos, book a visit and get great deals — no spam calls.",
   url: resolveSiteUrl(),
   ogImage: "/og/default.png",
   email: "info@groovyn.com",

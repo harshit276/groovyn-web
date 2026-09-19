@@ -65,6 +65,18 @@ export async function POST(request: Request) {
     );
   }
 
+  // A proposed offer rides along in the claim message rather than being
+  // written to Store.visitOffer. The shop has to honour whatever we publish at
+  // its own counter, so an offer only goes live after a human confirms it.
+  const message = [
+    data.message?.trim() || null,
+    data.visitOffer?.trim()
+      ? `Proposed visit offer: ${data.visitOffer.trim()}`
+      : null,
+  ]
+    .filter(Boolean)
+    .join("\n\n") || null;
+
   const claim = await db.claim.create({
     data: {
       storeId: store.id,
@@ -72,7 +84,7 @@ export async function POST(request: Request) {
       phone: data.phone,
       email: data.email || null,
       role: data.role ?? null,
-      message: data.message ?? null,
+      message,
     },
     select: { id: true, status: true },
   });
@@ -85,7 +97,7 @@ export async function POST(request: Request) {
           phone: data.phone,
           email: data.email || null,
           role: data.role ?? null,
-          message: data.message ?? null,
+          message,
           storeName: store.name,
           matched: true,
         },

@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Montserrat, Poppins } from "next/font/google";
+import { Montserrat, Playfair_Display, Poppins } from "next/font/google";
 
 import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { getCities } from "@/lib/queries";
+import { getCities, getServices } from "@/lib/queries";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
 
@@ -16,6 +16,13 @@ const montserrat = Montserrat({
   subsets: ["latin"],
   display: "swap",
   weight: ["500", "600", "700", "800"],
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 const poppins = Poppins({
@@ -41,12 +48,12 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: site.locale,
     url: site.url,
-    title: `${site.name} — Custom clothing, decoded`,
+    title: `${site.name} — Find the best tailors & custom clothing shops near you`,
     description: site.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — Custom clothing, decoded`,
+    title: `${site.name} — Find the best tailors & custom clothing shops near you`,
     description: site.description,
   },
   robots: {
@@ -63,12 +70,14 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const cities = await getCities();
+  // The nav's mega-menu lists real services per vertical, so it needs them
+  // here. One extra query for every page — keep it that way.
+  const [cities, services] = await Promise.all([getCities(), getServices()]);
 
   return (
     <html
       lang="en-IN"
-      className={`${montserrat.variable} ${poppins.variable} h-full antialiased`}
+      className={`${montserrat.variable} ${playfair.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-ground">
         <a
@@ -77,8 +86,10 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <SiteHeader cities={cities} />
-        <main id="main" className="flex-1">
+        <SiteHeader cities={cities} services={services} />
+        {/* The header is fixed, so reserve its height here. Full-bleed heroes
+            opt back out with `-mt-20 pt-20` to run under the floating nav. */}
+        <main id="main" className="flex-1 pt-20">
           {children}
         </main>
         <SiteFooter cities={cities} />

@@ -15,6 +15,7 @@ import { Gallery } from "@/components/gallery";
 import { JsonLd } from "@/components/json-ld";
 import { RateCard } from "@/components/rate-card";
 import { StoreCard } from "@/components/store-card";
+import { StoreGate } from "@/components/store-gate";
 import { StoreHero } from "@/components/store-hero";
 import { StoreTabs } from "@/components/store-tabs";
 import { VisitBooking } from "@/components/visit-booking";
@@ -24,7 +25,6 @@ import { Container, SectionHeading } from "@/components/ui/container";
 import { getAllStorePaths, getSimilarStores, getStoreDetail } from "@/lib/queries";
 import { breadcrumbSchema, storeSchema } from "@/lib/schema";
 import { getCategory } from "@/lib/site";
-import { formatPriceRange } from "@/lib/utils";
 
 export const revalidate = 3600;
 
@@ -118,11 +118,24 @@ export default async function StorePage({
 
   const waNumber = store.whatsapp?.replace(/[^0-9]/g, "");
 
+  // One-tap chips on the booking form, taken from what this shop actually
+  // prices rather than a generic list.
+  const bookingSuggestions = [
+    ...new Set(store.priceItems.map((p) => p.label)),
+  ].slice(0, 5);
+
   return (
     <>
-      <StoreHero store={store} crumbs={crumbs} />
+      <StoreGate
+        storeName={store.name}
+        category={category?.singular ?? "Shop"}
+        accent={category?.accent ?? "#1976d2"}
+      />
 
-      <Container className="py-12">
+      <div className="gate-interior">
+        <StoreHero store={store} crumbs={crumbs} />
+
+        <Container className="py-12">
         <div className="grid gap-10 lg:grid-cols-[1fr_22rem]">
         {/* ── Main column ─────────────────────────────────────── */}
         {/* min-w-0: grid items default to min-width:auto, which lets the
@@ -147,7 +160,7 @@ export default async function StorePage({
                       <div className="grid gap-6 sm:grid-cols-2">
                         {store.specialities.length ? (
                           <div>
-                            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-ink-500">
+                            <h3 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-400">
                               Speciality
                             </h3>
                             <ul className="flex flex-wrap gap-1.5">
@@ -162,7 +175,7 @@ export default async function StorePage({
 
                         {store.materials.length ? (
                           <div>
-                            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-ink-500">
+                            <h3 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-400">
                               Works with
                             </h3>
                             <ul className="flex flex-wrap gap-1.5">
@@ -210,10 +223,12 @@ export default async function StorePage({
             ]}
           />
 
-          <section className="mt-10 grid gap-6 sm:grid-cols-2">
-            <div className="rounded-card border border-ink-100 bg-white p-5">
-              <h2 className="mb-3 flex items-center gap-2 text-base text-ink-900">
-                <Clock aria-hidden className="size-4 text-brand-500" />
+          <section className="mt-10 grid gap-5 sm:grid-cols-2">
+            <div className="rounded-2xl bg-white p-6 shadow-card ring-1 ring-ink-100">
+              <h2 className="mb-4 flex items-center gap-2 font-display text-base font-bold text-ink-950">
+                <span className="grid size-8 place-items-center rounded-full bg-brand-50">
+                  <Clock aria-hidden className="size-4 text-brand-600" />
+                </span>
                 Opening hours
               </h2>
               {/* An empty hours object means we never collected them — which is
@@ -242,9 +257,11 @@ export default async function StorePage({
               )}
             </div>
 
-            <div className="rounded-card border border-ink-100 bg-white p-5">
-              <h2 className="mb-3 flex items-center gap-2 text-base text-ink-900">
-                <MapPin aria-hidden className="size-4 text-brand-500" />
+            <div className="rounded-2xl bg-white p-6 shadow-card ring-1 ring-ink-100">
+              <h2 className="mb-4 flex items-center gap-2 font-display text-base font-bold text-ink-950">
+                <span className="grid size-8 place-items-center rounded-full bg-brand-50">
+                  <MapPin aria-hidden className="size-4 text-brand-600" />
+                </span>
                 Address
               </h2>
               <address className="not-italic leading-relaxed text-ink-700">
@@ -273,12 +290,11 @@ export default async function StorePage({
         {/* ── Sticky sidebar ──────────────────────────────────── */}
         <aside className="min-w-0 lg:sticky lg:top-24 lg:self-start">
           <div className="space-y-4">
-            <div className="rounded-card border border-ink-100 bg-white p-5">
-              <p className="text-xs uppercase tracking-wider text-ink-400">
-                Typical range
-              </p>
-              <p className="mt-1 font-display text-2xl text-ink-900">
-                {formatPriceRange(store.priceMin, store.priceMax)}
+            {/* The price range lives in the hero now — this card is purely
+                the ways to reach the shop. */}
+            <div className="rounded-2xl border border-ink-100 bg-white p-5 shadow-card">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-400">
+                Reach the shop
               </p>
 
               <div className="mt-4 grid gap-2">
@@ -342,12 +358,17 @@ export default async function StorePage({
                 offersHomeVisit={store.homeVisit}
                 homeVisitFee={store.homeVisitFee}
                 source={`store:${store.slug}`}
+                suggestions={bookingSuggestions}
+                visitOffer={store.visitOffer}
+                visitOfferTerms={store.visitOfferTerms}
               />
             </div>
 
             {!store.claimed ? (
-              <div className="rounded-card border border-dashed border-brand-100 bg-brand-50 p-5">
-                <h2 className="text-base text-ink-900">Is this your shop?</h2>
+              <div className="rounded-2xl border border-dashed border-brand-300/60 bg-brand-50 p-5">
+                <h2 className="font-display text-base font-bold text-ink-950">
+                  Is this your shop?
+                </h2>
                 <p className="mt-1.5 text-sm text-ink-600">
                   Claim the listing to update photos, prices and timings. Free,
                   and always will be.
@@ -379,8 +400,9 @@ export default async function StorePage({
         </section>
       ) : null}
 
-        <JsonLd data={[storeSchema(store), breadcrumbSchema(crumbs)]} />
-      </Container>
+          <JsonLd data={[storeSchema(store), breadcrumbSchema(crumbs)]} />
+        </Container>
+      </div>
     </>
   );
 }

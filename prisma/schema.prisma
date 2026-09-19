@@ -87,6 +87,13 @@ model Store {
 
   homeVisit       Boolean @default(false)
   homeVisitFee    Int?
+
+  /// What this shop gives someone who books a visit through us, in the shop's
+  /// own words (e.g. "Free fitting consultation"). Owner-supplied only — we
+  /// never invent an offer, because the visitor quotes it at the counter.
+  visitOffer      String?
+  /// Conditions the shop attached, shown next to the offer.
+  visitOfferTerms String?
   /// True only when the shop itself supplied the rate card. Never infer this.
   rateCardVerified Boolean @default(false)
   /// Listing facts checked by the Groovyn team
@@ -226,6 +233,10 @@ model VisitBooking {
   status        String    @default("pending")
   /// Which page the booking came from — needed to prove footfall per surface.
   source        String?
+  /// Snapshot of the customer's measurement profile at the moment they booked,
+  /// as JSON. A snapshot, not a link: the profile lives on their device and
+  /// will change, but what the shop was told must not.
+  measurements  String?
   createdAt     DateTime  @default(now())
 
   @@index([storeId])

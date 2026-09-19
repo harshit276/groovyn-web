@@ -43,6 +43,23 @@ const db = new PrismaClient({ adapter: new PrismaNeon({ connectionString }) });
 const SEARCH_URL = "https://places.googleapis.com/v1/places:searchText";
 
 /**
+ * Google photos are off by default — see docs/places-photos.md.
+ *
+ * Two reasons this is a switch and not a default. The Places field mask puts
+ * photos in a costlier billing SKU, and Google's terms forbid re-hosting the
+ * image bytes: they must be fetched through their media endpoint on view and
+ * shown with the photographer's attribution. So we store a reference, never a
+ * file, and the site renders it through /api/places/photo.
+ */
+const WANT_PHOTOS = process.argv.includes("--photos");
+
+/** Photos to keep per shop. The first becomes the cover. */
+const MAX_PHOTOS = 4;
+
+/** Marks a StoreImage.url as a Places reference rather than a file we host. */
+const GPLACES_PREFIX = "gplaces:";
+
+/**
  * Field mask drives the billing SKU, so keep it tight — every extra field can
  * bump the request into a more expensive tier.
  */
@@ -57,6 +74,9 @@ const FIELD_MASK = [
   "places.rating",
   "places.userRatingCount",
   "places.googleMapsUri",
+  // Photos sit in a pricier SKU and carry attribution obligations, so they
+  // are only requested when explicitly switched on.
+  ...(WANT_PHOTOS ? ["places.photos"] : []),
 ].join(",");
 
 type PlaceResult = {
@@ -75,6 +95,13 @@ type PlaceResult = {
       close?: { day: number; hour: number; minute: number };
     }[];
   };
+  photos?: {
+    /** Resource name, e.g. "places/ChIJ.../photos/AeJ...". */
+    name: string;
+    widthPx?: number;
+    heightPx?: number;
+    authorAttributions?: { displayName?: string; uri?: string }[];
+  }[];
 };
 
 const DAY_KEYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
@@ -237,6 +264,10 @@ async function main() {
             placesSyncedAt: new Date(),
           },
         });
+
+        if (WANT_PHOTOS) {
+          await syncPhotos(s.id, s.coverImage, place);
+        }
       }
     } catch (e) {
       failed++;
@@ -264,6 +295,60 @@ async function main() {
   }
 
   await db.$disconnect();
+}
+
+
+/**
+ * Replaces this shop's Google-sourced photos with the current set.
+ *
+ * We store the photo *reference*, never the bytes: Google's terms require the
+ * image to be fetched through their media endpoint at view time and shown with
+ * the photographer's attribution. Rows we host ourselves (anything without the
+ * gplaces: prefix) are left untouched — a shop's own photography always wins,
+ * and the cover is only set when nothing better already exists.
+ */
+async function syncPhotos(
+  storeId: string,
+  existingCover: string | null,
+  place: PlaceResult
+): Promise<void> {
+  const photos = (place.photos ?? []).slice(0, MAX_PHOTOS);
+  if (!photos.length) return;
+
+  const name = place.displayName?.text ?? "This shop";
+
+  // Clear only the previously-imported Google rows, so re-running is idempotent
+  // and never deletes first-party photography.
+  await db.storeImage.deleteMany({
+    where: { storeId, url: { startsWith: GPLACES_PREFIX } },
+  });
+
+  await db.storeImage.createMany({
+    data: photos.map((photo, i) => {
+      const author = photo.authorAttributions?.[0]?.displayName;
+      return {
+        storeId,
+        url: `${GPLACES_PREFIX}${photo.name}`,
+        alt: `${name} — photo ${i + 1}`,
+        // Attribution is not optional under Google's terms; the UI renders it.
+        credit: author ? `${author} via Google` : "via Google",
+        sortOrder: 100 + i,
+      };
+    }),
+  });
+
+  // Only fill an empty cover. Overwriting would demote a photo we own.
+  const ownCover =
+    existingCover && !existingCover.startsWith(GPLACES_PREFIX)
+      ? existingCover
+      : null;
+
+  if (!ownCover) {
+    await db.store.update({
+      where: { id: storeId },
+      data: { coverImage: `${GPLACES_PREFIX}${photos[0].name}` },
+    });
+  }
 }
 
 main().catch(async (e) => {

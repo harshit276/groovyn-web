@@ -51,6 +51,11 @@ export async function POST(request: Request) {
       serviceWanted: data.serviceWanted ?? null,
       notes: data.notes ?? null,
       source: data.source ?? null,
+      // Stored as a snapshot, not a reference — the profile on the customer's
+      // device will change, but what this shop was told must not.
+      measurements: data.measurements
+        ? JSON.stringify(data.measurements)
+        : null,
     },
     select: { id: true, status: true, type: true },
   });
@@ -71,6 +76,13 @@ export async function POST(request: Request) {
           serviceWanted: data.serviceWanted ?? null,
           notes: data.notes ?? null,
           source: data.source ?? null,
+          measurements: data.measurements
+            ? {
+                chest: data.measurements.values.chest?.cm,
+                waist: data.measurements.values.waist?.cm,
+                hip: data.measurements.values.hip?.cm,
+              }
+            : null,
         },
         site.url
       )

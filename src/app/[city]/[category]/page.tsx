@@ -41,7 +41,7 @@ export async function generateMetadata({
   const count = counts[categorySlug] ?? 0;
 
   const title = `${count > 0 ? `${count} ` : ""}Best ${category.name} in ${city.name} — Prices & Reviews`;
-  const description = `Compare ${category.name.toLowerCase()} in ${city.name} with real price lists, specialities and photos. ${category.blurb}. No spam calls, no paid rankings.`;
+  const description = `Find the best ${category.name.toLowerCase()} near you in ${city.name}. Compare ratings, starting prices, specialities and photos, then book a visit. ${category.blurb}. No spam calls, no paid rankings.`;
 
   return {
     title,
@@ -113,44 +113,69 @@ export default async function CategoryPage({
     .sort((a, b) => a - b)[0];
 
   return (
-    <Container className="py-10">
-      <Breadcrumbs crumbs={crumbs} />
-
+    <>
       {/* ── Editorial masthead ──────────────────────────────────
           A guide opens with a statement and a set of figures. A listings
           site opens with a filter rail. That difference is most of why
-          this page used to feel generic. */}
-      <header className="mb-8">
-        <p
-          className="mb-4 text-[11px] font-semibold uppercase tracking-[0.24em]"
-          style={{ color: category.accent }}
-        >
-          {city.name} · Guide
-        </p>
-        <h1 className="max-w-4xl text-4xl leading-[1.02] text-ink-900 sm:text-6xl lg:text-7xl">
-          {category.name} in {city.name}
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-600">
-          {category.blurb}. Every listing shows what the shop charges where we
-          have it — so you can shortlist before you spend a Saturday walking
-          markets.
-        </p>
+          this page used to feel generic. Dark, so the floating nav has
+          something to sit against on arrival. */}
+      <section
+        data-dark-hero
+        className="mesh-dark grain relative isolate -mt-20 overflow-hidden pt-20"
+      >
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
+            maskImage:
+              "radial-gradient(ellipse 90% 80% at 50% 0%, #000 40%, transparent 100%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 90% 80% at 50% 0%, #000 40%, transparent 100%)",
+          }}
+        />
 
-        <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-ink-900/12 pt-6 sm:grid-cols-4">
-          <Stat label="Shops listed" value={String(result.total)} />
-          <Stat
-            label="With rate cards"
-            value={String(withRateCard)}
-            hint={withRateCard === 0 ? "collecting now" : undefined}
-          />
-          <Stat label="Localities" value={String(localities.length)} />
-          <Stat
-            label="Prices from"
-            value={cheapest ? formatINR(cheapest) : "—"}
-          />
-        </dl>
-      </header>
+        <div className="relative mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16 lg:px-12">
+          <div className="[&_a:hover]:text-brand-300 [&_a]:text-white/55 [&_li]:text-white/50 [&_span]:text-white/75">
+            <Breadcrumbs crumbs={crumbs} />
+          </div>
 
+          <p
+            className="mt-6 text-[11px] font-semibold uppercase tracking-[0.24em]"
+            style={{ color: category.accent }}
+          >
+            {category.name} · {city.name}
+          </p>
+
+          <h1 className="mt-4 max-w-4xl font-display text-4xl font-extrabold leading-[0.98] tracking-[-0.03em] text-white sm:text-6xl lg:text-7xl">
+            Best {category.name.toLowerCase()} in {city.name}
+          </h1>
+
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/55">
+            {category.blurb}. Compare ratings, see starting prices up front and
+            book a visit — so you shortlist in ten minutes instead of spending a
+            Saturday walking markets.
+          </p>
+
+          <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-white/12 pt-7 sm:grid-cols-4">
+            <Stat label="Shops listed" value={String(result.total)} />
+            <Stat
+              label="With rate cards"
+              value={String(withRateCard)}
+              hint={withRateCard === 0 ? "collecting now" : undefined}
+            />
+            <Stat label="Localities" value={String(localities.length)} />
+            <Stat
+              label="Prices from"
+              value={cheapest ? formatINR(cheapest) : "—"}
+            />
+          </dl>
+        </div>
+      </section>
+
+      <Container className="py-10">
       <StoreFilters
         localities={localities}
         services={services}
@@ -208,7 +233,8 @@ export default async function CategoryPage({
           itemListSchema(result.items, `${category.name} in ${city.name}`),
         ]}
       />
-    </Container>
+      </Container>
+    </>
   );
 }
 
@@ -224,13 +250,13 @@ function Stat({
 }) {
   return (
     <div>
-      <dt className="text-[11px] uppercase tracking-[0.16em] text-ink-400">
+      <dt className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/40">
         {label}
       </dt>
-      <dd className="mt-1 font-display text-3xl leading-none tabular-nums text-ink-900">
+      <dd className="mt-1.5 font-display text-3xl font-extrabold leading-none tabular-nums tracking-tight text-white sm:text-4xl">
         {value}
       </dd>
-      {hint ? <p className="mt-1 text-xs text-ink-400">{hint}</p> : null}
+      {hint ? <p className="mt-1 text-xs text-white/35">{hint}</p> : null}
     </div>
   );
 }

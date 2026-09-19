@@ -47,6 +47,7 @@ type StoreRow = {
   priceMax: number | null;
   turnaroundDays: number | null;
   homeVisit: boolean;
+  visitOffer: string | null;
   verified: boolean;
   claimed: boolean;
   rateCardVerified: boolean;
@@ -87,6 +88,7 @@ function toSummary(row: StoreRow): StoreSummaryDTO {
     googleRating: row.googleRating,
     googleRatingCount: row.googleRatingCount,
     googleMapsUri: row.googleMapsUri,
+    visitOffer: row.visitOffer,
     href: storeHref(row.city.slug, row.category, row.slug),
   };
 }
@@ -104,6 +106,7 @@ const summarySelect = {
   priceMax: true,
   turnaroundDays: true,
   homeVisit: true,
+  visitOffer: true,
   verified: true,
   claimed: true,
   rateCardVerified: true,
@@ -317,6 +320,7 @@ export async function getStoreDetail(
     mapUrl: row.mapUrl,
     materials: parseList(row.materials),
     openingHours: parseHours(row.openingHours),
+    visitOfferTerms: row.visitOfferTerms,
     establishedYear: row.establishedYear,
     homeVisitFee: row.homeVisitFee,
     images: row.images.map((i) => ({
@@ -324,6 +328,7 @@ export async function getStoreDetail(
       url: i.url,
       alt: i.alt,
       caption: i.caption,
+      credit: i.credit,
     })),
     priceItems: row.priceItems.map(
       (p): PriceItemDTO => ({

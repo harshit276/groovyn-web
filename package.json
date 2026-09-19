@@ -13,12 +13,14 @@
     "db:studio": "prisma studio",
     "import:stores": "tsx scripts/import-stores.ts",
     "worklist": "tsx scripts/verify-worklist.ts",
-    "enrich": "tsx scripts/enrich-places.ts"
+    "enrich": "tsx scripts/enrich-places.ts",
+    "verify:scan": "tsx scripts/verify-scan-math.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@mediapipe/tasks-vision": "^1.0.1",
     "@neondatabase/serverless": "^1.1.0",
     "@prisma/adapter-neon": "^7.10.0",
     "@prisma/adapter-pg": "^7.9.1",
