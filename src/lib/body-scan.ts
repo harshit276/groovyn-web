@@ -175,6 +175,21 @@ export function checkQuality(sample: FrameSample, pose: ScanPose): QualityCheck 
     issues.push("Turn fully sideways — one shoulder to the camera.");
   }
 
+  // A leaning torso foreshortens every width taken across it, and the lean is
+  // invisible in the resulting numbers — they just come out narrow.
+  const hipMidX = ((landmarks[L.hipL].x + landmarks[L.hipR].x) / 2) * width;
+  const hipMidY = ((landmarks[L.hipL].y + landmarks[L.hipR].y) / 2) * height;
+  const shoulderMidX = ((sL.x + sR.x) / 2) * width;
+  const shoulderMidY = ((sL.y + sR.y) / 2) * height;
+  const leanDeg =
+    (Math.atan2(
+      Math.abs(shoulderMidX - hipMidX),
+      Math.abs(hipMidY - shoulderMidY) || 1
+    ) *
+      180) /
+    Math.PI;
+  if (leanDeg > 9) issues.push("Stand upright — don't lean.");
+
   // Arms must be clear of the torso, or the silhouette measures arm + body.
   if (pose === "front") {
     const midY = (sL.y + landmarks[L.hipL].y) / 2;
@@ -196,7 +211,14 @@ export function checkQuality(sample: FrameSample, pose: ScanPose): QualityCheck 
 
 type Run = { start: number; end: number };
 
-/** Contiguous horizontal spans of body pixels in one row. */
+/**
+ * Contiguous horizontal spans of body pixels in one row, with sub-pixel edges.
+ *
+ * A hard threshold quantises every width to whole pixels. At the resolution the
+ * segmenter returns, one pixel on a torso is worth the better part of a
+ * centimetre of girth, so the edge is interpolated to where the mask actually
+ * crosses the threshold instead of snapping to the pixel that contains it.
+ */
 function runsInRow(
   mask: Float32Array,
   width: number,
@@ -204,19 +226,38 @@ function runsInRow(
   row: number
 ): Run[] {
   if (row < 0 || row >= height) return [];
+  const base = row * width;
   const runs: Run[] = [];
   let start = -1;
 
+  /** Where the mask crosses the threshold between two adjacent samples. */
+  const crossing = (xOut: number, xIn: number): number => {
+    const a = mask[base + xOut];
+    const b = mask[base + xIn];
+    const span = b - a;
+    if (!Number.isFinite(span) || Math.abs(span) < 1e-6) return xIn;
+    const t = (MASK_THRESHOLD - a) / span;
+    return xOut + Math.min(1, Math.max(0, t)) * (xIn - xOut);
+  };
+
   for (let x = 0; x < width; x++) {
-    const on = mask[row * width + x] >= MASK_THRESHOLD;
-    if (on && start < 0) start = x;
-    if ((!on || x === width - 1) && start >= 0) {
-      const end = on ? x : x - 1;
-      // Drop 1–2px specks; they are mask noise, not anatomy.
+    const on = mask[base + x] >= MASK_THRESHOLD;
+
+    if (on && start < 0) {
+      // Leading edge: interpolate back towards the last outside sample.
+      start = x > 0 ? crossing(x - 1, x) : x;
+    } else if (!on && start >= 0) {
+      const end = crossing(x, x - 1);
       if (end - start >= 2) runs.push({ start, end });
       start = -1;
     }
   }
+
+  if (start >= 0) {
+    const end = width - 1;
+    if (end - start >= 2) runs.push({ start, end });
+  }
+
   return runs;
 }
 
@@ -235,7 +276,7 @@ function torsoWidthAtRow(
   if (!runs.length) return 0;
 
   const hit = runs.find((r) => centreX >= r.start && centreX <= r.end);
-  if (hit) return hit.end - hit.start + 1;
+  if (hit) return hit.end - hit.start;
 
   // Centre fell in a gap: take the run nearest to it rather than the widest,
   // which would happily return an arm.
@@ -248,7 +289,31 @@ function torsoWidthAtRow(
       best = r;
     }
   }
-  return best.end - best.start + 1;
+  return best.end - best.start;
+}
+
+/**
+ * Torso width across a band of rows, reduced by median.
+ *
+ * A single row inherits every speckle in the mask at that height. Sampling a
+ * short band and taking the middle value costs nothing and removes the
+ * one-row-unlucky failure mode entirely.
+ */
+function bandWidth(
+  mask: Float32Array,
+  width: number,
+  height: number,
+  centreRow: number,
+  centreX: number,
+  halfSpanPx: number
+): number {
+  const widths: number[] = [];
+  const span = Math.max(1, Math.round(halfSpanPx));
+  for (let dy = -span; dy <= span; dy++) {
+    const w = torsoWidthAtRow(mask, width, height, Math.round(centreRow + dy), centreX);
+    if (w > 0) widths.push(w);
+  }
+  return median(widths);
 }
 
 function topmostBodyRow(mask: Float32Array, width: number, height: number): number {
@@ -319,25 +384,44 @@ export function extractProfile(sample: FrameSample): PoseProfile | null {
   const torso = hipY - shoulderY;
   if (torso <= 4) return null;
 
+  // Bands are a fixed fraction of torso height, so they scale with the person
+  // rather than with how much of the frame they happen to fill.
+  const band = Math.max(1, torso * 0.02);
   const at = (row: number) =>
+    bandWidth(mask, width, height, row, centreX, band);
+  const atRow = (row: number) =>
     torsoWidthAtRow(mask, width, height, Math.round(row), Math.round(centreX));
 
   // Chest sits just below the armpit, not at the shoulder line.
   const chestPx = at(shoulderY + torso * 0.22);
   const shoulderPx = at(shoulderY + torso * 0.04);
 
+  // Waist and hip are found by scanning for the narrowest and widest rows, so
+  // they already average over many samples; a per-row read is right here.
+  // Taking a raw min/max of noisy rows would latch onto the single worst
+  // speckle, so the extreme is smoothed over a short band once located.
+  let waistRow = hipY - torso * 0.15;
   let waistPx = Infinity;
   for (let y = shoulderY + torso * 0.45; y <= hipY; y += 1) {
-    const w = at(y);
-    if (w > 0 && w < waistPx) waistPx = w;
+    const w = atRow(y);
+    if (w > 0 && w < waistPx) {
+      waistPx = w;
+      waistRow = y;
+    }
   }
-  if (!Number.isFinite(waistPx)) waistPx = at(hipY - torso * 0.15);
+  waistPx = at(waistRow);
 
-  let hipPx = 0;
   const crotch = crotchRow(mask, width, height, Math.round(hipY), bottom);
+  let hipRow = hipY;
+  let hipPeak = 0;
   for (let y = hipY - torso * 0.05; y <= crotch; y += 1) {
-    hipPx = Math.max(hipPx, at(y));
+    const w = atRow(y);
+    if (w > hipPeak) {
+      hipPeak = w;
+      hipRow = y;
+    }
   }
+  const hipPx = at(hipRow);
 
   // Limb lengths follow the joint chain, so a bent elbow is measured along the
   // arm rather than as a straight line from shoulder to wrist.
@@ -354,7 +438,9 @@ export function extractProfile(sample: FrameSample): PoseProfile | null {
   const outseamPx = Math.max(0, ankleY - waistRowGuess);
 
   return {
-    bodyPx: bottom - top,
+    // A pixel extent, not an index difference: rows 20..384 span 365 pixels.
+    // Off by one here scales every girth by the same fraction.
+    bodyPx: bottom - top + 1,
     shoulderPx,
     chestPx,
     waistPx,
@@ -363,6 +449,21 @@ export function extractProfile(sample: FrameSample): PoseProfile | null {
     inseamPx,
     outseamPx,
   };
+}
+
+/**
+ * Mean of the middle 60% of the samples.
+ *
+ * A plain median throws away everything but one value; a plain mean lets a
+ * single mis-segmented frame pull the result. Trimming keeps the robustness
+ * and still uses most of the burst.
+ */
+export function trimmedMean(values: number[]): number {
+  const clean = values.filter((v) => Number.isFinite(v) && v > 0).sort((a, b) => a - b);
+  if (clean.length < 5) return median(clean);
+  const drop = Math.floor(clean.length * 0.2);
+  const kept = clean.slice(drop, clean.length - drop);
+  return kept.reduce((a, b) => a + b, 0) / kept.length;
 }
 
 /** Median is used everywhere frames are combined — one bad frame cannot move it. */

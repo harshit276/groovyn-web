@@ -8,6 +8,7 @@ import { JsonLd } from "@/components/json-ld";
 import { Container } from "@/components/ui/container";
 import { getCities, getServices } from "@/lib/queries";
 import { breadcrumbSchema } from "@/lib/schema";
+import { openGraphFor } from "@/lib/seo";
 import { CATEGORIES } from "@/lib/site";
 import { formatINR } from "@/lib/utils";
 
@@ -22,8 +23,14 @@ export async function generateMetadata({
   params,
 }: PageProps<"/[city]/prices">): Promise<Metadata> {
   const { city: citySlug } = await params;
-  const city = (await getCities()).find((c) => c.slug === citySlug);
+  const cities = await getCities();
+  const city = cities.find((c) => c.slug === citySlug);
   if (!city) return {};
+
+  // The benchmark ranges were researched for one city. Showing the same figures
+  // under Gurugram's or Noida's name would be near-duplicate pages, so only the
+  // first city is indexable until the others have data of their own.
+  const indexable = cities[0]?.slug === city.slug;
 
   const title = `Custom Clothing Prices in ${city.name} (${new Date().getFullYear()})`;
   const description = `What stitching, tailoring, boutique work and rentals actually cost in ${city.name} — a price index built from rate cards published by local shops.`;
@@ -32,7 +39,8 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: `/${citySlug}/prices` },
-    openGraph: { title, description, url: `/${citySlug}/prices` },
+    openGraph: openGraphFor({ title, description, url: `/${citySlug}/prices` }),
+    robots: indexable ? undefined : { index: false, follow: true },
   };
 }
 

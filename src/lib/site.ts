@@ -22,7 +22,7 @@ export const site = {
   name: "Groovyn",
   tagline: "Find the best tailors near you",
   description:
-    "Find the best tailors, boutiques, fabric shops and rental stores near you in Delhi NCR. Compare real rates, see work photos, book a visit and get great deals — no spam calls.",
+    "Find the best tailors, boutiques, fabric shops and rental stores near you in Delhi NCR. Compare ratings and prices, then book a visit for free.",
   url: resolveSiteUrl(),
   ogImage: "/og/default.png",
   email: "info@groovyn.com",
@@ -87,6 +87,24 @@ export type CategorySlug = (typeof CATEGORIES)[number]["slug"];
 export function getCategory(slug: string) {
   return CATEGORIES.find((c) => c.slug === slug);
 }
+
+/**
+ * A locality page with fewer shops than this is thin: one shop on its own page
+ * repeats the shop's own page. Below it the page stays reachable for visitors
+ * and keeps passing links, but is `noindex` and left out of the sitemap.
+ */
+export const MIN_SHOPS_TO_INDEX_LOCALITY = 3;
+
+/** The same rule for a city's category page: one shop is not a listing page. */
+export const MIN_SHOPS_TO_INDEX_CATEGORY = 3;
+
+/**
+ * A service page lists the shops that offer it. With none, it is a title, a
+ * sentence and a price chip repeated 26 times, which is what makes a search
+ * engine discount a whole site. It becomes indexable on its own as shops publish
+ * rate cards for the service.
+ */
+export const MIN_SHOPS_TO_INDEX_SERVICE = 3;
 
 /** Route segments that can never be a store slug, because they're real pages. */
 export const RESERVED_SEGMENTS = new Set(["in", "prices", "search", "api"]);

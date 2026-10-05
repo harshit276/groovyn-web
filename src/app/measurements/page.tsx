@@ -2,17 +2,33 @@ import { Lock } from "lucide-react";
 import type { Metadata } from "next";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { JsonLd } from "@/components/json-ld";
 import { MeasurementFlow } from "@/components/measurement-flow";
+import { PostCard } from "@/components/blog/post-card";
 import { Container } from "@/components/ui/container";
+import { getPost } from "@/content/blog";
+import { breadcrumbSchema, measurementToolSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Free body measurement — scan with your phone camera",
+  title: "Free Online Body Measurement: Scan With Your Phone",
   description:
-    "Get your body measurements from two photos on your phone, then share them with any tailor on Groovyn. Nothing is uploaded — the camera is read on your device.",
+    "Get your body measurements online from two photos on your phone camera. Free, for men and women, and nothing is uploaded. Share them with any tailor on Groovyn.",
   alternates: { canonical: "/measurements" },
 };
 
+// Guides for people who would rather use a tape, or want to know how far to
+// trust a phone. They are the same cluster the tool belongs to, so they link back.
+const GUIDE_SLUGS = [
+  "how-to-take-body-measurements-at-home",
+  "online-body-measurement-how-accurate",
+  "how-to-measure-for-a-blouse-at-home",
+  "how-to-measure-for-a-suit-and-shirt",
+];
+
 export default function MeasurementsPage() {
+  const guides = GUIDE_SLUGS.map((s) => getPost(s)).filter(
+    (p): p is NonNullable<typeof p> => !!p
+  );
   const crumbs = [
     { name: "Home", href: "/" },
     { name: "Measurements", href: "/measurements" },
@@ -91,7 +107,23 @@ export default function MeasurementsPage() {
               checked it with a tape.
             </p>
           </div>
+
+          <section className="mt-14">
+            <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink-950">
+              Prefer a tape? Start here
+            </h2>
+            <p className="mt-1.5 text-ink-500">
+              Step-by-step guides, in centimetres and inches.
+            </p>
+            <div className="mt-6 grid gap-5 sm:grid-cols-2">
+              {guides.map((g) => (
+                <PostCard key={g.slug} post={g} />
+              ))}
+            </div>
+          </section>
         </div>
+
+        <JsonLd data={[measurementToolSchema(), breadcrumbSchema(crumbs)]} />
       </Container>
     </>
   );

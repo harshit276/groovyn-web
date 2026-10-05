@@ -14,7 +14,8 @@
     "import:stores": "tsx scripts/import-stores.ts",
     "worklist": "tsx scripts/verify-worklist.ts",
     "enrich": "tsx scripts/enrich-places.ts",
-    "verify:scan": "tsx scripts/verify-scan-math.ts"
+    "verify:scan": "tsx scripts/verify-scan-math.ts",
+    "verify:blog": "tsx scripts/verify-blog.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

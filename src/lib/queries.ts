@@ -1,6 +1,7 @@
 import "server-only";
 
 import { db } from "@/lib/db";
+import { rankStores } from "@/lib/ranking";
 import type {
   CityDTO,
   LocalityDTO,
@@ -251,9 +252,6 @@ export async function listStores(
 
   const orderBy = (() => {
     switch (filters.sort) {
-      case "rating":
-        // Nulls last so unrated shops don't outrank rated ones.
-        return [{ ratingAvg: "desc" as const }, { verified: "desc" as const }];
       case "price_asc":
         return [{ priceMin: "asc" as const }];
       case "price_desc":
@@ -261,7 +259,8 @@ export async function listStores(
       case "name":
         return [{ name: "asc" as const }];
       default:
-        // Relevance: our own quality signals, since we have no engagement data yet.
+        // "relevance" and "rating" never reach here: they are ranked in JS below.
+        // This only orders an unrecognised sort value, in the same way.
         return [
           { featured: "desc" as const },
           { rateCardVerified: "desc" as const },
@@ -270,6 +269,29 @@ export async function listStores(
         ];
     }
   })();
+
+  // Quality orderings are computed in JS. A Bayesian score over a third
+  // party's rating cannot be expressed as an ORDER BY, and the set is small:
+  // a city's shops in one category, well under a hundred. Revisit with a
+  // materialised score column if a single listing ever passes a few thousand.
+  const mode =
+    filters.sort === "rating"
+      ? "rating"
+      : !filters.sort || filters.sort === "relevance"
+        ? "relevance"
+        : null;
+
+  if (mode) {
+    const all = await db.store.findMany({ where, select: summarySelect });
+    const ranked = rankStores(all.map(toSummary), mode);
+    return {
+      items: ranked.slice((page - 1) * perPage, page * perPage),
+      page,
+      perPage,
+      total: ranked.length,
+      totalPages: Math.max(1, Math.ceil(ranked.length / perPage)),
+    };
+  }
 
   const [rows, total] = await Promise.all([
     db.store.findMany({
@@ -489,7 +511,11 @@ export async function getAllStorePaths() {
   }));
 }
 
-export async function getAllLocalityPaths() {
+/**
+ * Every city/category/locality combination that has at least `minShops` shops.
+ * The sitemap passes the indexing threshold so it never advertises a thin page.
+ */
+export async function getAllLocalityPaths(minShops = 1) {
   const rows = await db.store.findMany({
     where: { localityId: { not: null } },
     select: {
@@ -497,13 +523,27 @@ export async function getAllLocalityPaths() {
       city: { select: { slug: true } },
       locality: { select: { slug: true } },
     },
-    distinct: ["category", "cityId", "localityId"],
   });
-  return rows
-    .filter((r) => r.locality)
-    .map((r) => ({
-      city: r.city.slug,
-      category: r.category,
-      locality: r.locality!.slug,
-    }));
+
+  const groups = new Map<
+    string,
+    { city: string; category: string; locality: string; count: number }
+  >();
+  for (const r of rows) {
+    if (!r.locality) continue;
+    const key = `${r.city.slug}/${r.category}/${r.locality.slug}`;
+    const g = groups.get(key);
+    if (g) g.count += 1;
+    else
+      groups.set(key, {
+        city: r.city.slug,
+        category: r.category,
+        locality: r.locality.slug,
+        count: 1,
+      });
+  }
+
+  return [...groups.values()]
+    .filter((g) => g.count >= minShops)
+    .map(({ city, category, locality }) => ({ city, category, locality }));
 }

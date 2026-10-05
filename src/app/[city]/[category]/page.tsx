@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { FaqList } from "@/components/blog/faq-list";
+import { PostCard } from "@/components/blog/post-card";
 import { JsonLd } from "@/components/json-ld";
 import { StoreFilters } from "@/components/store-filters";
 import { StoreGrid } from "@/components/store-grid";
@@ -14,8 +16,11 @@ import {
   getServices,
   listStores,
 } from "@/lib/queries";
-import { breadcrumbSchema, itemListSchema } from "@/lib/schema";
-import { getCategory } from "@/lib/site";
+import { guidesForCategory } from "@/content/blog";
+import { breadcrumbSchema, faqSchema, itemListSchema } from "@/lib/schema";
+import { categoryFaqs, categoryIntro } from "@/lib/seo-content";
+import { fitDescription, fitTitle, openGraphFor } from "@/lib/seo";
+import { getCategory, MIN_SHOPS_TO_INDEX_CATEGORY } from "@/lib/site";
 import type { StoreSort } from "@/lib/types";
 import { formatINR } from "@/lib/utils";
 
@@ -40,14 +45,35 @@ export async function generateMetadata({
   const counts = await getCategoryCounts(citySlug);
   const count = counts[categorySlug] ?? 0;
 
-  const title = `${count > 0 ? `${count} ` : ""}Best ${category.name} in ${city.name} — Prices & Reviews`;
-  const description = `Find the best ${category.name.toLowerCase()} near you in ${city.name}. Compare ratings, starting prices, specialities and photos, then book a visit. ${category.blurb}. No spam calls, no paid rankings.`;
+  // The year keeps the title fresh in results without touching the content, and
+  // the count is the real one. "Reviews" is left out on purpose: the ratings on
+  // these pages are Google's, and we have no reviews of our own to promise. The
+  // count is dropped below two shops, where "1 Shops Compared" is not a claim
+  // worth making.
+  const year = new Date().getFullYear();
+  const base = `Best ${category.name} in ${city.name} (${year})`;
+  const title = fitTitle(
+    count >= 2 ? [`${base}: ${count} Shops Compared`, base] : [base]
+  );
+  // Only what the page has: ratings, starting prices and booking. It does not
+  // promise photos, which most listings do not have yet.
+  const description = fitDescription(
+    `Find the best ${category.name.toLowerCase()} in ${city.name}: compare Google ratings and starting prices, then book a visit for free. ${category.blurb}.`
+  );
+
+  const url = `/${citySlug}/${categorySlug}`;
 
   return {
     title,
     description,
-    alternates: { canonical: `/${citySlug}/${categorySlug}` },
-    openGraph: { title, description, url: `/${citySlug}/${categorySlug}` },
+    alternates: { canonical: url },
+    openGraph: openGraphFor({ title, description, url }),
+    // One or two shops is not a listing page. Keep it reachable and keep passing
+    // links, but out of the index until the city has real depth.
+    robots:
+      count < MIN_SHOPS_TO_INDEX_CATEGORY
+        ? { index: false, follow: true }
+        : undefined,
   };
 }
 
@@ -98,6 +124,18 @@ export default async function CategoryPage({
     { name: city.name, href: `/${citySlug}` },
     { name: category.name, href: `/${citySlug}/${categorySlug}` },
   ];
+
+  const seoInput = {
+    category,
+    cityName: city.name,
+    total: result.total,
+    localities,
+    stores: allForFacets.items,
+    services,
+  };
+  const seoIntro = categoryIntro(seoInput);
+  const faqs = categoryFaqs(seoInput);
+  const guides = guidesForCategory(categorySlug);
 
   const basePath = `/${citySlug}/${categorySlug}`;
   const flatParams = Object.fromEntries(
@@ -196,6 +234,39 @@ export default async function CategoryPage({
         }
       />
 
+      {/* Copy built from this page's own data: real counts, areas, top-rated
+          shops and price ranges. Every answer is also in the FAQPage markup. */}
+      {result.total > 0 ? (
+        <section className="mt-16 border-t border-ink-100 pt-12">
+          <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink-950 sm:text-3xl">
+            About {category.name.toLowerCase()} in {city.name}
+          </h2>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-ink-600">
+            {seoIntro}
+          </p>
+
+          <h3 className="mt-10 font-display text-xl font-extrabold tracking-tight text-ink-950">
+            Frequently asked questions
+          </h3>
+          <div className="max-w-3xl">
+            <FaqList faq={faqs} />
+          </div>
+
+          {guides.length ? (
+            <div className="mt-14">
+              <h3 className="font-display text-xl font-extrabold tracking-tight text-ink-950">
+                Guides to read first
+              </h3>
+              <div className="mt-5 grid gap-5 md:grid-cols-3">
+                {guides.map((g) => (
+                  <PostCard key={g.slug} post={g} />
+                ))}
+              </div>
+            </div>
+          ) : null}
+        </section>
+      ) : null}
+
       {/* Locality links live at the foot of the page. Filtering by locality is
           the dropdown's job; these exist so each locality page is crawlable and
           reachable, which is what the long-tail SEO depends on. */}
@@ -231,6 +302,7 @@ export default async function CategoryPage({
         data={[
           breadcrumbSchema(crumbs),
           itemListSchema(result.items, `${category.name} in ${city.name}`),
+          ...(result.total > 0 ? [faqSchema(faqs)] : []),
         ]}
       />
       </Container>

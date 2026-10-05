@@ -147,3 +147,93 @@ export function storeSchema(store: StoreDetailDTO) {
     // store.ratingCount > 0 from genuine published reviews.
   };
 }
+
+/* ───────────────────────────── editorial ───────────────────────────── */
+
+type ArticleInput = {
+  slug: string;
+  title: string;
+  description: string;
+  datePublished: string;
+  dateModified: string;
+  words: number;
+};
+
+/**
+ * BlogPosting for a guide.
+ *
+ * The author is the organisation, not an invented person: a made-up byline with
+ * a made-up bio is the kind of thing quality raters are trained to distrust,
+ * and it is not true. `image` points at the per-post share image.
+ */
+export function articleSchema(post: ArticleInput) {
+  const url = absoluteUrl(`/blog/${post.slug}`);
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    headline: post.title,
+    description: post.description,
+    datePublished: post.datePublished,
+    dateModified: post.dateModified,
+    wordCount: post.words,
+    inLanguage: "en-IN",
+    image: [`${url}/opengraph-image`],
+    author: { "@type": "Organization", name: site.name, url: site.url },
+    publisher: {
+      "@type": "Organization",
+      name: site.name,
+      url: site.url,
+      logo: { "@type": "ImageObject", url: absoluteUrl("/images/logo.jpg") },
+    },
+  };
+}
+
+/**
+ * FAQPage. Every question and answer here must also be visible on the page,
+ * word for word, or the markup misrepresents the content. Callers pass the same
+ * array they render.
+ */
+export function faqSchema(faq: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+}
+
+/** The measurement scan, described as the free browser tool it is. */
+export function measurementToolSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Groovyn body measurement scan",
+    url: absoluteUrl("/measurements"),
+    applicationCategory: "LifestyleApplication",
+    operatingSystem: "Any modern browser with a camera",
+    description:
+      "Estimate your body measurements from two photos on your phone. Runs in the browser and uploads nothing.",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
+    isAccessibleForFree: true,
+  };
+}
+
+export function blogSchema(posts: { slug: string; title: string; datePublished: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: `${site.name} guides`,
+    url: absoluteUrl("/blog"),
+    publisher: { "@type": "Organization", name: site.name, url: site.url },
+    blogPost: posts.map((p) => ({
+      "@type": "BlogPosting",
+      headline: p.title,
+      url: absoluteUrl(`/blog/${p.slug}`),
+      datePublished: p.datePublished,
+    })),
+  };
+}

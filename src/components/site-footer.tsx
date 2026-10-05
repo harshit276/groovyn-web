@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
+import { POSTS } from "@/content/blog";
 import { CATEGORIES, site } from "@/lib/site";
 import type { CityDTO } from "@/lib/types";
 
@@ -11,7 +12,7 @@ export function SiteFooter({ cities }: { cities: CityDTO[] }) {
   return (
     <footer className="mt-20 border-t border-ink-100 bg-ink-900 text-white/85">
       <Container className="py-14">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
           <div>
             <div className="flex items-center gap-2.5">
               {/* The mark is black, so it needs a light chip to read on the
@@ -52,6 +53,34 @@ export function SiteFooter({ cities }: { cities: CityDTO[] }) {
                   </Link>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/55">
+              Guides
+            </h2>
+            <ul className="space-y-2 text-sm">
+              {POSTS.slice(0, 5).map((p) => (
+                <li key={p.slug}>
+                  <Link
+                    href={`/blog/${p.slug}`}
+                    className="text-white/75 hover:text-brand-300"
+                  >
+                    {p.metaTitle}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link href="/blog" className="font-medium text-brand-300 hover:text-white">
+                  All guides
+                </Link>
+              </li>
+              <li>
+                <Link href="/measurements" className="text-white/75 hover:text-brand-300">
+                  Measure yourself, free
+                </Link>
+              </li>
             </ul>
           </div>
 

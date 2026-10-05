@@ -15,6 +15,7 @@ import {
   listStores,
 } from "@/lib/queries";
 import { breadcrumbSchema } from "@/lib/schema";
+import { openGraphFor } from "@/lib/seo";
 import { getCategory } from "@/lib/site";
 import { formatINR } from "@/lib/utils";
 
@@ -57,7 +58,11 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: `/${citySlug}/prices/${serviceSlug}` },
-    openGraph: { title, description, url: `/${citySlug}/prices/${serviceSlug}` },
+    openGraph: openGraphFor({
+      title,
+      description,
+      url: `/${citySlug}/prices/${serviceSlug}`,
+    }),
     robots: indexable ? undefined : { index: false, follow: true },
   };
 }

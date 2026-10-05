@@ -158,7 +158,7 @@ export function SiteHeader({
           </Link>
 
           {/* ── Verticals ── */}
-          <nav aria-label="Categories" className="hidden lg:block">
+          <nav aria-label="Categories" className="hidden xl:block">
             <ul className="flex items-center gap-0.5">
               {CATEGORIES.map((c) => {
                 const href = `/${citySlug}/${c.slug}`;
@@ -178,7 +178,7 @@ export function SiteHeader({
                       onFocus={() => setMenu(c.slug)}
                       aria-expanded={isOpen}
                       className={cn(
-                        "flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium transition-colors",
+                        "flex items-center gap-1 whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-medium transition-colors",
                         isActive || isOpen
                           ? solid
                             ? "bg-ink-900 text-white"
@@ -213,7 +213,7 @@ export function SiteHeader({
                   aria-expanded={cityOpen}
                   aria-label={`Change city, currently ${activeCity?.name}`}
                   className={cn(
-                    "flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium transition-colors",
+                    "flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium transition-colors",
                     solid
                       ? "text-ink-700 hover:bg-ink-900/5"
                       : "text-white/80 hover:bg-white/10"
@@ -260,9 +260,25 @@ export function SiteHeader({
             ) : null}
 
             <Link
+              href="/blog"
+              className={cn(
+                "hidden whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium transition-colors xl:inline-flex",
+                pathname.startsWith("/blog")
+                  ? solid
+                    ? "bg-ink-900 text-white"
+                    : "bg-white text-ink-950"
+                  : solid
+                    ? "text-ink-700 hover:bg-ink-900/5"
+                    : "text-white/80 hover:bg-white/10"
+              )}
+            >
+              Guides
+            </Link>
+
+            <Link
               href="/measurements"
               className={cn(
-                "hidden items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium transition-colors lg:inline-flex",
+                "hidden items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium transition-colors xl:inline-flex",
                 solid
                   ? "text-ink-700 hover:bg-ink-900/5"
                   : "text-white/80 hover:bg-white/10"
@@ -288,7 +304,7 @@ export function SiteHeader({
             <Link
               href="/claim"
               className={cn(
-                "hidden rounded-full px-4 py-2 text-sm font-semibold transition-all sm:inline-flex",
+                "hidden shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition-all sm:inline-flex",
                 solid
                   ? "bg-brand-500 text-white hover:bg-brand-600"
                   : "bg-white text-ink-950 hover:bg-white/90"
@@ -304,7 +320,7 @@ export function SiteHeader({
               aria-controls="mobile-nav"
               aria-label={open ? "Close menu" : "Open menu"}
               className={cn(
-                "grid size-9 place-items-center rounded-full transition-colors sm:size-10 lg:hidden",
+                "grid size-9 place-items-center rounded-full transition-colors sm:size-10 xl:hidden",
                 solid
                   ? "text-ink-800 hover:bg-ink-900/5"
                   : "text-white hover:bg-white/10"
@@ -324,7 +340,7 @@ export function SiteHeader({
           <div
             onMouseEnter={cancelClose}
             onMouseLeave={scheduleClose}
-            className="mt-2 hidden overflow-hidden rounded-2xl border border-ink-100 bg-white/95 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.3)] backdrop-blur-xl lg:block"
+            className="mt-2 hidden overflow-hidden rounded-2xl border border-ink-100 bg-white/95 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.3)] backdrop-blur-xl xl:block"
           >
             <div className="grid grid-cols-[1.6fr_1fr]">
               <div className="p-6">
@@ -402,7 +418,7 @@ export function SiteHeader({
         {open ? (
           <div
             id="mobile-nav"
-            className="mt-2 max-h-[75vh] overflow-y-auto rounded-2xl border border-ink-100 bg-white/95 p-3 shadow-xl backdrop-blur-xl lg:hidden"
+            className="mt-2 max-h-[75vh] overflow-y-auto rounded-2xl border border-ink-100 bg-white/95 p-3 shadow-xl backdrop-blur-xl md:ml-auto md:w-[26rem] xl:hidden"
           >
             <ul className="grid gap-1">
               {CATEGORIES.map((c) => (
@@ -472,6 +488,13 @@ export function SiteHeader({
               >
                 <Ruler aria-hidden className="size-4" />
                 Measure me — free
+              </Link>
+              <Link
+                href="/blog"
+                onClick={closeMenu}
+                className="flex items-center justify-center gap-2 rounded-full border border-ink-200 px-4 py-2.5 text-sm font-medium text-ink-800"
+              >
+                Guides
               </Link>
               <Link
                 href="/search"

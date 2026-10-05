@@ -9,7 +9,8 @@ import { StoreCard } from "@/components/store-card";
 import { Container, SectionHeading } from "@/components/ui/container";
 import { getCities, getService, getServices, listStores } from "@/lib/queries";
 import { breadcrumbSchema } from "@/lib/schema";
-import { getCategory } from "@/lib/site";
+import { fitDescription, fitTitle, openGraphFor } from "@/lib/seo";
+import { getCategory, MIN_SHOPS_TO_INDEX_SERVICE } from "@/lib/site";
 import { formatINR } from "@/lib/utils";
 
 export const revalidate = 3600;
@@ -26,16 +27,36 @@ export async function generateMetadata({
   const service = await getService(serviceSlug);
   if (!service) return {};
 
-  const title = `${service.name} — Shops, Prices & How It Works`;
-  const description =
-    service.description ??
-    `Find shops offering ${service.name.toLowerCase()} across Delhi NCR, with prices and photos.`;
+  const title = fitTitle([
+    `${service.name} in Delhi: Prices and Shops`,
+    `${service.name} Prices in Delhi`,
+  ]);
+
+  const range =
+    service.benchmarkMin && service.benchmarkMax
+      ? ` Typical range ${formatINR(service.benchmarkMin)} to ${formatINR(service.benchmarkMax)}.`
+      : "";
+  const description = fitDescription(
+    `${service.description ?? `${service.name} in Delhi NCR.`}${range} Compare shops and prices, then book a visit for free.`
+  );
+
+  // With fewer than a handful of shops offering it, this page is a title and a
+  // price chip. Keep it reachable, keep it out of the index until it has depth.
+  const { total } = await listStores({ service: serviceSlug, perPage: 1 });
 
   return {
     title,
     description,
     alternates: { canonical: `/services/${serviceSlug}` },
-    openGraph: { title, description, url: `/services/${serviceSlug}` },
+    openGraph: openGraphFor({
+      title,
+      description,
+      url: `/services/${serviceSlug}`,
+    }),
+    robots:
+      total < MIN_SHOPS_TO_INDEX_SERVICE
+        ? { index: false, follow: true }
+        : undefined,
   };
 }
 
@@ -54,7 +75,9 @@ export default async function ServicePage({
 
   const crumbs = [
     { name: "Home", href: "/" },
-    { name: "Services", href: `/services/${serviceSlug}` },
+    ...(category && cities[0]
+      ? [{ name: category.name, href: `/${cities[0].slug}/${category.slug}` }]
+      : []),
     { name: service.name, href: `/services/${serviceSlug}` },
   ];
 

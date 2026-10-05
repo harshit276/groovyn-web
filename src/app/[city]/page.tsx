@@ -18,6 +18,7 @@ import {
   listStores,
 } from "@/lib/queries";
 import { breadcrumbSchema } from "@/lib/schema";
+import { fitDescription, fitTitle, openGraphFor } from "@/lib/seo";
 import { CATEGORIES } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -34,16 +35,22 @@ export async function generateMetadata({
   const city = await getCity(citySlug);
   if (!city) return {};
 
-  const title = `Tailors, Boutiques, Fabric & Rental Shops in ${city.name}`;
-  const description =
+  const title = fitTitle([
+    `Tailors, Boutiques, Fabric & Rental Shops in ${city.name}`,
+    `Tailors, Boutiques & Fabric Shops in ${city.name}`,
+    `Custom Clothing Shops in ${city.name}`,
+  ]);
+  // Says only what a city page has: listings, ratings, starting prices, booking.
+  const description = fitDescription(
     city.blurb ??
-    `Find verified tailors, boutiques, fabric shops and rental stores across ${city.name}, with real price lists and photos.`;
+      `Find tailors, boutiques, fabric shops and rental stores in ${city.name}. Compare Google ratings and starting prices, then book a visit for free.`
+  );
 
   return {
     title,
     description,
     alternates: { canonical: `/${citySlug}` },
-    openGraph: { title, description, url: `/${citySlug}` },
+    openGraph: openGraphFor({ title, description, url: `/${citySlug}` }),
   };
 }
 

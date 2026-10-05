@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import { Container, SectionHeading } from "@/components/ui/container";
 import { getAllStorePaths, getSimilarStores, getStoreDetail } from "@/lib/queries";
 import { breadcrumbSchema, storeSchema } from "@/lib/schema";
+import { fitDescription, fitTitle } from "@/lib/seo";
 import { getCategory } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -53,10 +54,25 @@ export async function generateMetadata({
     ? ` Prices from ₹${store.priceMin.toLocaleString("en-IN")}.`
     : "";
 
-  const title = `${store.name} — ${category?.singular ?? "Store"} in ${where}`;
-  const description = `${store.name}, ${where}. ${
-    store.specialities.slice(0, 3).join(", ") || category?.blurb
-  }.${priceHint} Photos, price list, timings and contact details on Groovyn.`;
+  // Shop names vary from "Kynaa" to "Roshan Tailors (House of Roshans)", so the
+  // title steps down through shorter forms until one fits, and never cuts a name
+  // in half to make room for a locality.
+  const singular = category?.singular ?? "Store";
+  const area = store.locality?.name ?? store.city.name;
+  const title = fitTitle([
+    `${store.name} — ${singular} in ${where}`,
+    `${store.name} — ${singular} in ${area}`,
+    `${store.name} — ${singular}, ${store.city.name}`,
+    store.name,
+  ]);
+
+  // Says only what a listing reliably has. Most do not have photos or a rate
+  // card yet, so neither is promised.
+  const description = fitDescription(
+    `${store.name}, ${where}. ${
+      store.specialities.slice(0, 3).join(", ") || category?.blurb
+    }.${priceHint} Address, contact details and free visit booking on Groovyn.`
+  );
 
   return {
     title,

@@ -19,7 +19,9 @@ import { Rise } from "@/components/rise";
 import { SearchBox } from "@/components/search-box";
 import { StoreRow } from "@/components/store-row";
 import { TiltCard } from "@/components/tilt-card";
+import { PostCard } from "@/components/blog/post-card";
 import { Button } from "@/components/ui/button";
+import { getPost } from "@/content/blog";
 import {
   getCategoryCounts,
   getCities,
@@ -29,7 +31,9 @@ import {
 import { CATEGORIES, site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: `${site.name} — Tailors, Boutiques, Fabric & Rentals in Delhi NCR`,
+  // Leads with the query people actually type. The page template does not apply
+  // to the page in the same segment as the layout, so the brand is spelled out.
+  title: `Best Tailors & Custom Clothing Shops in Delhi NCR | ${site.name}`,
   description: site.description,
   alternates: { canonical: "/" },
 };
@@ -71,6 +75,13 @@ const TICKER = [
   "Lajpat Nagar",
   "Karol Bagh",
   "Connaught Place",
+];
+
+/** The three guides that answer the questions people arrive with. */
+const HOME_GUIDES = [
+  "how-to-choose-a-tailor-in-delhi",
+  "tailoring-charges-in-delhi",
+  "how-to-take-body-measurements-at-home",
 ];
 
 export default async function HomePage() {
@@ -426,6 +437,49 @@ export default async function HomePage() {
                 </TiltCard>
               </Rise>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ Guides ═══════════════════════════════════════════ */}
+      <section className="bg-ground pb-20 sm:pb-28">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+          <Rise>
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <div className="max-w-2xl">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-500">
+                  Guides
+                </p>
+                <h2 className="mt-3 font-display text-4xl font-extrabold tracking-[-0.025em] text-ink-950 sm:text-5xl">
+                  Before you visit a tailor
+                </h2>
+                <p className="mt-4 text-ink-500">
+                  Plain-English guides to measuring, pricing and choosing, so
+                  you walk in knowing what to ask.
+                </p>
+              </div>
+              <Link
+                href="/blog"
+                className="group inline-flex items-center gap-2 rounded-full border border-ink-200 px-5 py-2.5 text-sm font-semibold text-ink-900 transition-colors hover:border-ink-900 hover:bg-ink-900 hover:text-white"
+              >
+                All guides
+                <ArrowRight
+                  aria-hidden
+                  className="size-4 transition-transform group-hover:translate-x-0.5"
+                />
+              </Link>
+            </div>
+          </Rise>
+
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {HOME_GUIDES.map((slug, i) => {
+              const post = getPost(slug);
+              return post ? (
+                <Rise key={slug} delay={i * 60}>
+                  <PostCard post={post} className="h-full" />
+                </Rise>
+              ) : null;
+            })}
           </div>
         </div>
       </section>
