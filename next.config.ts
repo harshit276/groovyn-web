@@ -1,15 +1,19 @@
 import type { NextConfig } from "next";
 
 /**
- * The address the site is meant to be reached at, taken from the same
- * NEXT_PUBLIC_SITE_URL that drives canonicals and the sitemap, so there is one
- * place to change if the main address ever moves from www to the bare domain.
+ * The address the site is meant to be reached at. This follows the same order
+ * as `resolveSiteUrl` in lib/site.ts (NEXT_PUBLIC_SITE_URL first, then Vercel's
+ * own production URL), so redirects, canonicals and the sitemap always agree,
+ * and there is one place to change if the main address ever moves from www to
+ * the bare domain.
  *
  * Returns null on localhost and on a *.vercel.app address, where redirecting
  * "to the main address" would only loop or break local work.
  */
 function canonicalOrigin(): string | null {
-  const raw = process.env.NEXT_PUBLIC_SITE_URL;
+  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  const raw =
+    process.env.NEXT_PUBLIC_SITE_URL || (vercel ? `https://${vercel}` : "");
   if (!raw) return null;
   try {
     const url = new URL(raw);
