@@ -16,6 +16,7 @@ import {
   MIN_SHOPS_TO_INDEX_CATEGORY,
   MIN_SHOPS_TO_INDEX_LOCALITY,
   MIN_SHOPS_TO_INDEX_SERVICE,
+  POLICIES_UPDATED,
 } from "@/lib/site";
 
 /**
@@ -52,6 +53,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: absoluteUrl("/claim"), lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: absoluteUrl("/suggest"), lastModified: now, changeFrequency: "monthly", priority: 0.4 },
   ];
+
+  // About, method and policy pages carry the date of their last real edit, not
+  // the day the sitemap was built.
+  const policyDate = new Date(POLICIES_UPDATED.iso);
+  const sitePages: MetadataRoute.Sitemap = (
+    [
+      ["/how-we-rank", 0.6],
+      ["/faq", 0.6],
+      ["/about", 0.5],
+      ["/contact", 0.4],
+      ["/privacy", 0.3],
+      ["/terms", 0.3],
+      ["/refund-policy", 0.3],
+    ] as const
+  ).map(([path, priority]) => ({
+    url: absoluteUrl(path),
+    lastModified: policyDate,
+    changeFrequency: "yearly" as const,
+    priority,
+  }));
 
   const cityPages: MetadataRoute.Sitemap = cities.map((c) => ({
     url: absoluteUrl(`/${c.slug}`),
@@ -156,6 +177,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     ...staticPages,
+    ...sitePages,
     ...cityPages,
     ...categoryPages,
     ...localityPages,

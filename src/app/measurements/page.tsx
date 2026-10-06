@@ -8,12 +8,21 @@ import { PostCard } from "@/components/blog/post-card";
 import { Container } from "@/components/ui/container";
 import { getPost } from "@/content/blog";
 import { breadcrumbSchema, measurementToolSchema } from "@/lib/schema";
+import { openGraphFor } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Free Online Body Measurement: Scan With Your Phone",
   description:
     "Get your body measurements online from two photos on your phone camera. Free, for men and women, and nothing is uploaded. Share them with any tailor on Groovyn.",
   alternates: { canonical: "/measurements" },
+  // Without its own openGraph the page inherits the home page's og:url, and a
+  // shared link can then preview the wrong page.
+  openGraph: openGraphFor({
+    title: "Free Online Body Measurement: Scan With Your Phone | Groovyn",
+    description:
+      "Get your body measurements online from two photos on your phone camera. Free, for men and women, and nothing is uploaded.",
+    url: "/measurements",
+  }),
 };
 
 // Guides for people who would rather use a tape, or want to know how far to

@@ -25,13 +25,34 @@ export const site = {
     "Find the best tailors, boutiques, fabric shops and rental stores near you in Delhi NCR. Compare ratings and prices, then book a visit for free.",
   url: resolveSiteUrl(),
   ogImage: "/og/default.png",
-  email: "info@groovyn.com",
+  email: "groovyntech@gmail.com",
   phone: "+917891467209",
+  /**
+   * City only for now. Add the street address and PIN code here when there is
+   * one: the contact page, the privacy policy and the Organization markup all
+   * read from this single place.
+   */
+  address: {
+    locality: "Bengaluru",
+    region: "Karnataka",
+    country: "India",
+    countryCode: "IN",
+  },
   locale: "en_IN",
   sameAs: [
     "https://www.instagram.com/groovyn",
     "https://twitter.com/groovyn",
   ],
+} as const;
+
+/**
+ * When the policy and about pages were last revised. Shown on each page and
+ * used as its sitemap date, so the date reflects a real edit and not the day the
+ * sitemap was built. Change it when you change the text of one of those pages.
+ */
+export const POLICIES_UPDATED = {
+  iso: "2026-10-07",
+  label: "7 October 2026",
 } as const;
 
 export function absoluteUrl(path = "/"): string {

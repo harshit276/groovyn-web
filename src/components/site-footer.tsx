@@ -104,9 +104,29 @@ export function SiteFooter({ cities }: { cities: CityDTO[] }) {
 
           <div>
             <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/55">
-              For shop owners
+              Company
             </h2>
             <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/about" className="text-white/75 hover:text-brand-300">
+                  About us
+                </Link>
+              </li>
+              <li>
+                <Link href="/how-we-rank" className="text-white/75 hover:text-brand-300">
+                  How we rank
+                </Link>
+              </li>
+              <li>
+                <Link href="/faq" className="text-white/75 hover:text-brand-300">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-white/75 hover:text-brand-300">
+                  Contact
+                </Link>
+              </li>
               <li>
                 <Link href="/claim" className="text-white/75 hover:text-brand-300">
                   Claim your listing
@@ -129,9 +149,30 @@ export function SiteFooter({ cities }: { cities: CityDTO[] }) {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-white/15 pt-6 text-xs text-white/55 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} Groovyn. All rights reserved.</p>
-          <p>
+        <div className="mt-12 border-t border-white/15 pt-6 text-xs text-white/55">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p>© {year} Groovyn. All rights reserved.</p>
+            <nav aria-label="Legal">
+              <ul className="flex flex-wrap gap-x-5 gap-y-1.5">
+                <li>
+                  <Link href="/privacy" className="hover:text-brand-300">
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/terms" className="hover:text-brand-300">
+                    Terms of Use
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/refund-policy" className="hover:text-brand-300">
+                    Cancellations and Refunds
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <p className="mt-3">
             Listings are informational. Always confirm prices with the shop
             before ordering.
           </p>

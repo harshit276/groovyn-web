@@ -4,12 +4,19 @@ import type { Metadata } from "next";
 import { SimpleForm } from "@/components/simple-form";
 import { Container } from "@/components/ui/container";
 import { db } from "@/lib/db";
+import { openGraphFor } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Claim your shop listing — free, forever",
   description:
     "Own a tailoring shop, boutique, fabric store or rental business in Delhi NCR? Claim your free Groovyn listing to manage your photos, price list and timings.",
   alternates: { canonical: "/claim" },
+  openGraph: openGraphFor({
+    title: "Claim your shop listing: free, forever | Groovyn",
+    description:
+      "Own a tailoring shop, boutique, fabric store or rental business in Delhi NCR? Claim your free Groovyn listing to manage your photos, price list and timings.",
+    url: "/claim",
+  }),
 };
 
 const BENEFITS = [

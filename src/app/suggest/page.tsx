@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { SimpleForm } from "@/components/simple-form";
 import { Container } from "@/components/ui/container";
+import { openGraphFor } from "@/lib/seo";
 import { CATEGORIES } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -9,6 +10,12 @@ export const metadata: Metadata = {
   description:
     "Know a great tailor, boutique, fabric shop or rental store we're missing? Tell us and we'll add them to Groovyn.",
   alternates: { canonical: "/suggest" },
+  openGraph: openGraphFor({
+    title: "Suggest a shop | Groovyn",
+    description:
+      "Know a great tailor, boutique, fabric shop or rental store we're missing? Tell us and we'll add them to Groovyn.",
+    url: "/suggest",
+  }),
 };
 
 export default function SuggestPage() {

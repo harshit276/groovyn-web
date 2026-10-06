@@ -17,6 +17,7 @@ import {
   Sunset,
   Ticket,
 } from "lucide-react";
+import Link from "next/link";
 import * as React from "react";
 
 import { useMeasurementProfile } from "@/lib/measurement-store";
@@ -614,7 +615,16 @@ export function VisitBooking({
         </div>
 
         <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-400">
-          We pass your details to this shop only. We never sell your number.
+          We pass your details to this shop only. We never sell your number. By
+          requesting a visit you agree to our{" "}
+          <Link href="/privacy" className="underline underline-offset-2 hover:text-ink-600">
+            Privacy Policy
+          </Link>{" "}
+          and{" "}
+          <Link href="/terms" className="underline underline-offset-2 hover:text-ink-600">
+            Terms
+          </Link>
+          .
         </p>
       </div>
     </form>

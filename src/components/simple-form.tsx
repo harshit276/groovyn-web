@@ -1,6 +1,7 @@
 "use client";
 
 import { Check } from "lucide-react";
+import Link from "next/link";
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -154,6 +155,14 @@ export function SimpleForm({
       >
         {state === "sending" ? "Sending…" : submitLabel}
       </Button>
+
+      <p className="text-center text-[11px] leading-relaxed text-ink-400">
+        By sending this you agree to our{" "}
+        <Link href="/privacy" className="underline underline-offset-2 hover:text-ink-600">
+          Privacy Policy
+        </Link>
+        . We never sell your details.
+      </p>
     </form>
   );
 }

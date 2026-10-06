@@ -19,7 +19,39 @@ export function organizationSchema() {
     url: site.url,
     logo: absoluteUrl("/images/logo.jpg"),
     email: site.email,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: site.address.locality,
+      addressRegion: site.address.region,
+      addressCountry: site.address.countryCode,
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      email: site.email,
+      areaServed: site.address.countryCode,
+    },
     sameAs: [...site.sameAs],
+  };
+}
+
+/** A plain page that is about the site itself: about, contact, policies. */
+export function webPageSchema(input: {
+  type: "WebPage" | "AboutPage" | "ContactPage";
+  name: string;
+  description: string;
+  path: string;
+  dateModified: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": input.type,
+    name: input.name,
+    description: input.description,
+    url: absoluteUrl(input.path),
+    dateModified: input.dateModified,
+    isPartOf: { "@type": "WebSite", name: site.name, url: site.url },
+    publisher: { "@type": "Organization", name: site.name, url: site.url },
   };
 }
 
