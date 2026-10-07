@@ -51,8 +51,8 @@ export const site = {
  * sitemap was built. Change it when you change the text of one of those pages.
  */
 export const POLICIES_UPDATED = {
-  iso: "2026-10-07",
-  label: "7 October 2026",
+  iso: "2026-10-08",
+  label: "8 October 2026",
 } as const;
 
 export function absoluteUrl(path = "/"): string {

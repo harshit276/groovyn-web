@@ -79,7 +79,10 @@ export default function PrivacyPage() {
               The measurement scan runs on your phone. Photos and video frames
               from the camera are not uploaded or kept.
             </li>
-            <li>We use no advertising or tracking cookies.</li>
+            <li>
+              We use no advertising or tracking cookies. We count visits with
+              privacy-friendly analytics that does not follow you across sites.
+            </li>
             <li>
               You can ask us to correct or delete your information at any time at{" "}
               <Email />.
@@ -132,6 +135,17 @@ export default function PrivacyPage() {
               pages requested and the time. This is used to deliver the site,
               keep it secure and fix faults.
             </li>
+            <li>
+              <strong>Visit statistics.</strong> We use Vercel Web Analytics and
+              Vercel Speed Insights to count visits and to measure how fast pages
+              load. They record the page viewed, the site you came from, your
+              country and city, your device type, browser and operating system,
+              and page-speed measurements. They do not use tracking cookies, do
+              not follow you across other sites and do not record your name or
+              phone number. A visitor is told apart from others by a code that is
+              discarded after 24 hours. We use this to see what is useful and what
+              is slow.
+            </li>
           </Bullets>
           <p>
             Some things stay on your own device and are not sent to us: the shops
@@ -171,8 +185,9 @@ export default function PrivacyPage() {
             </li>
             <li>
               <strong>Companies that run the site for us.</strong> Our hosting
-              provider and our database provider process data on our behalf. They
-              may do so on servers outside India.
+              provider, which also provides our visit statistics, and our
+              database provider process data on our behalf. They may do so on
+              servers outside India.
             </li>
             <li>
               <strong>Authorities.</strong> If the law requires it, or to protect
@@ -197,8 +212,9 @@ export default function PrivacyPage() {
             settings at any time.
           </p>
           <p>
-            If we add privacy-friendly analytics in future, we will say so on this
-            page.
+            Visit statistics are collected without cookies, as described above.
+            If we add any other kind of tracking in future, we will say so on this
+            page first.
           </p>
         </Section>
 

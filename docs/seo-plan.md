@@ -6,6 +6,10 @@ This plan covers the next 90 days and what comes after. It is built from a live 
 
 I had no search-volume data. Every 'odds' rating below is judgement from the search results pages, not measured demand. Search Console will replace those guesses with real numbers within a few weeks, and the plan is meant to be re-cut then.
 
+## Progress
+
+- **7 Oct.** Live now: About, Contact, FAQ, How we rank, Privacy Policy, Terms of Use and Cancellations and Refunds, with groovyntech@gmail.com and Bengaluru as the contact details. Also fixed: og:url on /measurements, /claim and /suggest, redirects for the old language paths and for groovyn-web.vercel.app, and security headers. The 12 guides were already live. Still open from week one: analytics, image descriptions, page speed, the seasonal pages and the Search Console steps.
+
 ## The short version
 
 - **Google barely knows the domain.** A search for site:groovyn.com shows one page, the old home page. Domain age is not a ranking factor, so treat this as a new site on a good address, not an old site with authority. The visitor numbers you saw were probably Cloudflare's, which count bots and were for the old site.

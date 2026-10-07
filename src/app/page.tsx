@@ -79,9 +79,10 @@ const TICKER = [
 
 /** The three guides that answer the questions people arrive with. */
 const HOME_GUIDES = [
+  // Seasonal: first until Diwali has passed, then put the measurement guide back.
+  "diwali-outfit-stitching-in-delhi",
   "how-to-choose-a-tailor-in-delhi",
   "tailoring-charges-in-delhi",
-  "how-to-take-body-measurements-at-home",
 ];
 
 export default async function HomePage() {

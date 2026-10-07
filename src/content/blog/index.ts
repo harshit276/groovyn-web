@@ -1,6 +1,7 @@
 import type { Post } from "@/lib/blog";
 
 import { post as bestFabricMarkets } from "./best-fabric-markets-in-delhi";
+import { post as diwaliStitching } from "./diwali-outfit-stitching-in-delhi";
 import { post as howToChooseTailor } from "./how-to-choose-a-tailor-in-delhi";
 import { post as measureBlouse } from "./how-to-measure-for-a-blouse-at-home";
 import { post as measureLehenga } from "./how-to-measure-for-a-lehenga";
@@ -18,6 +19,7 @@ import { post as weddingTimeline } from "./when-to-order-wedding-outfits-delhi-t
  * gate in scripts/verify-blog.ts then checks it before it can ship.
  */
 const ALL: Post[] = [
+  diwaliStitching,
   measureBody,
   measureBlouse,
   measureLehenga,
@@ -56,9 +58,10 @@ export function latestPosts(n: number): Post[] {
 /** Guides most relevant to a listing category, used to cross-link from listings. */
 export const GUIDES_FOR_CATEGORY: Record<string, string[]> = {
   tailors: [
+    // Seasonal: first until Diwali has passed, then drop it from this list.
+    "diwali-outfit-stitching-in-delhi",
     "how-to-choose-a-tailor-in-delhi",
     "tailoring-charges-in-delhi",
-    "how-to-take-body-measurements-at-home",
   ],
   boutiques: [
     "readymade-semi-stitched-or-custom-lehenga",

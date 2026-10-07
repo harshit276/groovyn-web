@@ -10,12 +10,13 @@ export const post: Post = {
     "Most wedding outfit problems are schedule problems. Work back from the date: what to do at four months, eight weeks, three weeks and the night before.",
   cluster: "choosing",
   datePublished: "2026-10-01T11:00:00+05:30",
-  dateModified: "2026-10-01T11:00:00+05:30",
+  dateModified: "2026-10-08T12:00:00+05:30",
   primaryKeyword: "when to order wedding outfits",
   related: [
     "how-to-choose-a-tailor-in-delhi",
     "how-to-measure-for-a-lehenga",
     "sherwani-stitching-cost-in-delhi",
+    "diwali-outfit-stitching-in-delhi",
   ],
   blocks: [
     {
@@ -43,6 +44,22 @@ export const post: Post = {
         ["About 1 week before", "Final collection, pressing and any last alterations.", "Hooks, hems, lining and every fastening"],
         ["The day before", "Steam, pack and set out everything in one place.", "A small kit: needle, thread and safety pins"],
       ],
+    },
+
+    { type: "h2", text: "This season: 2026 to 2027" },
+    {
+      type: "p",
+      text: "In North India the wedding season usually pauses through the monsoon months and starts again after Devuthani Ekadashi. In 2026 that falls on 20 November, so the first auspicious wedding dates come soon after it. Tailors, fabric shops and rental shops tend to fill up before then, in October and early November, so the rush starts earlier than the dates suggest.",
+    },
+    {
+      type: "p",
+      text: "Which dates are auspicious depends on your family's tradition and your priest, so confirm yours from a Panchang or with the priest rather than from a general list, then work back from your date using the timeline above. Diwali falls on 8 November 2026 and many workshops slow down around it, so read [Diwali outfit stitching in Delhi](/blog/diwali-outfit-stitching-in-delhi) before you plan fittings in that week.",
+    },
+    {
+      type: "callout",
+      tone: "warning",
+      title: "A wedding in the next two months",
+      text: "If the wedding is in November or December 2026 and you have not started, heavy custom work is already tight. Confirm a delivery date with your tailor this week, or move to a semi-stitched, readymade or rental route.",
     },
 
     { type: "h2", text: "If you have less time" },
@@ -126,6 +143,10 @@ export const post: Post = {
     {
       q: "Can a lehenga be stitched in two weeks?",
       a: "Sometimes, for a simple design with no handwork and a tailor who has space. But it leaves no room for trials or fixes, and many shops cannot take it in wedding season. A semi-stitched, readymade or rental outfit is usually the safer choice on a short timeline.",
+    },
+    {
+      q: "When does the wedding season start in 2026?",
+      a: "In North India the season usually resumes after Devuthani Ekadashi, which falls on 20 November in 2026. Exact auspicious dates depend on your tradition, so confirm them with your priest or a Panchang, then work back from your date using the timeline above.",
     },
     {
       q: "Which months are busiest for tailors in Delhi?",
