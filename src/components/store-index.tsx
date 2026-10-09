@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { getCategory } from "@/lib/site";
 import type { StoreSummaryDTO } from "@/lib/types";
-import { formatPriceRange } from "@/lib/utils";
+import { formatPriceRange, hasPrice } from "@/lib/utils";
 
 /**
  * The index view — a magazine contents page rather than a grid of cards.
@@ -45,7 +45,9 @@ export function StoreIndex({ stores }: { stores: StoreSummaryDTO[] }) {
                     ·
                   </span>
                   <span className="text-ink-800">
-                    {formatPriceRange(store.priceMin, store.priceMax)}
+                    {hasPrice(store.priceMin, store.priceMax)
+                      ? formatPriceRange(store.priceMin, store.priceMax)
+                      : "Typical rates inside"}
                   </span>
                 </p>
               </div>
@@ -62,7 +64,9 @@ export function StoreIndex({ stores }: { stores: StoreSummaryDTO[] }) {
               <div className="hidden items-center justify-end gap-4 sm:flex">
                 <span className="text-right">
                   <span className="block font-display text-base tabular-nums text-ink-900">
-                    {formatPriceRange(store.priceMin, store.priceMax)}
+                    {hasPrice(store.priceMin, store.priceMax)
+                      ? formatPriceRange(store.priceMin, store.priceMax)
+                      : "Typical rates inside"}
                   </span>
                   <span className="flex items-center justify-end gap-2 text-[11px] text-ink-400">
                     {store.rateCardVerified ? (

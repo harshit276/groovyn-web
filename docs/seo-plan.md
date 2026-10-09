@@ -8,6 +8,9 @@ I had no search-volume data. Every 'odds' rating below is judgement from the sea
 
 ## Progress
 
+- **9 Oct.** Ready in the working copy, waiting for your go-ahead to deploy: the claim-your-shop page, header button, footer link and home section are gone (old links go to Contact). Phone fixes: category pages no longer scroll sideways, the booking form comes right after the shop header with a Book a free visit bar at the bottom of the screen, and the home hero is realigned. Every shop page without a price list now shows typical Delhi prices, clearly labelled, and prices read off 8 shops' own websites are ready to load. There is a Book through Groovyn section on the home page, and a gold Visit offer badge that appears only when a shop has agreed to an offer.
+- **8 Oct.** A content review of the site for wedding shoppers is done (docs/content-plan.md). It found that the home page over-promised, and that multi-word searches returned nothing. Both are fixed in the working copy and wait for deploy. Its ten next steps are in the new phase below, and its 25-piece wedding calendar is under Content.
+- **8 Oct.** Now live: the Diwali outfit stitching guide, a 2026 to 2027 season section in the wedding timeline guide, visit-count and page-speed tracking (it starts counting once you switch Web Analytics and Speed Insights on in Vercel), and an IndexNow submission of all 118 pages to Bing and other search engines. Search Console is a Domain property and has read the sitemap. So far Google has indexed 1 page and shows 3 search clicks in total. Still to do: switch on Vercel Analytics and Speed Insights, request indexing in Search Console for the key pages, image descriptions and page speed.
 - **7 Oct.** Live now: About, Contact, FAQ, How we rank, Privacy Policy, Terms of Use and Cancellations and Refunds, with groovyntech@gmail.com and Bengaluru as the contact details. Also fixed: og:url on /measurements, /claim and /suggest, redirects for the old language paths and for groovyn-web.vercel.app, and security headers. The 12 guides were already live. Still open from week one: analytics, image descriptions, page speed, the seasonal pages and the Search Console steps.
 
 ## The short version
@@ -15,14 +18,14 @@ I had no search-volume data. Every 'odds' rating below is judgement from the sea
 - **Google barely knows the domain.** A search for site:groovyn.com shows one page, the old home page. Domain age is not a ranking factor, so treat this as a new site on a good address, not an old site with authority. The visitor numbers you saw were probably Cloudflare's, which count bots and were for the old site.
 - **The site itself is healthy.** Mobile Lighthouse on the home page scores 100 for SEO, redirects and the sitemap are clean, and the admin area is locked. The gaps are trust pages (none exist), analytics (none installed), thin shop pages and zero photos.
 - **Do not fight on breadth.** Justdial shows about 41,000 Delhi tailors. You list 75. Win on trust instead: honest ranking, real prices, real photos, a free measurement tool, and local guides written from first-hand visits.
-- **The next four weeks matter most.** Fix the gaps, get shops to claim listings and send photos, and publish the seasonal pages before Karwa Chauth (29 Oct), Diwali (8 Nov) and the wedding season, which resumes after 20 Nov.
+- **The next four weeks matter most.** Fix the gaps, get shops to send their rate lists, photos and a visit offer, and publish the seasonal pages before Karwa Chauth (29 Oct), Diwali (8 Nov) and the wedding season, which resumes after 20 Nov.
 
 ### If you only have an hour a day
 
 - Check Search Console is a Domain property and the sitemap is submitted (10 min).
 - Rotate the Google key and revoke the Cashfree key (15 min).
 - Send me your business details for the About, Privacy and Terms pages.
-- WhatsApp 10 shops a day with the claim message in Appendix B. This is the highest-leverage task in the plan.
+- WhatsApp 10 shops a day with the message in Appendix B, asking for their rate list, three photos and a small offer for Groovyn visitors. This is the highest-leverage task in the plan.
 - Photograph one shop on your way somewhere: front, inside, one sample of their work.
 
 ## What I checked on the live site
@@ -31,8 +34,8 @@ I had no search-volume data. Every 'odds' rating below is judgement from the sea
 - **Pages in the sitemap:** 110: 75 shops, 12 guides, 7 locality, 5 city, 4 category, 3 service, 4 other
 - **Listings:** 75 (Delhi 69, Gurugram 5, Noida 1). Tailors 36, fabric 19, rental 8, boutiques 6 in Delhi
 - **Shops with a Google rating:** 20 of 75 (median 123 reviews)
-- **Shops with photos, verified, claimed:** 0, 0, 0
-- **Bookings, claims, reviews so far:** 0, 0, 0 (the new site is only hours old)
+- **Shops with photos, verified, their own rate card:** 0, 0, 0
+- **Bookings, shop offers, reviews so far:** 0, 0, 0 (the new site is only hours old)
 - **Pages Google shows for the domain:** 1 (the old home page)
 - **Median shop page length:** 284 words: one short unique paragraph, hours, address and a booking form, plus 'No photos yet', 'No price list yet' and 'No reviews yet' notices
 - **Lighthouse, mobile, home:** Performance 93, Accessibility 97, Best practices 100, SEO 100. LCP 2.9 s
@@ -94,7 +97,7 @@ I had no search-volume data. Every 'odds' rating below is judgement from the sea
 
 Close the gaps, start measuring, and publish the seasonal pages before the festival rush.
 
-- [ ] **Make sure Search Console is a Domain property and the sitemap is in** (You, effort S, high impact, Foundation) `p0-gsc`
+- [x] **Make sure Search Console is a Domain property and the sitemap is in** (You, effort S, high impact, Foundation) `p0-gsc`
   In Search Console, Settings should show 'Domain: groovyn.com'. If it shows a property starting with https://, add a Domain property too (Add property, Domain, groovyn.com, then add the TXT record in Cloudflare). Then Sitemaps, and submit `sitemap.xml` for www.groovyn.com.
 - [ ] **Request indexing for the 10 key pages** (You, effort S, high impact, Foundation) `p0-index`
   URL Inspection, paste each URL, Request indexing: home, /delhi/tailors, /delhi/fabric-shops, /delhi/boutiques, /delhi/rental-shops, /blog, /measurements, /blog/best-fabric-markets-in-delhi, /blog/tailoring-charges-in-delhi, /blog/when-to-order-wedding-outfits-delhi-timeline. Google allows about 10 a day.
@@ -109,14 +112,14 @@ Close the gaps, start measuring, and publish the seasonal pages before the festi
 - [x] **Build About, Contact, Privacy, Terms, Refund, 'How we rank' and Editorial policy** (Claude, effort M, high impact, Foundation) `p0-trust`
   Plus footer links and Organization schema with logo and social links. I need your registered business name, address, contact email and phone, a grievance-officer name, and your social profile links. Have a lawyer or CA read the legal text before you rely on it.
 - [ ] **Install analytics and conversion events** (Claude, effort S, high impact, Measurement) `p0-analytics`
-  Vercel Web Analytics (free, no cookies) and, if you want it, GA4. Events: booking started and submitted, claim started and submitted, scan started and completed, call tap, directions tap, shop-website tap, WhatsApp tap. Tell me if you want GA4 and send the measurement ID.
+  Vercel Web Analytics (free, no cookies) and, if you want it, GA4. Events: booking started and submitted, scan started and completed, call tap, directions tap, shop-website tap, WhatsApp tap. Tell me if you want GA4 and send the measurement ID.
 - [ ] **Fix og:url, image descriptions and the Lighthouse warnings** (Claude, effort S, med impact, Pages) `p0-bugs`
   Correct og:url on /measurements and add an og:url equals canonical check to the audit script. Write real alt text for non-decorative images. Fix colour contrast, heading order and list markup.
 - [x] **Redirect the old paths and the vercel.app copy** (Claude, effort S, med impact, Foundation) `p0-redirects`
   301 the old /hi-in, /de-de, /es-es, /fr-fr, /nl-nl and /zh-cn paths to the home page. Redirect groovyn-web.vercel.app to the main address so only one copy exists.
 - [x] **Add security headers** (Claude, effort S, low impact, Foundation) `p0-headers`
   X-Content-Type-Options, Referrer-Policy, frame-ancestors, and a Permissions-Policy that still allows the camera on the measurement page.
-- [ ] **Publish the festival and wedding-season pages by 12 Oct** (You + Claude, effort M, high impact, Content) `p0-seasonal`
+- [x] **Publish the festival and wedding-season pages by 12 Oct** (You + Claude, effort M, high impact, Content) `p0-seasonal`
   (1) 'Diwali outfit stitching in Delhi: order-by dates and express options' (Karwa Chauth Thu 29 Oct, Dhanteras Fri 6 Nov, Diwali Sun 8 Nov). (2) Update the wedding timeline guide for this season: it resumes after Devuthani Ekadashi on 20 Nov, so the booking rush is now. Link a Panchang source for dates rather than copying them. You: name 3 to 5 tailors who really take express orders and their last-order dates.
 - [ ] **Bring mobile LCP under 2.5 s** (Claude, effort S, med impact, Pages) `p0-perf`
   Prioritise the main image, drop unused fonts and JavaScript, remove old-browser polyfills. Current LCP: home 2.9 s, category 2.8 s.
@@ -127,10 +130,10 @@ Close the gaps, start measuring, and publish the seasonal pages before the festi
 
 Make shop pages worth ranking, start earning trust, and publish the price guides.
 
-- [ ] **Start the claim drive on WhatsApp** (You, effort M, high impact, Data) `p1-claim-drive`
-  Message the 36 tailors first, then 19 fabric shops, 8 rentals and 6 boutiques, with the text in Appendix B. Goal: 15 claimed listings by 9 Nov. A claimed shop brings photos, a rate card, accurate hours and a likely link back.
-- [ ] **Polish the claim flow and add the Verified badge** (Claude, effort M, high impact, Data) `p1-claim-flow`
-  Phone-OTP check against the listed number, owner can add photos, hours, services and a rate card, a Verified badge, and a 'Listed on Groovyn' badge with a plain brand-name link. Claims land in the admin queue.
+- [ ] **Ask shops on WhatsApp for a rate list, photos and a visit offer** (You, effort M, high impact, Data) `p1-claim-drive`
+  Message the 36 tailors first, then 19 fabric shops, 8 rentals and 6 boutiques, with the text in Appendix B. The public claim page was removed on 9 Oct, so shops now send things to you on WhatsApp and you pass them to me. Goal: 15 shops with a rate list or photos by 9 Nov. Each one brings a real price, a better page and a likely link back.
+- [ ] **Add an admin form for a shop's rate card, photos, hours and visit offer** (Claude, effort M, high impact, Data) `p1-admin-editor`
+  With the claim page gone, this is how what shops send you reaches their page without a developer. Today a visit offer can be set with 'npm run offer', and prices read off a shop's own website can be loaded with 'npm run import:web-prices'.
 - [ ] **Photograph 25 shops, 3 photos each** (You, effort L, high impact, Data) `p1-photos`
   Front with the sign, inside, one sample of their work. Ask permission. Name files like `grover-tailors-khan-market-front.jpg`. I add upload, compression, alt text and an image sitemap. Photos are 0 of 75 today.
 - [ ] **Collect 20 rate cards from tailors** (You, effort M, high impact, Data) `p1-ratecards`
@@ -156,6 +159,39 @@ Make shop pages worth ranking, start earning trust, and publish the price guides
 - [ ] **After 2 to 3 weeks, check which pages Google indexed** (You, effort S, high impact, Measurement) `p1-gsc-review`
   Search Console, Pages. Send me the 'Why pages aren't indexed' list. It tells us which templates Google judges thin.
 
+### Content and discovery upgrades (From the 8 Oct content review)
+
+Make the site answer a wedding shopper's real questions, with evidence a visitor can trust. The full review is in docs/content-plan.md.
+
+- [ ] **Correct the over-promising copy and price labels** (Claude, effort S, high impact, Pages) `cr-copy`
+  The home page said listings had published rates and photos of actual work, and other pages said prices came from rate cards, when none have yet. Cards now say 'Indicative from' unless the shop's own rate card is behind the price. Ready in the working copy, waiting to be deployed.
+- [ ] **Make search understand how shoppers type** (Claude, effort S, high impact, Pages) `cr-search`
+  'bridal lehenga chandni chowk' used to return no shops. Search now matches word by word, understands spellings and Hinglish (lehnga, ghagra, darzi, cp), reads 'under 5000' as a budget, and says so when it has to loosen a search. Ready in the working copy, waiting to be deployed.
+- [ ] **Call and tag your shops: one 6-minute script** (You, effort M, high impact, Data) `cr-calls`
+  About 5 hours for the 45 phones in data/worklist.md. Confirm the address, get the rate list on WhatsApp, ask for a small offer for Groovyn visitors in the shop's own words, tick which garments, fabrics and occasions they really take, their last wedding-order date, lead time, number of trials, and for rentals the deposit and days. This unlocks most of the rest of this phase.
+- [ ] **Add a controlled tag list and show tags with their evidence** (Claude, effort M, high impact, Data) `cr-tags`
+  Garment, fabric, craft, occasion, role and mode tags, each marked as listed, stated by the shop (dated), seen by us, or confirmed by customers. Delhi tailors currently carry 48 free-text speciality values and 27 are used once. Needs the calls first.
+- [ ] **Wedding shopping pillar plus bride and groom guides, by 9 Nov** (You + Claude, effort L, high impact, Content) `cr-pillar`
+  Needs two market walks (Chandni Chowk and Lajpat Nagar), nine dated bridal quotes and your photos. These are the pages that can rank for a new wedding shopper. See the calendar below.
+- [ ] **Rental and boutique pages first, then sherwani on rent** (You + Claude, effort M, med impact, Content) `cr-rental`
+  Eight rental calls for days, deposit, trial and cleaning. No boutique currently sits in Lajpat Nagar, Karol Bagh, Rajouri Garden or South Ex, where wedding shoppers search, so those areas need listings before pages.
+- [ ] **Re-gate service pages on tag evidence and add about 10 offerings** (Claude, effort M, med impact, Pages) `cr-services`
+  Three service pages are indexable only because of estimated price lines. Index a page only when 5 or more shops carry the tag and 3 were stated by the shop within a year. New offerings: cotton, georgette and chiffon, brocade and zari, velvet, bandhgala, bridal blouse.
+- [ ] **Swap the Diwali and timeline 'planning allowances' for shop-quoted lead times** (You + Claude, effort S, med impact, Content) `cr-leadtimes`
+  Ask 10 tailors for their real festival-week and wedding-season lead times and update both guides with dated figures.
+- [ ] **Google sign-in and verified-visit reviews** (You + Claude, effort L, high impact, Data) `cr-accounts`
+  Needs your three decisions (who can review, what the coupon is, the Google login key). Reviews tied to a confirmed visit get a Verified badge; no rating markup until a shop has 5 genuine reviews; visit offers come from the shop and are not tied to the rating given.
+- [ ] **Home page: Bride, Groom, Family, Guest chooser and 'browse by what you need' chips** (Claude, effort S, med impact, Pages) `cr-home`
+  Lets a wedding shopper start from who they are and what they need, and routes to the right guide or filtered list.
+- [ ] **Phone layout: no sideways scroll, booking up front, a Book a free visit bar** (Claude, effort S, high impact, Pages) `cr-phone`
+  Category pages used to scroll sideways on phones, the booking form was the last thing on a long shop page, and the home hero chip was cut off at the screen edge. All fixed, and every page checked at 375 and 320 px wide. Ready in the working copy, waiting to be deployed.
+- [ ] **Typical Delhi prices on every shop page, plus prices read off shops' own websites** (Claude, effort M, high impact, Data) `cr-prices-fallback`
+  A shop with no price list now shows typical Delhi ranges for shops of its kind, labelled as ours. Eight shops that publish prices on their own websites get those ranges instead, marked as the shop's own with the date we checked (npm run collect:web-prices, then npm run import:web-prices). Ready in the working copy, waiting to be deployed.
+- [ ] **Win real 'book through Groovyn' offers from shops** (You + Claude, effort M, high impact, Data) `cr-offers`
+  The site has a Book through Groovyn section and a gold Visit offer badge, but the badge appears only when a shop has agreed to an offer. Ask on the same call (see data/worklist.md), and I set it with npm run offer. Never advertise a discount no shop has agreed to.
+- [ ] **Boutique products: a showcase that links to the boutique's own shop** (You + Claude, effort L, med impact, Pages) `cr-boutique-products`
+  Awaiting your choice. The proposal is to show a few pieces from boutiques that already sell online, with photo, price and a 'Buy on their website' button, and only with each boutique's written OK. Selling and taking payment on Groovyn itself needs a registered business, GST, payment-gateway KYC, a returns policy and a change to the Terms, so it comes later, if the showcase gets clicks.
+
 ### Weeks 6 to 9 (10 Nov to 7 Dec)
 
 Add depth: local guides, tools, the first price index, and the first links.
@@ -176,7 +212,7 @@ Add depth: local guides, tools, the first price index, and the first links.
   From 20 or more verified rate cards, with the method, sample size and date shown. This is the main PR asset and the most citable page on the site.
 - [ ] **Ten pitches for the price index and tools** (You + Claude, effort M, high impact, Authority) `p2-pr`
   HT City, Times of India Delhi, Delhi blogs, and startup press (YourStory, Inc42) for the founder angle. One concrete number per pitch.
-- [ ] **Ask every claimed shop to add the badge** (You, effort S, med impact, Authority) `p2-badge`
+- [ ] **Ask shops that send a rate card to add the badge** (You, effort S, med impact, Authority) `p2-badge`
   On their website or Instagram bio. Target: 10 links from shop sites.
 - [ ] **Pilot first-party reviews** (You + Claude, effort M, med impact, Data) `p2-reviews`
   After a booked visit, a WhatsApp request. Only real reviews, shown in full on the shop page. Consider review markup once a shop has 5 or more genuine ones.
@@ -219,7 +255,7 @@ The habits that keep the work compounding.
 - [ ] **Two 15-minute community sessions a week** (You, effort S, low impact, Authority) `o-community`
   Helpful answers on Quora, Reddit (r/delhi and fashion subs, follow each sub's rules, disclose who you are) and Facebook groups. Mostly nofollow links, so the value is traffic and brand, not ranking.
 - [ ] **Onboard shops continuously** (You + Claude, effort M, high impact, Data) `o-shops`
-  Claims, photos, rate cards, hours. Each one makes a page more useful and more likely to be linked.
+  Photos, rate cards, hours and visit offers. Each one makes a page more useful and more likely to be linked.
 - [ ] **Monthly: refresh, audit, snapshot** (Claude, effort S, med impact, Measurement) `o-monthly`
   Re-run the Places refresh, the crawl audit and Lighthouse, take a ranking snapshot of the tracked queries, and update dates on changed pages.
 
@@ -274,6 +310,36 @@ One page per keyword. No volume data: check in Search Console and Google Keyword
 | Wk 11 | 15 to 21 Dec | South Extension wedding shopping guide. Tailor vs boutique vs readymade. |
 | Wk 12 | 22 to 28 Dec | Delhi stitching price index 2026 with PR push. Year-end best-of refresh. |
 
+### Wedding-shopper pieces, from the content review
+
+| Date | Piece | Search | Needs |
+|---|---|---|---|
+| 23 Oct | Indian wedding shopping checklist: bride, groom, family | indian bridal shopping checklist | Nothing extra |
+| 2 Nov | Wedding shopping in Delhi: fabric, tailor, rent | wedding shopping delhi | Market walks, tailor calls |
+| 5 Nov | How Groovyn reviews work (trust page) | none | Your review decisions |
+| 9 Nov | Bridal lehenga price in Delhi: Chandni Chowk, Lajpat Nagar, Shahpur Jat | bridal lehenga price in delhi | 9 dated quotes, photos |
+| 9 Nov | Groom wear in Delhi: sherwani, bandhgala, suit or rent | sherwani for groom delhi | Rental and tailor calls |
+| 16 Nov | Sherwani on rent in Delhi: prices, deposits, trial | sherwani on rent delhi | Rental calls |
+| 16 Nov | Best fabric for a bridal lehenga: silk, velvet, net or brocade | fabric for bridal lehenga | Fabric shop prices |
+| 23 Nov | Chandni Chowk for weddings, lane by lane | chandni chowk wedding shopping | Market walk |
+| 23 Nov | Bridal blouse stitching in Delhi: cost, lead time, what to ask | bridal blouse stitching delhi | Tailor calls |
+| 30 Nov | Lajpat Nagar for weddings: stitch, rent, fabric in one trip | lajpat nagar wedding shopping | Market walk |
+| 30 Nov | Lehenga stitching cost in Delhi with your own fabric | lehenga stitching cost in delhi | Tailor calls |
+| 7 Dec | Guest and bridesmaid outfits: rent, 7-day stitch or buy | bridesmaid lehenga delhi | Rental and tailor calls |
+| 7 Dec | Bandhgala, jodhpuri, achkan or sherwani, and which tailors | sherwani vs bandhgala | Tailor calls |
+| 14 Dec | Check silk, georgette and velvet before you buy | how to identify pure silk | Fabric shop visit |
+| 14 Dec | Fabric for a sherwani or bandhgala, and how much | best fabric for sherwani | Fabric shop prices |
+| 21 Dec | Roka to reception: rent, stitch or buy by function | sangeet outfit | Tailor calls |
+| 4 Jan | Reception and cocktail: gown, indo-western or tuxedo | gown on rent delhi | Rental and tailor calls |
+| 11 Jan | Mother of the bride and groom: outfits, fabrics, fittings | mother of the bride outfit indian | Tailor calls |
+| 18 Jan | Suit and shirt fabric by season in Delhi | suit fabric delhi | Fabric shop prices |
+| 25 Jan | Shankar Market, Connaught Place: a tailor lane guide | shankar market tailors | Market walk, tailor calls |
+| 1 Feb | Summer wedding fabrics for April and May dates | fabric for summer wedding lehenga | Fabric shop prices |
+| Feb | Tailor, boutique, readymade or rent: five questions | none | Nothing extra |
+| 8 Feb | Eid outfits in Delhi: order-by dates (only if 3 or more Old Delhi tailors confirm) | none | Tailor calls |
+| Mar | What Delhi customers actually paid (first verified-visit survey) | none | 30 or more verified reviews |
+| Mar | Shops customers rated best for bridal blouses, sherwanis and rentals | none | 30 or more verified reviews |
+
 ### Rules for every piece
 
 - A named author, plus 'checked by' a working tailor or shop owner for guides that give prices or measurements.
@@ -290,7 +356,7 @@ Links are the main bottleneck for competitive terms, and the main thing on-page 
 
 | Source | How |
 |---|---|
-| Shop badge | Claimed shops show 'Listed on Groovyn' and link back. Target 10 to 20 links in 60 days. |
+| Shop badge | Shops that send us a rate card can show 'Listed on Groovyn' and link back. Target 10 to 20 links in 60 days. |
 | Data you own | The Delhi stitching price index, a fabric market map, the size charts. Pitch them with one concrete number. |
 | The measurement tool | A free, private tool is a story for fashion students, bloggers and startup press. Be plain about its accuracy. |
 | Creators and planners | Delhi market-tour creators, wedding planners and bloggers. Offer a real asset, not a request for a favour. |
@@ -303,22 +369,22 @@ Links are the main bottleneck for competitive terms, and the main thing on-page 
 
 | What | Track |
 |---|---|
-| Inputs (weekly) | Guides and tools published, shops claimed, photos added, rate cards collected, outreach sent, links earned. |
+| Inputs (weekly) | Guides and tools published, shops that sent a rate list or photos, photos added, rate cards collected, outreach sent, links earned. |
 | Visibility | Indexed pages, impressions, clicks, CTR and average position for the tracked queries, split branded and non-branded. |
 | Quality | Core Web Vitals pass rate, pages Google calls 'crawled, not indexed', broken links. |
-| Outcomes | Bookings, claims, calls, directions taps, scans completed, by landing page. |
+| Outcomes | Bookings, calls, directions taps, scans completed, by landing page. |
 
 ### What 'on track' looks like
 
 | When | Markers |
 |---|---|
-| Day 30 | 90% or more of sitemap pages indexed. Analytics live. 8 new pages published. 10 shops claimed. Impressions appearing for long-tail queries. |
-| Day 60 | At least 20 queries with impressions in positions 1 to 30. 20 rate cards collected. 25 shops claimed. First 3 links earned. |
+| Day 30 | 90% or more of sitemap pages indexed. Analytics live. 8 new pages published. 10 shops with a rate list or photos. Impressions appearing for long-tail queries. |
+| Day 60 | At least 20 queries with impressions in positions 1 to 30. 20 rate cards collected. 25 shops with a rate list or photos. First 3 links earned. |
 | Day 90 | At least 10 queries in the top 10. About 150 listings with 40 or more photographed. First price index published. About 10 referring domains. |
 
 These are markers to check yourself against, not forecasts. A new site with no authority can take longer, and I will say so when the data shows it.
 
-Events: `booking_started`, `booking_submitted`, `claim_started`, `claim_submitted`, `scan_started`, `scan_completed`, `call_tap`, `directions_tap`, `shop_website_tap`, `whatsapp_tap`
+Events: `booking_started`, `booking_submitted`, `scan_started`, `scan_completed`, `call_tap`, `directions_tap`, `shop_website_tap`, `whatsapp_tap`
 
 | When | What |
 |---|---|
@@ -374,7 +440,7 @@ Use the year only on lists you will refresh each year. Description under 158 cha
 
 ### B. WhatsApp message to shops
 
-> Hi {Name}, this is {You} from Groovyn (groovyn.com), a free directory that helps people in Delhi NCR find good tailors and boutiques. {Shop} is already listed here: {link}. You can claim it for free in about 2 minutes: add photos, your rate card and timings, and get a Verified badge. We never charge to be listed or to rank higher. Want me to send the claim link?
+> Hi {Name}, this is {You} from Groovyn (groovyn.com), a free directory that helps people in Delhi NCR find good tailors and boutiques. {Shop} is already listed here: {link}. If you send me your rate list and three photos of your work on WhatsApp, I will add them to your page for free. You can also give me the exact words for any small offer you would like to make to people who book a visit through Groovyn. We never charge to be listed or to rank higher. Want to send them?
 
 Keep it plain, never promise leads, and stop if they say no.
 

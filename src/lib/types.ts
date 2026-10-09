@@ -6,7 +6,7 @@
  * treat changes here as breaking: add fields, don't repurpose them.
  */
 
-export type PriceSource = "shop" | "menu" | "estimate";
+export type PriceSource = "shop" | "menu" | "website" | "estimate";
 
 export type PriceItemDTO = {
   id: string;
@@ -16,7 +16,11 @@ export type PriceItemDTO = {
   priceMax: number | null;
   unit: string;
   note: string | null;
-  /** "shop"/"menu" = the shop gave us this. "estimate" = our benchmark, shown as indicative. */
+  /**
+   * "shop"/"menu" = the shop gave us this. "website" = the shop publishes it on
+   * its own website, with the date we checked in `note`. "estimate" = our
+   * benchmark, shown as indicative.
+   */
   source: PriceSource;
 };
 
@@ -117,6 +121,8 @@ export type Paginated<T> = {
   perPage: number;
   total: number;
   totalPages: number;
+  /** Set when a search had to be loosened, so the page can say so. */
+  note?: string;
 };
 
 export type StoreSort =

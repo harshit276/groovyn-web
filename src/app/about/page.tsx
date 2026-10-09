@@ -119,10 +119,10 @@ export default function AboutPage() {
         <Section id="touch" title="Get in touch">
           <p>
             Customers and shop owners are both welcome. Start with the{" "}
-            <A href="/contact">contact page</A>, <A href="/claim">claim your
-            listing</A> if you run a shop, or <A href="/suggest">suggest a shop</A>{" "}
-            we are missing. Common questions are answered in the{" "}
-            <A href="/faq">FAQ</A>.
+            <A href="/contact">contact page</A>, or{" "}
+            <A href="/suggest">suggest a shop</A> we are missing. Shop owners can
+            write to us to correct or remove a listing. Common questions are
+            answered in the <A href="/faq">FAQ</A>.
           </p>
         </Section>
       </PageBody>

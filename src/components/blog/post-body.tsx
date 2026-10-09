@@ -57,12 +57,6 @@ const CTA_COPY: Record<
     label: "Browse fabric shops",
     href: (city) => `/${city}/fabric-shops`,
   },
-  claim: {
-    title: "Run a shop? Publish your rates",
-    body: "Claiming your listing is free. Add your price list, photos and timings so customers know what to expect.",
-    label: "Claim your listing",
-    href: () => "/claim",
-  },
 };
 
 /**

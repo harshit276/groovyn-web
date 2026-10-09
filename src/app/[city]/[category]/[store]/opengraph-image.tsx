@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 import { getStoreDetail } from "@/lib/queries";
 import { getCategory } from "@/lib/site";
-import { formatPriceRange } from "@/lib/utils";
+import { formatPriceRange, hasPrice } from "@/lib/utils";
 
 /**
  * Per-store share image.
@@ -38,7 +38,10 @@ export default async function StoreOgImage({
   const where = store
     ? [store.locality?.name, store.city.name].filter(Boolean).join(", ")
     : "Delhi NCR";
-  const price = store ? formatPriceRange(store.priceMin, store.priceMax) : "";
+  const price =
+    store && hasPrice(store.priceMin, store.priceMax)
+      ? formatPriceRange(store.priceMin, store.priceMax)
+      : "See typical rates";
 
   return new ImageResponse(
     (

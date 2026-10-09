@@ -95,8 +95,10 @@ export default function TermsPage() {
           <Bullets>
             <li>
               A price marked as a shop’s own rate card was supplied by that shop on
-              the date shown. Other figures are indicative ranges from our
-              research. They are not quotes.
+              the date shown. A price marked as listed on a shop’s website is the
+              shop’s own, as we found it on the date shown. Other figures are
+              indicative or typical ranges from our research. They are not
+              quotes.
             </li>
             <li>
               Ratings marked as Google’s belong to Google and are shown with their
@@ -149,8 +151,8 @@ export default function TermsPage() {
           <Bullets>
             <li>give false details, or pretend to be someone else;</li>
             <li>
-              claim a listing unless you own the shop or are authorised to act for
-              it;
+              ask us to change a listing unless you own the shop or are
+              authorised to act for it;
             </li>
             <li>
               copy listings, prices or guides in bulk, or use bots to collect or
@@ -163,10 +165,10 @@ export default function TermsPage() {
 
         <Section id="shops" title="For shop owners">
           <p>
-            Listing a shop on Groovyn is free. When you claim a listing, you
-            confirm that you are allowed to act for the shop and that what you
-            give us is accurate. Offers you ask us to show must be ones you will
-            honour.
+            Listing a shop on Groovyn is free. When you ask us to change a
+            listing or show an offer, you confirm that you are allowed to act for
+            the shop and that what you give us is accurate. Offers you ask us to
+            show must be ones you will honour.
           </p>
           <p>
             Photos and text you send remain yours. You give us a non-exclusive

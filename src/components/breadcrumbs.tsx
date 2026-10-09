@@ -12,18 +12,21 @@ export function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
           return (
             // Keyed by position, not href: a trail can legitimately repeat a
             // destination, and a duplicate key silently drops a crumb.
+            // The chevron follows each crumb rather than leading the next one,
+            // so when a long trail wraps on a phone a line starts with a name
+            // and not with a stray ">".
             <li key={`${i}-${c.href}`} className="flex items-center gap-1">
-              {i > 0 ? (
-                <ChevronRight aria-hidden className="size-3.5 text-ink-300" />
-              ) : null}
               {isLast ? (
                 <span aria-current="page" className="text-ink-800">
                   {c.name}
                 </span>
               ) : (
-                <Link href={c.href} className="hover:text-brand-600">
-                  {c.name}
-                </Link>
+                <>
+                  <Link href={c.href} className="hover:text-brand-600">
+                    {c.name}
+                  </Link>
+                  <ChevronRight aria-hidden className="size-3.5 text-ink-300" />
+                </>
               )}
             </li>
           );

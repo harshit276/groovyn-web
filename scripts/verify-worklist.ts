@@ -108,8 +108,12 @@ async function main() {
       `${unreachable.length} need a number found first. ${noAddress.length} have no usable street address.\n`
   );
   lines.push(
-    "Ask for two things on every call: **confirm the address**, and **ask them to WhatsApp their rate list**. " +
-      "The second is what no competitor has.\n"
+    "Ask for three things on every call: **confirm the address**, **ask them to WhatsApp their rate list**, " +
+      "and **ask whether they will give people who book through Groovyn a small offer**, " +
+      "such as a free alteration, a percentage off or free fabric advice. " +
+      "The rate list is what no competitor has. Write the offer down in the shop's own words, because the " +
+      "shop has to honour it when a visitor shows their visit token. " +
+      "An offer is shown on the shop's page only after the shop has agreed to it.\n"
   );
 
   lines.push("\n## Call these first\n");

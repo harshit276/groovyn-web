@@ -1,4 +1,5 @@
 import {
+  ArrowDown,
   BadgeCheck,
   CalendarClock,
   MapPin,
@@ -30,6 +31,12 @@ export function StoreHero({
   crumbs: Crumb[];
 }) {
   const category = getCategory(store.category);
+  // Say where the headline range comes from, the same way the price list does.
+  const priceLabel = store.rateCardVerified
+    ? "Rate card range"
+    : store.priceItems.some((p) => p.source === "website")
+      ? "On the shop’s website"
+      : "Indicative range";
   const hero = store.images[0];
   const heroSrc = resolveStoreImage(hero?.url, 1600);
 
@@ -127,14 +134,31 @@ export function StoreHero({
         </div>
 
         <div className="mt-7 flex flex-wrap items-end justify-between gap-5 border-t border-white/10 pt-6">
-          <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/40">
-              Typical range
-            </p>
-            <p className="mt-1 font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-              {formatPriceRange(store.priceMin, store.priceMax)}
-            </p>
-          </div>
+          {store.priceMin == null && store.priceMax == null ? (
+            // Nothing for this shop yet: point at the city-wide ranges further
+            // down the page rather than printing "On request".
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/40">
+                Prices
+              </p>
+              <a
+                href="#typical-prices"
+                className="mt-1 inline-flex items-center gap-2 font-display text-2xl font-extrabold tracking-tight text-white underline-offset-4 hover:underline sm:text-3xl"
+              >
+                See typical prices
+                <ArrowDown aria-hidden className="size-5 text-brand-300" />
+              </a>
+            </div>
+          ) : (
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/40">
+                {priceLabel}
+              </p>
+              <p className="mt-1 font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                {formatPriceRange(store.priceMin, store.priceMax)}
+              </p>
+            </div>
+          )}
 
           {store.rateCardVerified || store.verified || store.claimed ? (
             <div className="flex flex-wrap gap-2">

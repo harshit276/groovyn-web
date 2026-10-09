@@ -51,7 +51,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Are the prices real?",
-    a: "Prices say where they came from. A shop's own rate card carries its date. A range marked indicative is our research, not a quote. If we do not know, it says on request. Always confirm the price with the shop.",
+    a: "Prices say where they came from. A shop's own rate card carries its date. A range marked indicative is our research, not a quote. For a shop that has given us no prices, we show typical prices for shops of its kind in the city, and say so. Always confirm the price with the shop.",
   },
   {
     q: "How accurate is the measurement scan?",
@@ -66,8 +66,8 @@ const FAQS: { q: string; a: string }[] = [
     a: "Delhi NCR: Delhi, Gurugram and Noida. Most listings are in Delhi today, and we add areas as we can check shops properly.",
   },
   {
-    q: "My shop is listed. How do I claim, correct or remove it?",
-    a: "Use the claim page to take over the listing for free, or email us to correct or remove it. We will check that you run the shop first.",
+    q: "My shop is listed. How do I correct or remove it?",
+    a: "Email us the page address and what should change, or ask us to remove the listing. We will check that you run the shop first.",
   },
   {
     q: "How do I suggest a shop?",
@@ -115,7 +115,6 @@ export default function FaqPage() {
             <A href="/how-we-rank">How we rank</A>, <A href="/privacy">Privacy
             Policy</A>, <A href="/terms">Terms of Use</A>,{" "}
             <A href="/refund-policy">Cancellations and Refunds</A>,{" "}
-            <A href="/claim">Claim your listing</A>,{" "}
             <A href="/suggest">Suggest a shop</A>, <A href="/measurements">the
             measurement scan</A> and <A href="/contact">Contact</A>.
           </p>

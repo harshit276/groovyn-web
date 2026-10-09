@@ -100,7 +100,7 @@ export default async function HomePage() {
   const stats = [
     { value: `${totalShops}+`, label: "Shops listed" },
     { value: `${cities.length}`, label: "Cities covered" },
-    { value: "₹0", label: "To list your shop" },
+    { value: "₹0", label: "To book a visit" },
   ];
 
   return (
@@ -152,9 +152,9 @@ export default async function HomePage() {
 
               <Rise delay={120}>
                 <p className="mt-6 max-w-lg text-base leading-relaxed text-white/60 sm:text-lg">
-                  Compare Delhi NCR&rsquo;s best tailors, boutiques, fabric and
-                  rental shops — see real rates up front, book a visit, and grab
-                  the deals they&rsquo;re running.
+                  Compare Delhi NCR&rsquo;s tailors, boutiques, fabric and
+                  rental shops — see typical prices up front, then book a visit
+                  for free.
                 </p>
               </Rise>
 
@@ -165,15 +165,17 @@ export default async function HomePage() {
               </Rise>
 
               <Rise delay={240}>
-                <dl className="mt-10 flex flex-wrap gap-x-10 gap-y-5">
+                {/* Three across on a phone. As a wrapping row the third figure
+                    dropped to a line of its own. */}
+                <dl className="mt-10 grid grid-cols-3 gap-x-4 gap-y-5 sm:flex sm:flex-wrap sm:gap-x-10">
                   {stats.map((s) => (
                     <div key={s.label}>
                       <dt className="sr-only">{s.label}</dt>
                       <dd>
-                        <span className="block font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                        <span className="block font-display text-2xl font-extrabold tracking-tight text-white sm:text-4xl">
                           {s.value}
                         </span>
-                        <span className="mt-0.5 block text-xs font-medium uppercase tracking-[0.14em] text-white/40">
+                        <span className="mt-0.5 block text-[10px] font-medium uppercase tracking-[0.12em] text-white/40 sm:text-xs sm:tracking-[0.14em]">
                           {s.label}
                         </span>
                       </dd>
@@ -203,8 +205,8 @@ export default async function HomePage() {
               {[
                 {
                   icon: ReceiptText,
-                  title: "Published price lists",
-                  body: "Rate cards from the shop, not guesses.",
+                  title: "Prices that show their source",
+                  body: "A shop’s own rate card, or our estimate, always labelled.",
                 },
                 {
                   icon: PhoneOff,
@@ -354,8 +356,8 @@ export default async function HomePage() {
                   Shops worth knowing
                 </h2>
                 <p className="mt-4 text-white/55">
-                  Verified listings with published rates, real timings and
-                  photos of actual work.
+                  Ranked by Google rating, adjusted for how many reviews it
+                  rests on. No shop pays to be here.
                 </p>
               </div>
               <Link
@@ -404,8 +406,9 @@ export default async function HomePage() {
                 Starting prices near you
               </h2>
               <p className="mt-4 text-ink-500">
-                What Delhi NCR shops charge, from the rate cards they published
-                themselves. Compare, then book the one you like.
+                Indicative prices from our own research, with a shop’s own rate
+                card marked separately when it shares one. Compare, then book the
+                one you like.
               </p>
             </div>
           </Rise>
@@ -485,8 +488,11 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ══ Owner CTA ════════════════════════════════════════ */}
-      <section className="bg-ground pb-20 sm:pb-28">
+      {/* ══ Book through Groovyn ═════════════════════════════ */}
+      {/* The offer wording is conditional on purpose: a visit offer is the
+          shop's own, set per shop, and the shop has to honour it. Until a shop
+          gives us one this section promises only what is true for everyone. */}
+      <section id="book-a-visit" className="bg-ground pb-20 sm:pb-28">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           <Rise>
             <div className="mesh-dark grain relative isolate overflow-hidden rounded-[2rem] px-6 py-16 text-center sm:px-16 sm:py-24">
@@ -502,25 +508,59 @@ export default async function HomePage() {
 
               <div className="relative">
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-300 backdrop-blur-sm">
-                  For shop owners
+                  Book through Groovyn
                 </span>
 
                 <h2 className="mx-auto mt-6 max-w-3xl font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.03em] text-white sm:text-6xl">
-                  Your listing is free.{" "}
+                  Book a visit.{" "}
                   <span className="text-gradient font-serif italic font-medium">
-                    Always.
+                    It&rsquo;s free.
                   </span>
                 </h2>
 
                 <p className="mx-auto mt-6 max-w-xl text-white/55 sm:text-lg">
-                  Claim your shop to manage photos, price lists, timings and
-                  contact details. No commission, no middlemen, no paid ranking.
+                  Tell a shop what you need and when, and it calls to confirm.
+                  When a shop gives a deal to people who book through Groovyn,
+                  you will see it on its page as an{" "}
+                  <span className="text-white/80">offer on booked visits</span>.
                 </p>
+
+                <ol className="mx-auto mt-10 grid max-w-3xl gap-3 text-left sm:grid-cols-3">
+                  {[
+                    {
+                      title: "Choose a shop",
+                      body: "Compare by Google rating, area and price.",
+                    },
+                    {
+                      title: "Book a day",
+                      body: "No payment and no obligation. We never sell your number.",
+                    },
+                    {
+                      title: "Visit",
+                      body: "Show your visit token at the counter, and ask about the offer if the shop has one.",
+                    },
+                  ].map((step, i) => (
+                    <li
+                      key={step.title}
+                      className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm"
+                    >
+                      <span className="font-display text-xs font-bold tracking-[0.2em] text-brand-300">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <p className="mt-2 font-display text-base font-bold text-white">
+                        {step.title}
+                      </p>
+                      <p className="mt-1 text-sm leading-relaxed text-white/50">
+                        {step.body}
+                      </p>
+                    </li>
+                  ))}
+                </ol>
 
                 <div className="mt-10 flex flex-wrap justify-center gap-3">
                   <Button asChild variant="brand" size="lg" className="shadow-3d-brand">
-                    <Link href="/claim">
-                      Claim your listing
+                    <Link href={`/${primaryCity}/tailors`}>
+                      Find a shop to visit
                       <ArrowRight aria-hidden className="ml-1 size-4" />
                     </Link>
                   </Button>
@@ -530,7 +570,7 @@ export default async function HomePage() {
                     size="lg"
                     className="border-white/20 bg-white/5 text-white backdrop-blur-sm hover:border-white/45 hover:bg-white/10"
                   >
-                    <Link href="/suggest">Suggest a shop</Link>
+                    <Link href="/measurements">Measure yourself first</Link>
                   </Button>
                 </div>
               </div>

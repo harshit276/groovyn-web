@@ -116,9 +116,10 @@ export default function PrivacyPage() {
               about it, and to look after bookings.
             </li>
             <li>
-              <strong>Claiming a listing.</strong> Your name, phone number, email
-              (optional), role, and any offer or message you add. We use this to
-              check that you run the shop and to update the listing.
+              <strong>Shop owners.</strong> If you write to us about a listing,
+              your name, phone number or email, your role, and any offer or
+              message you add. We use this to check that you run the shop and to
+              update the listing.
             </li>
             <li>
               <strong>Suggesting a shop.</strong> The shop’s name, category, city,
@@ -243,7 +244,7 @@ export default function PrivacyPage() {
 
         <Section id="keep" title="How long we keep it">
           <p>
-            We keep visit requests, claims and suggestions for as long as we need
+            We keep visit requests, shop owners’ messages and suggestions for as long as we need
             to handle them, settle any dispute and meet legal obligations. After
             that we delete or anonymise them. You can ask us to delete yours
             sooner. Our hosting provider keeps server logs for a short period.

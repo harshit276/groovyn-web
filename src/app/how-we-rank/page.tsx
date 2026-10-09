@@ -129,8 +129,8 @@ export default function HowWeRankPage() {
         <Section id="sources" title="Where our information comes from">
           <Bullets>
             <li>
-              <strong>The shops themselves,</strong> through claims, rate cards and
-              offers.
+              <strong>The shops themselves,</strong> through the rate cards and
+              offers they give us.
             </li>
             <li>
               <strong>Google,</strong> for ratings, review counts and some
@@ -153,11 +153,18 @@ export default function HowWeRankPage() {
               <strong>A shop’s own rate card,</strong> with the date it was given.
             </li>
             <li>
+              <strong>Prices on the shop’s own website,</strong> marked as such
+              and with the date we checked them.
+            </li>
+            <li>
               <strong>An indicative range,</strong> which is our own research. It is
               not a quote.
             </li>
             <li>
-              <strong>On request,</strong> when we do not know.
+              <strong>Typical prices in the city,</strong> shown for a shop that
+              has given us no prices, as ranges for shops of its kind. They are
+              not that shop’s prices, and premium or designer shops often charge
+              more.
             </li>
           </Bullets>
           <p>

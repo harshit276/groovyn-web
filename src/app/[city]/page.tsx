@@ -168,7 +168,7 @@ export default async function CityPage({ params }: PageProps<"/[city]">) {
         <SectionHeading
           eyebrow="Price transparency"
           title={`What things cost in ${city.name}`}
-          description="Built from rate cards shops have shared with us."
+          description="Indicative ranges from our research. A shop’s own rate card is marked separately."
         />
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {services.slice(0, 9).map((s) => (

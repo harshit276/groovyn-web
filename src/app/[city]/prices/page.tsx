@@ -33,7 +33,7 @@ export async function generateMetadata({
   const indexable = cities[0]?.slug === city.slug;
 
   const title = `Custom Clothing Prices in ${city.name} (${new Date().getFullYear()})`;
-  const description = `What stitching, tailoring, boutique work and rentals actually cost in ${city.name} — a price index built from rate cards published by local shops.`;
+  const description = `What stitching, tailoring, boutique work and rentals cost in ${city.name}: indicative ranges from our research, with shops' own rate cards marked apart.`;
 
   return {
     title,
@@ -127,7 +127,7 @@ export default async function CityPricesPage({
             </div>
             <div>
               <dt className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/40">
-                With a published range
+                Priced services
               </dt>
               <dd className="mt-1.5 font-display text-3xl font-extrabold tabular-nums tracking-tight text-white sm:text-4xl">
                 {priced}
@@ -168,7 +168,7 @@ export default async function CityPricesPage({
                 </Link>
               </div>
 
-              <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {list.map((s) => (
                   <li key={s.slug}>
                     <Link

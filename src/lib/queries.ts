@@ -2,6 +2,11 @@ import "server-only";
 
 import { db } from "@/lib/db";
 import { rankStores } from "@/lib/ranking";
+import {
+  parseQuery,
+  type ParsedQuery,
+  type SearchTerm,
+} from "@/lib/search-terms";
 import type {
   CityDTO,
   LocalityDTO,
@@ -196,6 +201,96 @@ export async function getService(slug: string) {
 /* ────────────────────────────── Stores ────────────────────────────── */
 
 /**
+ * A shop matches a word if any spelling of it appears in any searchable field.
+ * Postgres LIKE is case-sensitive, so every match needs mode: "insensitive",
+ * otherwise "Suit" and "suit" return different results.
+ *
+ * These are substring scans, which is fine for hundreds of shops. If listings
+ * pass a few thousand, move this to Postgres full-text search.
+ */
+function termClause(term: SearchTerm) {
+  const ci = (text: string) => ({ contains: text, mode: "insensitive" as const });
+  const clauses: Record<string, unknown>[] = term.alternatives.flatMap((text) => [
+    { name: ci(text) },
+    { about: ci(text) },
+    { address: ci(text) },
+    { specialities: ci(text) },
+    { materials: ci(text) },
+    { locality: { name: ci(text) } },
+    { priceItems: { some: { label: ci(text) } } },
+    { priceItems: { some: { service: { name: ci(text) } } } },
+    { priceItems: { some: { service: { aliases: ci(text) } } } },
+  ]);
+  if (term.category) clauses.push({ category: term.category });
+  return { OR: clauses };
+}
+
+/**
+ * The ids of the shops a typed phrase should show.
+ *
+ * Shops matching every word come first and alone. If there are none, the shops
+ * matching the most words are returned, with a note, so a shopper who types
+ * "bridal lehenga chandni chowk" sees the closest shops and is told why, and not
+ * an empty page. A budget ("under 5000") narrows the result only if some shop
+ * lists a price that low; otherwise it is ignored and the note says so.
+ */
+async function matchTerms(
+  base: Record<string, unknown>[],
+  parsed: ParsedQuery,
+  typed: string
+): Promise<{ ids: string[]; note?: string }> {
+  let ids: string[];
+  let note: string | undefined;
+
+  if (!parsed.terms.length) {
+    const rows = await db.store.findMany({
+      where: { AND: base },
+      select: { id: true },
+    });
+    ids = rows.map((r) => r.id);
+  } else {
+    const sets = await Promise.all(
+      parsed.terms.map(async (term) => {
+        const rows = await db.store.findMany({
+          where: { AND: [...base, termClause(term)] },
+          select: { id: true },
+        });
+        return new Set(rows.map((r) => r.id));
+      })
+    );
+
+    ids = [...sets[0]].filter((id) => sets.every((s) => s.has(id)));
+
+    if (!ids.length && parsed.terms.length > 1) {
+      const counts = new Map<string, number>();
+      for (const s of sets) {
+        for (const id of s) counts.set(id, (counts.get(id) ?? 0) + 1);
+      }
+      const best = Math.max(0, ...counts.values());
+      if (best > 0) {
+        ids = [...counts].filter(([, n]) => n === best).map(([id]) => id);
+        note = `No shop matches every word in “${typed}”. These match the most (${best} of ${parsed.terms.length}).`;
+      }
+    }
+  }
+
+  if (ids.length && parsed.maxPrice != null) {
+    const priced = await db.store.findMany({
+      where: { id: { in: ids }, priceMin: { lte: parsed.maxPrice } },
+      select: { id: true },
+    });
+    if (priced.length) {
+      ids = priced.map((r) => r.id);
+    } else {
+      const ignored = `None of these list a starting price under ₹${parsed.maxPrice.toLocaleString("en-IN")}, so the budget was ignored.`;
+      note = note ? `${note} ${ignored}` : ignored;
+    }
+  }
+
+  return { ids, note };
+}
+
+/**
  * The one query every listing surface goes through — category pages, locality
  * pages, service pages, search, and /api/v1/stores.
  */
@@ -226,25 +321,17 @@ export async function listStores(
   if (filters.service)
     and.push({ priceItems: { some: { service: { slug: filters.service } } } });
 
-  // Postgres LIKE is case-sensitive, so every free-text match needs
-  // mode: "insensitive" — without it "Suit" and "suit" return different results.
-  if (filters.q) {
-    const q = filters.q.trim();
-    if (q) {
-      const ci = { contains: q, mode: "insensitive" as const };
-      and.push({
-        OR: [
-          { name: ci },
-          { about: ci },
-          { address: ci },
-          { specialities: ci },
-          { materials: ci },
-          { locality: { name: ci } },
-          { priceItems: { some: { label: ci } } },
-          { priceItems: { some: { service: { name: ci } } } },
-          { priceItems: { some: { service: { aliases: ci } } } },
-        ],
-      });
+  // Free text. Every word has to match somewhere, and when nothing matches every
+  // word the closest matches are shown with a note saying so. See
+  // lib/search-terms.ts for how a typed phrase becomes words.
+  let note: string | undefined;
+  const typed = filters.q?.trim();
+  if (typed) {
+    const parsed = parseQuery(typed);
+    if (parsed.terms.length || parsed.maxPrice != null) {
+      const matched = await matchTerms(and, parsed, typed);
+      note = matched.note;
+      and.push({ id: { in: matched.ids } });
     }
   }
 
@@ -290,6 +377,7 @@ export async function listStores(
       perPage,
       total: ranked.length,
       totalPages: Math.max(1, Math.ceil(ranked.length / perPage)),
+      ...(note ? { note } : {}),
     };
   }
 
@@ -310,6 +398,7 @@ export async function listStores(
     perPage,
     total,
     totalPages: Math.max(1, Math.ceil(total / perPage)),
+    ...(note ? { note } : {}),
   };
 }
 

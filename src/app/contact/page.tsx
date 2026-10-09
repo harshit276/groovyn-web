@@ -67,9 +67,9 @@ export default function ContactPage() {
               timings or price. Send the page address and what should change.
             </li>
             <li>
-              <strong>Shop owners:</strong> to take over a listing,{" "}
-              <A href="/claim">use the claim form</A>. To change or remove one,
-              email us.
+              <strong>Shop owners:</strong> to correct or remove a listing, email
+              us from the shop’s phone number or email address so we can check
+              it is you.
             </li>
             <li>
               <strong>Privacy requests,</strong> such as seeing, correcting or

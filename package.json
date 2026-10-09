@@ -16,7 +16,11 @@
     "enrich": "tsx scripts/enrich-places.ts",
     "verify:scan": "tsx scripts/verify-scan-math.ts",
     "verify:blog": "tsx scripts/verify-blog.ts",
-    "indexnow": "node scripts/indexnow.mjs"
+    "indexnow": "node scripts/indexnow.mjs",
+    "verify:search": "tsx --conditions=react-server scripts/verify-search.ts",
+    "offer": "tsx --conditions=react-server scripts/set-visit-offer.ts",
+    "collect:web-prices": "node scripts/collect-web-prices.mjs",
+    "import:web-prices": "tsx --conditions=react-server scripts/import-web-prices.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

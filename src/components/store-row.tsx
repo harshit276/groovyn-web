@@ -16,7 +16,7 @@ import { StoreCover } from "@/components/store-cover";
 import { isPlacesRef, resolveStoreImage } from "@/lib/images";
 import { getCategory } from "@/lib/site";
 import type { StoreSummaryDTO } from "@/lib/types";
-import { cn, formatPriceRange } from "@/lib/utils";
+import { cn, formatPriceRange, hasPrice } from "@/lib/utils";
 
 /**
  * Listing row: photo left, details right, two actions at the foot.
@@ -155,12 +155,25 @@ export function StoreRow({
           </p>
 
           <div className="mt-2.5 flex items-baseline gap-1.5">
-            <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-400">
-              From
-            </span>
-            <span className="font-display text-base font-extrabold tracking-tight text-ink-950 sm:text-lg">
-              {formatPriceRange(store.priceMin, store.priceMax)}
-            </span>
+            {hasPrice(store.priceMin, store.priceMax) ? (
+              <>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-400">
+                  {store.rateCardVerified ? "Rate card" : "Indicative"}
+                </span>
+                <span className="font-display text-base font-extrabold tracking-tight text-ink-950 sm:text-lg">
+                  {formatPriceRange(store.priceMin, store.priceMax)}
+                </span>
+              </>
+            ) : (
+              <>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-400">
+                  Prices
+                </span>
+                <span className="font-display text-sm font-bold tracking-tight text-ink-600 sm:text-base">
+                  Typical rates inside
+                </span>
+              </>
+            )}
           </div>
         </div>
 

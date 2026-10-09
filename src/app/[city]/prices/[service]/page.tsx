@@ -46,7 +46,12 @@ export async function generateMetadata({
     low && high ? ` — ₹${low.toLocaleString("en-IN")} to ₹${high.toLocaleString("en-IN")}` : "";
 
   const title = `${service.name} Price in ${city.name} (${new Date().getFullYear()})${range}`;
-  const description = `What ${service.name.toLowerCase()} actually costs in ${city.name}, based on rate cards shared by local shops. Compare prices and find shops near you.`;
+  // Say "rate cards" only when there are some. Until then it is our own research.
+  const basis =
+    index.sampleSize > 0
+      ? "based on rate cards shared by local shops"
+      : "an indicative range from our own research";
+  const description = `What ${service.name.toLowerCase()} costs in ${city.name}, ${basis}. Compare prices and find shops near you.`;
 
   // With no shop-supplied rate cards, every city falls back to the same national
   // benchmark — so /delhi/prices/x and /noida/prices/x would be identical thin

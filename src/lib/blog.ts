@@ -47,7 +47,7 @@ export type Block =
     }
   /** Live list of localities, with counts, linking to their listing pages. */
   | { type: "localities"; category: CategorySlug; limit?: number; title?: string }
-  | { type: "cta"; kind: "measure" | "tailors" | "rentals" | "fabric" | "claim" };
+  | { type: "cta"; kind: "measure" | "tailors" | "rentals" | "fabric" };
 
 export type Faq = { q: string; a: string };
 

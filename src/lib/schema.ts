@@ -116,8 +116,12 @@ export function storeSchema(store: StoreDetailDTO) {
     });
 
   const offers = store.priceItems
-    // Only publish prices the shop actually gave us — never our estimates.
-    .filter((p) => p.source !== "estimate" && p.priceMin != null)
+    // Only publish prices the shop actually gave us. Never our estimates, and
+    // not the ranges we read off a shop's website either: those describe the
+    // shop's own products, with a date, and are not an offer we can stand behind.
+    .filter(
+      (p) => (p.source === "shop" || p.source === "menu") && p.priceMin != null
+    )
     .map((p) => ({
       "@type": "Offer",
       name: p.label,

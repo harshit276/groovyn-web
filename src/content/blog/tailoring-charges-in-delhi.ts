@@ -97,7 +97,7 @@ export const post: Post = {
     { type: "h2", text: "Want a specific shop's prices?" },
     {
       type: "p",
-      text: "Shops that publish a rate card on Groovyn show their own prices on their listing, marked as coming from the shop. For shops that have not, we show an indicative range and say so, and the two are never presented as if they were the same. If you run a shop, publishing your rates is free: [claim your listing](/claim).",
+      text: "Where a shop's own rate card is behind a price on Groovyn, the listing says so. Where it is not, we show an indicative range and say so, and the two are never presented as if they were the same. The quickest way to a real number is to book a free visit or call the shop and ask it to price your exact garment.",
     },
     { type: "cta", kind: "tailors" },
   ],

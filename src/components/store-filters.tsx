@@ -80,6 +80,19 @@ export function StoreFilters({
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
+  // Below `sm` the bar has no room for a sort menu next to the view toggle and
+  // the Filters button (it pushed the whole page 135px sideways on a 375px
+  // phone), so there it lives in the Filters sheet instead.
+  const sortSelect = (
+    <Select
+      label="Sort"
+      value={active.sort}
+      highlight={active.sort !== "relevance"}
+      onChange={(v) => setParam("sort", v)}
+      options={SORTS.map((s) => ({ value: s.value, label: s.label }))}
+    />
+  );
+
   const selects = (
     <>
       <Select
@@ -138,7 +151,7 @@ export function StoreFilters({
     <>
       <div className="sticky top-16 z-30 -mx-4 mb-8 border-y border-ink-900/12 bg-white/92 px-4 backdrop-blur-md sm:-mx-6 sm:px-6">
         <div className="flex items-center gap-3 py-3">
-          <p className="shrink-0 text-sm text-ink-500" aria-live="polite">
+          <p className="shrink-0 whitespace-nowrap text-sm text-ink-500" aria-live="polite">
             <span className="font-display text-lg text-ink-900">{total}</span>{" "}
             {total === 1 ? "shop" : "shops"}
           </p>
@@ -159,21 +172,23 @@ export function StoreFilters({
           </div>
 
           <div className="ml-auto flex shrink-0 items-center gap-2">
-            <label className="sr-only" htmlFor="sort">
-              Sort by
-            </label>
-            <select
-              id="sort"
-              value={active.sort}
-              onChange={(e) => setParam("sort", e.target.value)}
-              className="h-9 shrink-0 rounded-full border border-ink-200 bg-white px-3 text-sm text-ink-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
-            >
-              {SORTS.map((s) => (
-                <option key={s.value} value={s.value}>
-                  {s.label}
-                </option>
-              ))}
-            </select>
+            <div className="hidden sm:block">
+              <label className="sr-only" htmlFor="sort">
+                Sort by
+              </label>
+              <select
+                id="sort"
+                value={active.sort}
+                onChange={(e) => setParam("sort", e.target.value)}
+                className="h-9 shrink-0 rounded-full border border-ink-200 bg-white px-3 text-sm text-ink-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+              >
+                {SORTS.map((s) => (
+                  <option key={s.value} value={s.value}>
+                    {s.label}
+                  </option>
+                ))}
+              </select>
+            </div>
 
             {/* Gallery vs index. The index is the view that makes this feel
                 like a guide rather than a search results page. */}
@@ -233,7 +248,10 @@ export function StoreFilters({
           />
           <div className="absolute inset-x-0 bottom-0 max-h-[85vh] overflow-y-auto rounded-t-2xl bg-ground p-5">
             <div className="mb-5 flex items-center justify-between">
-              <h2 className="font-display text-xl">Filters</h2>
+              <h2 className="font-display text-xl">
+                <span className="sm:hidden">Sort &amp; filters</span>
+                <span className="hidden sm:inline">Filters</span>
+              </h2>
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}
@@ -244,7 +262,10 @@ export function StoreFilters({
               </button>
             </div>
 
-            <div className="grid gap-3">{selects}</div>
+            <div className="grid gap-3">
+              <div className="grid gap-3 sm:hidden">{sortSelect}</div>
+              {selects}
+            </div>
             <div className="mt-4 flex flex-wrap gap-2">{toggles}</div>
 
             {activeCount > 0 ? (
@@ -272,11 +293,14 @@ function Select({
   value,
   onChange,
   options,
+  highlight = Boolean(value),
 }: {
   label: string;
   value: string;
   onChange: (v: string) => void;
   options: { value: string; label: string }[];
+  /** Dark "this is applied" styling. Defaults to whether a value is chosen. */
+  highlight?: boolean;
 }) {
   return (
     <>
@@ -289,7 +313,7 @@ function Select({
         onChange={(e) => onChange(e.target.value)}
         className={cn(
           "h-9 max-w-[12rem] shrink-0 rounded-full border px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500",
-          value
+          highlight
             ? "border-ink-900 bg-ink-900 text-white"
             : "border-ink-200 bg-white text-ink-800"
         )}

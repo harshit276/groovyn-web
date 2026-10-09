@@ -15,7 +15,7 @@ import { StoreCover } from "@/components/store-cover";
 import { isPlacesRef, resolveStoreImage } from "@/lib/images";
 import { getCategory } from "@/lib/site";
 import type { StoreSummaryDTO } from "@/lib/types";
-import { cn, formatPriceRange } from "@/lib/utils";
+import { cn, formatPriceRange, hasPrice } from "@/lib/utils";
 
 /**
  * Grid card.
@@ -209,15 +209,30 @@ export function StoreCard({
         <div className="mt-auto flex flex-wrap items-end justify-between gap-x-3 gap-y-3 pt-4">
           <div className="min-w-0">
             {/* Only label it a starting price when there is one — "Starting
-                from: On request" is nonsense. */}
-            {store.priceMin != null ? (
-              <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-400">
-                Starting from
-              </p>
-            ) : null}
-            <p className="truncate font-display text-xl font-extrabold tracking-tight text-ink-950">
-              {formatPriceRange(store.priceMin, store.priceMax)}
-            </p>
+                from: On request" is nonsense. And say where it came from: a
+                shop's own rate card, or our estimate. With no figure at all
+                the card points at the city-wide ranges on the shop's page. */}
+            {hasPrice(store.priceMin, store.priceMax) ? (
+              <>
+                {store.priceMin != null ? (
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-400">
+                    {store.rateCardVerified ? "From, shop’s rate card" : "Indicative from"}
+                  </p>
+                ) : null}
+                <p className="truncate font-display text-xl font-extrabold tracking-tight text-ink-950">
+                  {formatPriceRange(store.priceMin, store.priceMax)}
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-400">
+                  Prices
+                </p>
+                <p className="truncate font-display text-base font-bold tracking-tight text-ink-600">
+                  Typical rates inside
+                </p>
+              </>
+            )}
           </div>
 
           <span

@@ -48,6 +48,11 @@ export default async function SearchPage({
           {result.total} {result.total === 1 ? "shop" : "shops"} found
           {city ? ` in ${cities.find((c) => c.slug === city)?.name ?? city}` : ""}.
         </p>
+        {result.note ? (
+          <p className="mt-2 rounded-xl bg-amber-50 px-4 py-3 text-sm text-ink-700 ring-1 ring-amber-200">
+            {result.note}
+          </p>
+        ) : null}
         <div className="mt-6">
           <SearchBox cities={cities} defaultCity={city} defaultQuery={q} size="md" />
         </div>

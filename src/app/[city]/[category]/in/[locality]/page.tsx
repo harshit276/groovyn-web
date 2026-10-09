@@ -7,6 +7,7 @@ import { PostCard } from "@/components/blog/post-card";
 import { JsonLd } from "@/components/json-ld";
 import { StoreGrid } from "@/components/store-grid";
 import { Container } from "@/components/ui/container";
+import { VisitOfferNote } from "@/components/visit-offer-note";
 import { guidesForCategory } from "@/content/blog";
 import { getLocalities, getLocality, listStores } from "@/lib/queries";
 import { rankStores } from "@/lib/ranking";
@@ -179,7 +180,7 @@ export default async function LocalityPage({
             {category.name} in {locality.name}
           </h1>
 
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/55">
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/55 sm:text-lg">
             Groovyn lists {result.total} {noun} in {locality.name},{" "}
             {locality.city.name}.{ratingSentence} Each listing shows the address,
             Google rating and a starting price where we have one, and you can
@@ -189,6 +190,8 @@ export default async function LocalityPage({
       </section>
 
       <Container className="py-10">
+        <VisitOfferNote stores={everyShop.items} />
+
         <StoreGrid
           result={result}
           basePath={basePath}

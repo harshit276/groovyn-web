@@ -1,49 +1,33 @@
-import { Info, ReceiptText } from "lucide-react";
-import Link from "next/link";
+import { Globe, Info } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import type { PriceItemDTO } from "@/lib/types";
 import { formatPriceRange } from "@/lib/utils";
 
 /**
- * The rate card is the whole product. Nobody else publishes what a tailor
- * charges, so this is styled as a menu rather than a data table — and it has to
- * be unambiguous about where each number came from. A shop-supplied price and
- * our own estimate must never look alike.
+ * The prices we have for this one shop, each marked with where it came from. A
+ * number the shop gave us, a number the shop publishes on its own website, and
+ * our own estimate must never look alike, so each row says which it is.
+ *
+ * It renders nothing for a shop with no prices at all: the store page shows
+ * <TypicalPrices> instead, which says what such a shop typically charges in the
+ * city rather than leaving an empty box.
  */
 export function RateCard({
   items,
-  storeName,
   verified,
 }: {
   items: PriceItemDTO[];
-  storeName: string;
   verified: boolean;
 }) {
-  if (!items.length) {
-    return (
-      <div className="rounded-card border border-dashed border-ink-200 bg-white px-6 py-10 text-center">
-        <ReceiptText aria-hidden className="mx-auto mb-3 size-5 text-ink-300" />
-        <p className="font-display text-xl text-ink-800">
-          No price list yet for {storeName}
-        </p>
-        <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-ink-500">
-          We&apos;re collecting rate cards shop by shop. If you know what they
-          charge,{" "}
-          <Link href="/suggest" className="text-brand-600 underline underline-offset-2">
-            tell us
-          </Link>{" "}
-          and we&apos;ll add it.
-        </p>
-      </div>
-    );
-  }
+  if (!items.length) return null;
 
   const hasEstimates = items.some((i) => i.source === "estimate");
+  const hasWebsite = items.some((i) => i.source === "website");
 
   return (
     <div className="overflow-hidden rounded-card border border-ink-100 bg-white">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ink-100 px-6 py-5">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ink-100 px-5 py-5 sm:px-6">
         <div>
           <h2 className="font-display text-2xl text-ink-900">Price list</h2>
           <p className="mt-0.5 text-xs uppercase tracking-[0.14em] text-ink-400">
@@ -52,6 +36,8 @@ export function RateCard({
         </div>
         {verified ? (
           <Badge variant="rateCard">Shared by the shop</Badge>
+        ) : hasWebsite && !hasEstimates ? (
+          <Badge variant="verified">From the shop’s website</Badge>
         ) : (
           <Badge variant="estimate">Indicative estimate</Badge>
         )}
@@ -61,7 +47,7 @@ export function RateCard({
         {items.map((item) => (
           <li
             key={item.id}
-            className="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-6 py-4 transition-colors hover:bg-ground"
+            className="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-5 py-4 transition-colors hover:bg-ground sm:px-6"
           >
             <span className="font-display text-lg leading-snug text-ink-900">
               {item.label}
@@ -80,7 +66,7 @@ export function RateCard({
               <span className="ml-1.5 text-xs text-ink-400">{item.unit}</span>
             </span>
 
-            {item.note || item.source === "estimate" ? (
+            {item.note || item.source === "estimate" || item.source === "website" ? (
               <span className="w-full">
                 {item.note ? (
                   <span className="block text-sm text-ink-500">{item.note}</span>
@@ -91,16 +77,24 @@ export function RateCard({
                     Estimated — not confirmed by the shop
                   </span>
                 ) : null}
+                {item.source === "website" && !item.note ? (
+                  <span className="mt-0.5 inline-flex items-center gap-1 text-xs text-ink-400">
+                    <Globe aria-hidden className="size-3" />
+                    Listed on the shop’s website
+                  </span>
+                ) : null}
               </span>
             ) : null}
           </li>
         ))}
       </ul>
 
-      <p className="border-t border-ink-100 bg-ground px-6 py-3 text-xs leading-relaxed text-ink-500">
+      <p className="border-t border-ink-100 bg-ground px-5 py-3 text-xs leading-relaxed text-ink-500 sm:px-6">
         {hasEstimates
-          ? "Estimated prices come from our own research and may differ from what the shop quotes. Always confirm before ordering."
-          : "Prices shared by the shop. Fabric is usually charged separately unless stated."}
+          ? "Estimated prices come from our own research and may differ from what the shop quotes. Prices marked as listed on the shop’s website are its own, on the date shown, and may have changed. Always confirm before ordering."
+          : hasWebsite
+            ? "These are prices the shop lists on its own website, on the date shown. They can change, and made-to-measure work is often quoted separately. Always confirm with the shop before ordering."
+            : "Prices shared by the shop. Fabric is usually charged separately unless stated."}
       </p>
     </div>
   );

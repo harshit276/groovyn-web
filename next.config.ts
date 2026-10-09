@@ -38,6 +38,10 @@ const nextConfig: NextConfig = {
         destination: "/",
         permanent: true,
       },
+      // The claim page was removed. Owners now write to us to correct or
+      // remove a listing, so send old links and search results to the contact
+      // page.
+      { source: "/claim", destination: "/contact", permanent: true },
       // One copy of the site. Without this, groovyn-web.vercel.app serves every
       // page a second time. Only the production alias matches: preview
       // deployments have their own hostnames. API routes are left alone so a

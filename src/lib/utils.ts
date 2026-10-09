@@ -15,6 +15,14 @@ export function formatINR(paise: number | null | undefined): string {
   }).format(paise);
 }
 
+/** Whether there is any figure to show, so a card can skip "On request". */
+export function hasPrice(
+  min: number | null | undefined,
+  max: number | null | undefined
+): boolean {
+  return min != null || max != null;
+}
+
 /** "₹800 – ₹1,200", or "₹800" when both ends match, or "from ₹800". */
 export function formatPriceRange(
   min: number | null | undefined,

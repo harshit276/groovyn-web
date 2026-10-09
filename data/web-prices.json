@@ -1,0 +1,334 @@
+{
+  "checkedAt": "2026-10-09",
+  "shops": {
+    "asiana-couture-chandni-chowk": {
+      "site": "https://www.asianacouture.com",
+      "checkedAt": "2026-10-09",
+      "items": [
+        {
+          "label": "Lehenga sets",
+          "unit": "per set",
+          "min": 139240,
+          "max": 944000,
+          "count": 33,
+          "page": "https://www.asianacouture.com"
+        },
+        {
+          "label": "Anarkali sets",
+          "unit": "per set",
+          "min": 149624,
+          "max": 944000,
+          "count": 3,
+          "page": "https://www.asianacouture.com"
+        }
+      ]
+    },
+    "bhaavya-bhatnagar-shahpur-jat": {
+      "site": "https://www.bhaavya.com",
+      "checkedAt": "2026-10-09",
+      "items": [
+        {
+          "label": "Lehenga sets",
+          "unit": "per set",
+          "min": 34800,
+          "max": 38800,
+          "count": 3,
+          "page": "https://www.bhaavya.com"
+        },
+        {
+          "label": "Sari sets",
+          "unit": "per set",
+          "min": 15000,
+          "max": 65800,
+          "count": 52,
+          "page": "https://www.bhaavya.com"
+        },
+        {
+          "label": "Co-ord sets",
+          "unit": "per set",
+          "min": 14000,
+          "max": 44190,
+          "count": 79,
+          "page": "https://www.bhaavya.com"
+        },
+        {
+          "label": "Dresses",
+          "unit": "per piece",
+          "min": 22000,
+          "max": 65000,
+          "count": 13,
+          "page": "https://www.bhaavya.com"
+        },
+        {
+          "label": "Blazers and pant suits",
+          "unit": "per piece",
+          "min": 13000,
+          "max": 32000,
+          "count": 16,
+          "page": "https://www.bhaavya.com"
+        },
+        {
+          "label": "Shirts and tops",
+          "unit": "per piece",
+          "min": 4000,
+          "max": 18000,
+          "count": 61,
+          "page": "https://www.bhaavya.com"
+        }
+      ]
+    },
+    "chetna-bagga-nirvana-country": {
+      "site": "https://chetnabagga.com",
+      "checkedAt": "2026-10-09",
+      "items": [
+        {
+          "label": "Outfit sets",
+          "unit": "per set",
+          "min": 5850,
+          "max": 16850,
+          "count": 49,
+          "page": "https://chetnabagga.com"
+        },
+        {
+          "label": "Dresses",
+          "unit": "per piece",
+          "min": 5450,
+          "max": 6850,
+          "count": 9,
+          "page": "https://chetnabagga.com"
+        },
+        {
+          "label": "Tops and blouses",
+          "unit": "per piece",
+          "min": 2850,
+          "max": 7950,
+          "count": 9,
+          "page": "https://chetnabagga.com"
+        },
+        {
+          "label": "Pants and skirts",
+          "unit": "per piece",
+          "min": 3850,
+          "max": 5850,
+          "count": 11,
+          "page": "https://chetnabagga.com"
+        },
+        {
+          "label": "Jackets",
+          "unit": "per piece",
+          "min": 4850,
+          "max": 6250,
+          "count": 3,
+          "page": "https://chetnabagga.com"
+        }
+      ]
+    },
+    "kapaas-by-nikita-sector-104": {
+      "site": "https://kapaasbynikita.com",
+      "checkedAt": "2026-10-09",
+      "items": [
+        {
+          "label": "Sarees",
+          "unit": "per piece",
+          "min": 8950,
+          "max": 24500,
+          "count": 17,
+          "page": "https://kapaasbynikita.com"
+        },
+        {
+          "label": "Lehenga sets",
+          "unit": "per set",
+          "min": 15500,
+          "max": 25500,
+          "count": 4,
+          "page": "https://kapaasbynikita.com"
+        },
+        {
+          "label": "Kurta sets",
+          "unit": "per set",
+          "min": 5450,
+          "max": 17500,
+          "count": 7,
+          "page": "https://kapaasbynikita.com"
+        },
+        {
+          "label": "Unstitched suit sets",
+          "unit": "per set",
+          "min": 4250,
+          "max": 11500,
+          "count": 4,
+          "page": "https://kapaasbynikita.com"
+        }
+      ]
+    },
+    "mr-fox-defence-colony": {
+      "site": "https://mrfox.in",
+      "checkedAt": "2026-10-09",
+      "items": [
+        {
+          "label": "Shirts",
+          "unit": "per piece",
+          "min": 10500,
+          "max": 15500,
+          "count": 8,
+          "page": "https://mrfox.in"
+        },
+        {
+          "label": "Kurtas and kurta sets",
+          "unit": "per piece",
+          "min": 20500,
+          "max": 53500,
+          "count": 42,
+          "page": "https://mrfox.in"
+        },
+        {
+          "label": "Sadri jackets",
+          "unit": "per piece",
+          "min": 20500,
+          "max": 57500,
+          "count": 14,
+          "page": "https://mrfox.in"
+        },
+        {
+          "label": "Suits",
+          "unit": "per piece",
+          "min": 130500,
+          "max": 141500,
+          "count": 3,
+          "page": "https://mrfox.in"
+        },
+        {
+          "label": "Bandhgala, sherwani and achkan",
+          "unit": "per piece",
+          "min": 90000,
+          "max": 449500,
+          "count": 25,
+          "page": "https://mrfox.in"
+        }
+      ]
+    },
+    "kc-creations-lajpat-nagar": {
+      "site": "https://kccreations.com",
+      "checkedAt": "2026-10-09",
+      "items": [
+        {
+          "label": "Chanderi fabrics",
+          "unit": "per metre",
+          "min": 350,
+          "max": 2400,
+          "count": 139,
+          "page": "https://kccreations.com"
+        },
+        {
+          "label": "Cotton fabrics",
+          "unit": "per metre",
+          "min": 190,
+          "max": 1900,
+          "count": 51,
+          "page": "https://kccreations.com"
+        },
+        {
+          "label": "Net fabrics",
+          "unit": "per metre",
+          "min": 410,
+          "max": 3450,
+          "count": 37,
+          "page": "https://kccreations.com"
+        },
+        {
+          "label": "Satin fabrics",
+          "unit": "per metre",
+          "min": 210,
+          "max": 1210,
+          "count": 34,
+          "page": "https://kccreations.com"
+        },
+        {
+          "label": "Georgette fabrics",
+          "unit": "per metre",
+          "min": 720,
+          "max": 1150,
+          "count": 23,
+          "page": "https://kccreations.com"
+        },
+        {
+          "label": "Unstitched suit sets",
+          "unit": "per set",
+          "min": 3280,
+          "max": 17250,
+          "count": 14,
+          "page": "https://kccreations.com"
+        }
+      ]
+    },
+    "ramji-sons-lajpat-nagar": {
+      "site": "https://ramjisons.com",
+      "checkedAt": "2026-10-09",
+      "items": [
+        {
+          "label": "Brocade fabrics",
+          "unit": "per metre",
+          "min": 320,
+          "max": 2415,
+          "count": 474,
+          "page": "https://ramjisons.com"
+        },
+        {
+          "label": "Banarasi fabrics",
+          "unit": "per metre",
+          "min": 360,
+          "max": 1645,
+          "count": 63,
+          "page": "https://ramjisons.com"
+        },
+        {
+          "label": "Net embroidery fabrics",
+          "unit": "per metre",
+          "min": 685,
+          "max": 5375,
+          "count": 135,
+          "page": "https://ramjisons.com"
+        },
+        {
+          "label": "Chanderi embroidery fabrics",
+          "unit": "per metre",
+          "min": 545,
+          "max": 1760,
+          "count": 78,
+          "page": "https://ramjisons.com"
+        },
+        {
+          "label": "Unstitched suit sets",
+          "unit": "per set",
+          "min": 1315,
+          "max": 13965,
+          "count": 496,
+          "page": "https://ramjisons.com"
+        },
+        {
+          "label": "Sherwani and bandhgala sets",
+          "unit": "per set",
+          "min": 14844,
+          "max": 60604,
+          "count": 17,
+          "page": "https://ramjisons.com"
+        }
+      ]
+    },
+    "roshan-tailors-house-of-roshans-greater-kailash-1": {
+      "site": "https://www.houseofroshans.com",
+      "checkedAt": "2026-10-09",
+      "items": [
+        {
+          "label": "Blouses",
+          "unit": "per piece",
+          "min": 2500,
+          "max": 8500,
+          "page": "https://www.houseofroshans.com/categories/all-blouses",
+          "evidence": "Price Range ₹ 2500 to ₹ 8500 (the price filter on the all-blouses page)",
+          "extra": "Made to order, shown on the site as shipping in 14 to 21 days."
+        }
+      ]
+    }
+  }
+}

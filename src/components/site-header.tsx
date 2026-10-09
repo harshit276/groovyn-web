@@ -302,7 +302,7 @@ export function SiteHeader({
             </Link>
 
             <Link
-              href="/claim"
+              href={`/${citySlug}/tailors`}
               className={cn(
                 "hidden shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition-all sm:inline-flex",
                 solid
@@ -310,7 +310,7 @@ export function SiteHeader({
                   : "bg-white text-ink-950 hover:bg-white/90"
               )}
             >
-              List your shop
+              Book a visit
             </Link>
 
             <button
@@ -505,11 +505,11 @@ export function SiteHeader({
                 Search all shops
               </Link>
               <Link
-                href="/claim"
+                href={`/${citySlug}/tailors`}
                 onClick={closeMenu}
                 className="rounded-full bg-brand-500 px-4 py-2.5 text-center text-sm font-semibold text-white"
               >
-                List your shop
+                Book a visit
               </Link>
             </div>
           </div>

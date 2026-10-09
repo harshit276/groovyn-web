@@ -101,7 +101,10 @@ export function HeroDeck() {
   }, []);
 
   return (
-    <div className="stage relative aspect-[4/3.4] w-full select-none">
+    // --zs scales every card's depth. At full depth the cards and the price
+    // chip are drawn so close to the viewer that on a phone they spread past the
+    // edges of the stage, and the chip was clipped at the left of the screen.
+    <div className="stage relative aspect-[4/3.4] w-full select-none [--zs:0.3] sm:[--zs:1]">
       <div
         ref={ref}
         className="preserve-3d absolute inset-0 transition-transform duration-[400ms] ease-out"
@@ -118,7 +121,7 @@ export function HeroDeck() {
               left: c.x,
               top: c.y,
               width: c.w,
-              transform: `translateZ(${c.z}px) rotate(${c.rot}deg)`,
+              transform: `translateZ(calc(${c.z}px * var(--zs, 1))) rotate(${c.rot}deg)`,
             }}
           >
             <div className="relative aspect-[4/5]">
@@ -148,11 +151,11 @@ export function HeroDeck() {
             Sits above the cluster's top-left corner so it never lands on a
             card's own caption. */}
         <div
-          className="glass-panel preserve-3d absolute left-0 -top-[4%] rounded-xl px-3.5 py-2.5 sm:-left-[5%]"
-          style={{ transform: "translateZ(200px) rotate(-4deg)" }}
+          className="glass-panel preserve-3d absolute left-[3%] -top-[4%] rounded-xl px-3.5 py-2.5 sm:-left-[5%]"
+          style={{ transform: "translateZ(calc(200px * var(--zs, 1))) rotate(-4deg)" }}
         >
           <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-300">
-            Rate card
+            Typical price
           </p>
           <p className="font-display text-lg font-extrabold text-white">
             ₹450<span className="text-xs font-medium text-white/60"> /shirt</span>

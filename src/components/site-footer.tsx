@@ -128,11 +128,6 @@ export function SiteFooter({ cities }: { cities: CityDTO[] }) {
                 </Link>
               </li>
               <li>
-                <Link href="/claim" className="text-white/75 hover:text-brand-300">
-                  Claim your listing
-                </Link>
-              </li>
-              <li>
                 <Link href="/suggest" className="text-white/75 hover:text-brand-300">
                   Suggest a shop
                 </Link>

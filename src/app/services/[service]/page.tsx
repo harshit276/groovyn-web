@@ -112,7 +112,7 @@ export default async function ServicePage({
         <SectionHeading
           eyebrow="By city"
           title={`${service.name} prices near you`}
-          description="Each city page shows the observed range from rate cards shops have shared."
+          description="Each city page shows an indicative range, and a shop’s own rate card where it has shared one."
         />
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {cities.map((c) => (

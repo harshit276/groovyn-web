@@ -44,7 +44,7 @@ const LIMITS = {
 };
 
 /** Routes a post may link to, besides other posts. */
-const STATIC_ROUTES = new Set(["/measurements", "/claim", "/suggest", "/blog"]);
+const STATIC_ROUTES = new Set(["/measurements", "/suggest", "/blog"]);
 const ROUTE_PATTERNS = [/^\/delhi(\/[a-z0-9-]+)*$/];
 
 type Problem = { slug: string; message: string };

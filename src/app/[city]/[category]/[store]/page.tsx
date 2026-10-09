@@ -18,11 +18,18 @@ import { StoreCard } from "@/components/store-card";
 import { StoreGate } from "@/components/store-gate";
 import { StoreHero } from "@/components/store-hero";
 import { StoreTabs } from "@/components/store-tabs";
+import { MobileBookBar } from "@/components/mobile-book-bar";
+import { TypicalPrices } from "@/components/typical-prices";
 import { VisitBooking } from "@/components/visit-booking";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Container, SectionHeading } from "@/components/ui/container";
-import { getAllStorePaths, getSimilarStores, getStoreDetail } from "@/lib/queries";
+import {
+  getAllStorePaths,
+  getServices,
+  getSimilarStores,
+  getStoreDetail,
+} from "@/lib/queries";
 import { breadcrumbSchema, storeSchema } from "@/lib/schema";
 import { fitDescription, fitTitle } from "@/lib/seo";
 import { getCategory } from "@/lib/site";
@@ -51,7 +58,7 @@ export async function generateMetadata({
     : store.city.name;
 
   const priceHint = store.priceMin
-    ? ` Prices from ₹${store.priceMin.toLocaleString("en-IN")}.`
+    ? ` ${store.rateCardVerified ? "Prices" : "Indicative prices"} from ₹${store.priceMin.toLocaleString("en-IN")}.`
     : "";
 
   // Shop names vary from "Kynaa" to "Roshan Tailors (House of Roshans)", so the
@@ -115,7 +122,22 @@ export default async function StorePage({
   }
 
   const category = getCategory(store.category);
-  const similar = await getSimilarStores(store);
+  const [similar, services] = await Promise.all([
+    getSimilarStores(store),
+    getServices(store.category),
+  ]);
+
+  // A shop with its own prices (given to us, or listed on its own website)
+  // does not also need the city-wide ranges. A shop with none, or with only our
+  // estimates, does.
+  const hasOwnPrices = store.priceItems.some(
+    (p) => p.source === "shop" || p.source === "menu" || p.source === "website"
+  );
+  const priceHints = [
+    ...store.specialities,
+    ...store.materials,
+    store.about ?? "",
+  ].join(" ");
 
   const crumbs = [
     { name: "Home", href: "/" },
@@ -208,9 +230,21 @@ export default async function StorePage({
 
                     <RateCard
                       items={store.priceItems}
-                      storeName={store.name}
                       verified={store.rateCardVerified}
                     />
+
+                    {hasOwnPrices ? null : (
+                      <TypicalPrices
+                        services={services}
+                        category={store.category}
+                        categoryName={category?.name ?? "Shops"}
+                        storeName={store.name}
+                        cityName={store.city.name}
+                        citySlug={store.city.slug}
+                        hints={priceHints}
+                        hasOwnPrices={store.priceItems.length > 0}
+                      />
+                    )}
                   </div>
                 ),
               },
@@ -304,16 +338,21 @@ export default async function StorePage({
         </div>
 
         {/* ── Sticky sidebar ──────────────────────────────────── */}
-        <aside className="min-w-0 lg:sticky lg:top-24 lg:self-start">
-          <div className="space-y-4">
+        {/* On a phone this comes first, booking before the other ways to
+            reach the shop, because it was otherwise the last thing on a long
+            page. From lg up it is the right-hand column, as before. */}
+        <aside className="order-first min-w-0 lg:order-none lg:sticky lg:top-24 lg:self-start">
+          <div className="flex flex-col gap-4">
             {/* The price range lives in the hero now — this card is purely
                 the ways to reach the shop. */}
-            <div className="rounded-2xl border border-ink-100 bg-white p-5 shadow-card">
+            <div className="order-2 rounded-2xl border border-ink-100 bg-white p-5 shadow-card lg:order-1">
               <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-400">
                 Reach the shop
               </p>
 
-              <div className="mt-4 grid gap-2">
+              {/* Two across on a phone, so the card stays short. An odd last
+                  button takes the full row. */}
+              <div className="mt-4 grid grid-cols-2 gap-2 lg:grid-cols-1 [&>*:last-child:nth-child(odd)]:col-span-2 lg:[&>*:last-child:nth-child(odd)]:col-span-1">
                 {store.phone ? (
                   <Button asChild variant="primary">
                     <a href={`tel:${store.phone.replace(/\s/g, "")}`}>
@@ -366,8 +405,9 @@ export default async function StorePage({
               </div>
             </div>
 
-            {/* Anchor target for the listing card's "Book Visit" button. */}
-            <div id="book" className="scroll-mt-24">
+            {/* Anchor target for the listing card's "Book Visit" button, the
+                phone's sticky bar, and the "book a free visit" links. */}
+            <div id="book" className="order-1 scroll-mt-24 lg:order-2">
               <VisitBooking
                 storeId={store.id}
                 storeName={store.name}
@@ -380,22 +420,16 @@ export default async function StorePage({
               />
             </div>
 
-            {!store.claimed ? (
-              <div className="rounded-2xl border border-dashed border-brand-300/60 bg-brand-50 p-5">
-                <h2 className="font-display text-base font-bold text-ink-950">
-                  Is this your shop?
-                </h2>
-                <p className="mt-1.5 text-sm text-ink-600">
-                  Claim the listing to update photos, prices and timings. Free,
-                  and always will be.
-                </p>
-                <Button asChild variant="brand" size="sm" className="mt-4 w-full">
-                  <Link href={`/claim?store=${store.slug}`}>
-                    Claim this listing
-                  </Link>
-                </Button>
-              </div>
-            ) : null}
+            <p className="order-3 px-1 text-xs leading-relaxed text-ink-400">
+              Something out of date on this page?{" "}
+              <Link
+                href="/contact"
+                className="underline underline-offset-2 hover:text-ink-600"
+              >
+                Tell us
+              </Link>
+              .
+            </p>
           </div>
         </aside>
       </div>
@@ -419,6 +453,11 @@ export default async function StorePage({
           <JsonLd data={[storeSchema(store), breadcrumbSchema(crumbs)]} />
         </Container>
       </div>
+
+      {/* Outside .gate-interior on purpose: that wrapper keeps a transform from
+          its entrance animation, which would make this bar position itself
+          against the whole page instead of the screen. */}
+      <MobileBookBar phone={store.phone} storeName={store.name} />
     </>
   );
 }

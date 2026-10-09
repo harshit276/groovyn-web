@@ -9,6 +9,7 @@ import { JsonLd } from "@/components/json-ld";
 import { StoreFilters } from "@/components/store-filters";
 import { StoreGrid } from "@/components/store-grid";
 import { Container } from "@/components/ui/container";
+import { VisitOfferNote } from "@/components/visit-offer-note";
 import {
   getCategoryCounts,
   getCity,
@@ -191,7 +192,7 @@ export default async function CategoryPage({
             Best {category.name.toLowerCase()} in {city.name}
           </h1>
 
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/55">
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/55 sm:text-lg">
             {category.blurb}. Compare ratings, see starting prices up front and
             book a visit — so you shortlist in ten minutes instead of spending a
             Saturday walking markets.
@@ -206,7 +207,7 @@ export default async function CategoryPage({
             />
             <Stat label="Localities" value={String(localities.length)} />
             <Stat
-              label="Prices from"
+              label="Indicative from"
               value={cheapest ? formatINR(cheapest) : "—"}
             />
           </dl>
@@ -220,6 +221,8 @@ export default async function CategoryPage({
         specialities={specialities}
         total={result.total}
       />
+
+      <VisitOfferNote stores={allForFacets.items} />
 
       <StoreGrid
         result={result}
