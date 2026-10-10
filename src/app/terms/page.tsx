@@ -110,6 +110,13 @@ export default function TermsPage() {
             </li>
           </Bullets>
           <p>
+            Some boutiques show pieces they sell on their own website, with their
+            permission. The photo, price and stock are the shop’s, as we read them
+            on the date shown, and may have changed since. A purchase is an
+            agreement between you and the shop. We do not take payment, deliver or
+            handle returns for it.
+          </p>
+          <p>
             Read how we order shops on <A href="/how-we-rank">How we rank</A>.
           </p>
         </Section>

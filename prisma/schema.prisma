@@ -121,8 +121,19 @@ model Store {
   googleRatingCount Int?
   googleMapsUri     String?
 
+  /// The shop's own online shop, e.g. https://www.bhaavya.com (a Shopify
+  /// store). Read only to show a few of its pieces on this page, and only while
+  /// productsApproved is true.
+  productFeed          String?
+  /// True only after the shop itself said yes to showing some of its pieces
+  /// here. Never set it on our own judgement: the photos are the shop's.
+  productsApproved     Boolean @default(false)
+  /// Who said yes, how and when, in a line (e.g. "Owner, WhatsApp, 12 Oct 2026").
+  productsApprovalNote String?
+
   images     StoreImage[]
   priceItems PriceItem[]
+  products   ShopProduct[]
   reviews    Review[]
   claims     Claim[]
   bookings   VisitBooking[]
@@ -184,6 +195,28 @@ model PriceItem {
 
   @@index([storeId])
   @@index([serviceId])
+}
+
+/// A piece a shop sells on its own website, shown on its Groovyn page with the
+/// shop's permission. Groovyn does not sell it: the button goes to the shop.
+model ShopProduct {
+  id        String   @id @default(cuid())
+  storeId   String
+  store     Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  title     String
+  /// Rupees: the lowest price on the shop's own listing.
+  price     Int
+  imageUrl  String
+  /// The product page on the shop's own website.
+  url       String
+  sortOrder Int      @default(0)
+  /// Taps on the "Buy on the shop's website" button, counted by /go/[id].
+  /// A bare count, with nothing about who tapped.
+  clicks    Int      @default(0)
+  /// When we last read this price from the shop's website.
+  checkedAt DateTime
+
+  @@index([storeId])
 }
 
 model Review {

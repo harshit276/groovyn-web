@@ -8,6 +8,8 @@ I had no search-volume data. Every 'odds' rating below is judgement from the sea
 
 ## Progress
 
+- **10 Oct.** Built the shop outreach sheet (data/shop-outreach.xlsx, kept out of git): who to message, a ready message in English and Hinglish for each, and columns to note who replied. Only 35 of the 75 saved numbers are mobiles; the site had been treating every phone number as WhatsApp, so the WhatsApp button now shows only for mobiles. The message offers booking requests as leads, a Prices listed badge, and asks for a price list, boutiques' products and an optional offer.
+- **10 Oct.** Live now (9 Oct work): no more claim-your-shop page, phone layout fixes, booking first on phone shop pages with a Book a free visit bar, typical Delhi prices on every shop page, and the shops' own website prices for 8 shops. Built and waiting for your go-ahead: the boutique showcase, which shows 6 to 8 pieces from a boutique's own online shop with a Buy on their website button. It stays hidden for each boutique until it says yes.
 - **9 Oct.** Ready in the working copy, waiting for your go-ahead to deploy: the claim-your-shop page, header button, footer link and home section are gone (old links go to Contact). Phone fixes: category pages no longer scroll sideways, the booking form comes right after the shop header with a Book a free visit bar at the bottom of the screen, and the home hero is realigned. Every shop page without a price list now shows typical Delhi prices, clearly labelled, and prices read off 8 shops' own websites are ready to load. There is a Book through Groovyn section on the home page, and a gold Visit offer badge that appears only when a shop has agreed to an offer.
 - **8 Oct.** A content review of the site for wedding shoppers is done (docs/content-plan.md). It found that the home page over-promised, and that multi-word searches returned nothing. Both are fixed in the working copy and wait for deploy. Its ten next steps are in the new phase below, and its 25-piece wedding calendar is under Content.
 - **8 Oct.** Now live: the Diwali outfit stitching guide, a 2026 to 2027 season section in the wedding timeline guide, visit-count and page-speed tracking (it starts counting once you switch Web Analytics and Speed Insights on in Vercel), and an IndexNow submission of all 118 pages to Bing and other search engines. Search Console is a Domain property and has read the sitemap. So far Google has indexed 1 page and shows 3 search clicks in total. Still to do: switch on Vercel Analytics and Speed Insights, request indexing in Search Console for the key pages, image descriptions and page speed.
@@ -130,8 +132,8 @@ Close the gaps, start measuring, and publish the seasonal pages before the festi
 
 Make shop pages worth ranking, start earning trust, and publish the price guides.
 
-- [ ] **Ask shops on WhatsApp for a rate list, photos and a visit offer** (You, effort M, high impact, Data) `p1-claim-drive`
-  Message the 36 tailors first, then 19 fabric shops, 8 rentals and 6 boutiques, with the text in Appendix B. The public claim page was removed on 9 Oct, so shops now send things to you on WhatsApp and you pass them to me. Goal: 15 shops with a rate list or photos by 9 Nov. Each one brings a real price, a better page and a likely link back.
+- [ ] **Message the shops: price list, products and an offer** (You, effort M, high impact, Data) `p1-claim-drive`
+  Open data/shop-outreach.xlsx: 35 shops have a mobile number (tap the link and WhatsApp opens with their message typed), 31 have only a landline (call and ask for a WhatsApp number), 9 have no number. Send about 10 a day, in the Day order. The message says what they get (booking requests as leads, no commission, a Prices listed badge and a higher place) and asks for the price list, boutiques' products, and an optional offer. Shops now send things to you on WhatsApp and you pass them to me. Goal: 15 shops with a price list by 9 Nov.
 - [ ] **Add an admin form for a shop's rate card, photos, hours and visit offer** (Claude, effort M, high impact, Data) `p1-admin-editor`
   With the claim page gone, this is how what shops send you reaches their page without a developer. Today a visit offer can be set with 'npm run offer', and prices read off a shop's own website can be loaded with 'npm run import:web-prices'.
 - [ ] **Photograph 25 shops, 3 photos each** (You, effort L, high impact, Data) `p1-photos`
@@ -189,8 +191,8 @@ Make the site answer a wedding shopper's real questions, with evidence a visitor
   A shop with no price list now shows typical Delhi ranges for shops of its kind, labelled as ours. Eight shops that publish prices on their own websites get those ranges instead, marked as the shop's own with the date we checked (npm run collect:web-prices, then npm run import:web-prices). Ready in the working copy, waiting to be deployed.
 - [ ] **Win real 'book through Groovyn' offers from shops** (You + Claude, effort M, high impact, Data) `cr-offers`
   The site has a Book through Groovyn section and a gold Visit offer badge, but the badge appears only when a shop has agreed to an offer. Ask on the same call (see data/worklist.md), and I set it with npm run offer. Never advertise a discount no shop has agreed to.
-- [ ] **Boutique products: a showcase that links to the boutique's own shop** (You + Claude, effort L, med impact, Pages) `cr-boutique-products`
-  Awaiting your choice. The proposal is to show a few pieces from boutiques that already sell online, with photo, price and a 'Buy on their website' button, and only with each boutique's written OK. Selling and taking payment on Groovyn itself needs a registered business, GST, payment-gateway KYC, a returns policy and a change to the Terms, so it comes later, if the showcase gets clicks.
+- [ ] **Boutique showcase: ask each boutique, then I switch it on** (You + Claude, effort L, med impact, Pages) `cr-boutique-products`
+  Built, and dormant until a boutique says yes. A boutique's page can show 6 to 8 pieces from its own online shop, with a 'Buy on their website' button and a count of taps. Send the message in docs/boutique-showcase.md to the seven shops listed there (Asiana, Bhaavya, Chetna Bagga, Kapaas, Mr. Fox, KC Creations, Ramji Sons), and tell me who said yes. Selling and taking payment on Groovyn itself needs a registered business, GST, payment-gateway KYC, a returns policy and a change to the Terms, so it waits until the taps show people want it.
 
 ### Weeks 6 to 9 (10 Nov to 7 Dec)
 
@@ -440,9 +442,9 @@ Use the year only on lists you will refresh each year. Description under 158 cha
 
 ### B. WhatsApp message to shops
 
-> Hi {Name}, this is {You} from Groovyn (groovyn.com), a free directory that helps people in Delhi NCR find good tailors and boutiques. {Shop} is already listed here: {link}. If you send me your rate list and three photos of your work on WhatsApp, I will add them to your page for free. You can also give me the exact words for any small offer you would like to make to people who book a visit through Groovyn. We never charge to be listed or to rank higher. Want to send them?
+> Hello, this is a message from Groovyn (groovyn.com), a free directory that helps people in Delhi NCR find good tailors, boutiques and fabric shops. {Shop} is already listed on Groovyn from public Google details: {link}. What you get, free: people looking for a {tailor} in {area} can book a visit on your page, and each request comes straight to you as a lead, with no commission, and we never sell your number. Shops that share a price list get a 'Prices listed' badge and are shown higher on Groovyn. Could you please send: (1) your price list, a photo or a message is fine, and I will add it to your page and update it whenever you send changes; (2) boutiques and online shops: your website link, or photos and prices of 6 to 8 pieces, which I will show on your page with a button to buy from your website or message you; (3) optional: a small offer for people who book through Groovyn. If you would rather not be listed, tell me and I will remove it.
 
-Keep it plain, never promise leads, and stop if they say no.
+Ready to send for each shop in data/shop-outreach.xlsx (35 mobiles on WhatsApp, 31 landlines to call first, 9 with no number), in English and Hinglish. Say that requests come to the shop as leads, never promise a number of customers, send about 10 a day, and stop if they say no.
 
 ### C. Redirects
 

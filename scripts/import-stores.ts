@@ -20,6 +20,8 @@ import { PrismaClient } from "@prisma/client";
 import ws from "ws";
 import { z } from "zod";
 
+import { whatsappDigits } from "../src/lib/utils";
+
 // See prisma/seed.ts — WebSocket driver over 443, because outbound TCP 5432
 // is blocked on this network.
 neonConfig.webSocketConstructor = ws;
@@ -195,7 +197,9 @@ async function main() {
       lat: s.lat ?? null,
       lng: s.lng ?? null,
       phone: s.phone ?? null,
-      whatsapp: s.whatsapp ?? s.phone ?? null,
+      // A shop's phone is only offered as WhatsApp when it is a mobile number.
+      // A landline copied here made a WhatsApp button that could not work.
+      whatsapp: s.whatsapp ?? (whatsappDigits(s.phone) ? s.phone : null) ?? null,
       website: s.website || null,
       instagram: s.instagram || null,
       mapUrl:

@@ -21,7 +21,8 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         // Search results are near-infinite thin permutations — keep them out of
         // the crawl budget entirely. /admin is auth-gated and noindex too.
-        disallow: ["/api/", "/search", "/admin"],
+        // /go/ is the redirect behind a shop's "Buy" buttons.
+        disallow: ["/api/", "/search", "/admin", "/go/"],
       },
     ],
     sitemap: absoluteUrl("/sitemap.xml"),

@@ -72,7 +72,29 @@ export type StoreSummaryDTO = {
   href: string;
 };
 
+/**
+ * A piece a shop sells on its own website, shown on its page with its
+ * permission. There is no product URL here on purpose: the page links to
+ * /go/<id>, which counts the tap and sends the visitor to the shop.
+ */
+export type ShopProductDTO = {
+  id: string;
+  title: string;
+  /** Rupees, as the shop lists it. */
+  price: number;
+  imageUrl: string;
+  /** When we last read this price from the shop's website (ISO date). */
+  checkedAt: string;
+};
+
 export type StoreDetailDTO = StoreSummaryDTO & {
+  /**
+   * Pieces from the shop's own website. Empty unless the shop has said yes to
+   * being shown (Store.productsApproved), so this is safe to render as is.
+   */
+  products: ShopProductDTO[];
+  /** The shop's own site, as a bare host such as "bhaavya.com", when it has products here. */
+  productSite: string | null;
   /** Conditions the shop attached to its visit offer. */
   visitOfferTerms: string | null;
   pincode: string | null;

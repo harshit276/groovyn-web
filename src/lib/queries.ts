@@ -14,6 +14,7 @@ import type {
   PriceItemDTO,
   PriceSource,
   ServiceDTO,
+  ShopProductDTO,
   StoreDetailDTO,
   StoreFilters,
   StoreSummaryDTO,
@@ -415,9 +416,22 @@ export async function getStoreDetail(
         orderBy: { sortOrder: "asc" },
         include: { service: { select: { slug: true } } },
       },
+      products: { orderBy: { sortOrder: "asc" } },
     },
   });
   if (!row) return null;
+
+  // Pieces from the shop's own website appear only once the shop has said yes.
+  // Gating here, and not in the page, means no caller can show them by mistake.
+  const showProducts = row.productsApproved && row.products.length > 0;
+  const productSite = (() => {
+    if (!showProducts || !row.productFeed) return null;
+    try {
+      return new URL(row.productFeed).hostname.replace(/^www\./, "");
+    } catch {
+      return null;
+    }
+  })();
 
   return {
     ...toSummary(row),
@@ -453,6 +467,18 @@ export async function getStoreDetail(
         source: p.source as PriceSource,
       })
     ),
+    products: showProducts
+      ? row.products.map(
+          (p): ShopProductDTO => ({
+            id: p.id,
+            title: p.title,
+            price: p.price,
+            imageUrl: p.imageUrl,
+            checkedAt: p.checkedAt.toISOString(),
+          })
+        )
+      : [],
+    productSite,
   };
 }
 

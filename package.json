@@ -19,6 +19,7 @@
     "indexnow": "node scripts/indexnow.mjs",
     "verify:search": "tsx --conditions=react-server scripts/verify-search.ts",
     "offer": "tsx --conditions=react-server scripts/set-visit-offer.ts",
+    "products": "tsx --conditions=react-server scripts/shop-products.ts",
     "collect:web-prices": "node scripts/collect-web-prices.mjs",
     "import:web-prices": "tsx --conditions=react-server scripts/import-web-prices.ts"
   },

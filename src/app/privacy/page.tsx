@@ -147,6 +147,14 @@ export default function PrivacyPage() {
               discarded after 24 hours. We use this to see what is useful and what
               is slow.
             </li>
+            <li>
+              <strong>Taps on a shop’s Buy button.</strong> Some boutiques show a
+              few pieces on their page. When you tap one, we add one to a count
+              for that piece, so we can tell the shop what we send it, and then
+              send you to the shop’s own website. The count holds no name, number
+              or device details. Once you are on the shop’s site, its own privacy
+              policy applies.
+            </li>
           </Bullets>
           <p>
             Some things stay on your own device and are not sent to us: the shops

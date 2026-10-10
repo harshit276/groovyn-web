@@ -15,6 +15,25 @@ export function formatINR(paise: number | null | undefined): string {
   }).format(paise);
 }
 
+/**
+ * The digits to put after wa.me/ for a number that can be on WhatsApp, or null.
+ *
+ * Only an Indian mobile qualifies (ten digits starting 6 to 9, with or without
+ * +91 or a leading 0). The listings kept a shop's landline in the WhatsApp
+ * field, and a WhatsApp button that opens "this number is not on WhatsApp" is
+ * worse than no button.
+ */
+export function whatsappDigits(raw: string | null | undefined): string | null {
+  const digits = (raw ?? "").replace(/[^0-9]/g, "");
+  const national =
+    digits.length === 12 && digits.startsWith("91")
+      ? digits.slice(2)
+      : digits.length === 11 && digits.startsWith("0")
+        ? digits.slice(1)
+        : digits;
+  return /^[6-9]\d{9}$/.test(national) ? `91${national}` : null;
+}
+
 /** Whether there is any figure to show, so a card can skip "On request". */
 export function hasPrice(
   min: number | null | undefined,

@@ -19,6 +19,7 @@ import { StoreGate } from "@/components/store-gate";
 import { StoreHero } from "@/components/store-hero";
 import { StoreTabs } from "@/components/store-tabs";
 import { MobileBookBar } from "@/components/mobile-book-bar";
+import { ShopProducts } from "@/components/shop-products";
 import { TypicalPrices } from "@/components/typical-prices";
 import { VisitBooking } from "@/components/visit-booking";
 import { Badge } from "@/components/ui/badge";
@@ -33,6 +34,7 @@ import {
 import { breadcrumbSchema, storeSchema } from "@/lib/schema";
 import { fitDescription, fitTitle } from "@/lib/seo";
 import { getCategory } from "@/lib/site";
+import { whatsappDigits } from "@/lib/utils";
 
 export const revalidate = 3600;
 
@@ -154,7 +156,8 @@ export default async function StorePage({
     { name: store.name, href: store.href },
   ];
 
-  const waNumber = store.whatsapp?.replace(/[^0-9]/g, "");
+  // Only a mobile number can be on WhatsApp. Ten shops had a landline here.
+  const waNumber = whatsappDigits(store.whatsapp);
 
   // One-tap chips on the booking form, taken from what this shop actually
   // prices rather than a generic list.
@@ -179,55 +182,67 @@ export default async function StorePage({
         {/* min-w-0: grid items default to min-width:auto, which lets the
             rate-card table's min-width push the whole page sideways. */}
         <div className="min-w-0">
-          {/* Services / Gallery / Reviews, as the app lays it out. */}
+          {/* What the shop is, above the tabs: on a boutique the first tab is
+              its collection, and the description should not hide behind a
+              different tab. */}
+          {store.about || store.specialities.length || store.materials.length ? (
+            <div className="mb-8 space-y-6">
+              {store.about ? (
+                <p className="max-w-2xl leading-relaxed text-ink-700">
+                  {store.about}
+                </p>
+              ) : null}
+
+              {store.specialities.length || store.materials.length ? (
+                <div className="grid gap-6 sm:grid-cols-2">
+                  {store.specialities.length ? (
+                    <div>
+                      <h3 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-400">
+                        Speciality
+                      </h3>
+                      <ul className="flex flex-wrap gap-1.5">
+                        {store.specialities.map((s) => (
+                          <li key={s}>
+                            <Badge>{s}</Badge>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+
+                  {store.materials.length ? (
+                    <div>
+                      <h3 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-400">
+                        Works with
+                      </h3>
+                      <ul className="flex flex-wrap gap-1.5">
+                        {store.materials.map((m) => (
+                          <li key={m}>
+                            <Badge variant="outline">{m}</Badge>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+                </div>
+              ) : null}
+            </div>
+          ) : null}
+
+          {/* Services / Collection / Gallery / Reviews, as the app lays it out. */}
           <StoreTabs
+            defaultTab={
+              store.category === "boutiques" && store.products.length
+                ? "collection"
+                : undefined
+            }
             tabs={[
               {
                 id: "services",
-                label: "Services",
+                label: "Prices",
                 count: store.priceItems.length || undefined,
                 panel: (
                   <div className="space-y-8">
-                    {store.about ? (
-                      <p className="max-w-2xl leading-relaxed text-ink-700">
-                        {store.about}
-                      </p>
-                    ) : null}
-
-                    {store.specialities.length || store.materials.length ? (
-                      <div className="grid gap-6 sm:grid-cols-2">
-                        {store.specialities.length ? (
-                          <div>
-                            <h3 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-400">
-                              Speciality
-                            </h3>
-                            <ul className="flex flex-wrap gap-1.5">
-                              {store.specialities.map((s) => (
-                                <li key={s}>
-                                  <Badge>{s}</Badge>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ) : null}
-
-                        {store.materials.length ? (
-                          <div>
-                            <h3 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-400">
-                              Works with
-                            </h3>
-                            <ul className="flex flex-wrap gap-1.5">
-                              {store.materials.map((m) => (
-                                <li key={m}>
-                                  <Badge variant="outline">{m}</Badge>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ) : null}
-                      </div>
-                    ) : null}
-
                     <RateCard
                       items={store.priceItems}
                       verified={store.rateCardVerified}
@@ -248,6 +263,23 @@ export default async function StorePage({
                   </div>
                 ),
               },
+              // The shop's own pieces, only for a shop that has said yes.
+              ...(store.products.length
+                ? [
+                    {
+                      id: "collection",
+                      label: "Collection",
+                      count: store.products.length,
+                      panel: (
+                        <ShopProducts
+                          products={store.products}
+                          storeName={store.name}
+                          site={store.productSite}
+                        />
+                      ),
+                    },
+                  ]
+                : []),
               {
                 id: "gallery",
                 label: "Gallery",

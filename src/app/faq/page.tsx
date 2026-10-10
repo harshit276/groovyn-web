@@ -79,7 +79,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Do you sell clothes or stitch them?",
-    a: "No. We list shops. Any order or payment is between you and the shop.",
+    a: "No. We list shops. Some boutiques also show a few pieces from their own online shop, with their permission, and the Buy button takes you to that shop's website. Any order or payment is between you and the shop.",
   },
 ];
 
